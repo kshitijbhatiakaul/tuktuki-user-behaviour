@@ -1,0 +1,1430 @@
+<meta name="dash-one-writer">
+<style>
+#dash-root .tb { font-family: var(--font-anthropic-sans); color: var(--color-fg); display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+#dash-root .tb h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+#dash-root .tb h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-sm); }
+#dash-root .tb h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+#dash-root .tb p { margin: 0; line-height: 1.55; }
+#dash-root .tb .muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+#dash-root .tb .lede { max-width: 62rem; color: var(--color-fg-muted); margin-top: var(--cds-gap-xs); }
+#dash-root .tb .bar { position: sticky; top: 0; z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm); padding: var(--cds-pad-sm) var(--cds-pad-md); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); font-size: var(--cds-font-size-caption); }
+#dash-root .tb .bar label { display: flex; align-items: center; gap: 6px; color: var(--color-fg-muted); }
+#dash-root .tb .bar input { font: inherit; color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 4px 6px; }
+#dash-root .tb .bar button { font: inherit; color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 4px 10px; cursor: pointer; }
+#dash-root .tb .bar button[aria-pressed=true] { border-color: var(--color-fg); }
+#dash-root .tb .bar .shown { margin-left: auto; color: var(--color-fg-muted); }
+#dash-root .tb .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+#dash-root .tb .tile, #dash-root .tb .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); }
+#dash-root .tb .tile .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+#dash-root .tb .tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin: var(--cds-gap-xs) 0; min-height: 1.3em; }
+#dash-root .tb .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+#dash-root .tb .stack { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+#dash-root .tb .card .note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+#dash-root .tb .chart { position: relative; min-height: 240px; }
+#dash-root .tb .chart.short { min-height: 200px; }
+#dash-root .tb .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+#dash-root .tb .tip .d { color: var(--cds-text-secondary); }
+#dash-root .tb .tip .sw { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+#dash-root .tb .legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+#dash-root .tb .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+#dash-root .tb .k0 { background: var(--tb-c0); } #dash-root .tb .k1 { background: var(--tb-c1); } #dash-root .tb .k2 { background: var(--tb-c2); } #dash-root .tb .k3 { background: var(--tb-c3); }
+#dash-root .tb .tw { overflow: auto; max-height: 32rem; }
+#dash-root .tb table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+#dash-root .tb th, #dash-root .tb td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+#dash-root .tb th:first-child, #dash-root .tb td:first-child, #dash-root .tb th.l, #dash-root .tb td.l { text-align: left; }
+#dash-root .tb th { position: sticky; top: 0; background: var(--color-panel); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+#dash-root .tb td.bad { color: var(--color-bad); } #dash-root .tb td.ok { color: var(--color-ok); }
+#dash-root .tb .pb b, #dash-root .tb .tile b { font-weight: 600; }
+#dash-root .tb ol, #dash-root .tb ul { margin: 0; padding-left: 1.2rem; line-height: 1.6; }
+#dash-root .tb li { margin-bottom: var(--cds-gap-sm); }
+#dash-root .tb .fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+#dash-root .tb .fail i { width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+#dash-root .tb .empty { display: flex; align-items: center; justify-content: center; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); text-align: center; padding: 0 var(--cds-pad-md); }
+#dash-root [data-dash-source-state=empty] { color: transparent; }
+#dash-root [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="tb">
+  <header id="top">
+    <h1>Tuktuki user behaviour</h1>
+    <p class="lede">Every Adjust metric that describes how users arrive, watch, leave and come back, from the app's first day of data, plus a <a href="#ga">Google Analytics section</a> on who the audience is (gender, age, location, language, app builds). Pick a date range and every number, chart and table below follows it.</p>
+  </header>
+
+  <div class="bar" id="range">
+    <label>From <input class="tb-start" type="date" min="2025-10-06" aria-label="From"></label>
+    <label>To <input class="tb-end" type="date" min="2025-10-06" aria-label="To"></label>
+    <button class="tb-preset" data-days="7">Last 7 days</button>
+    <button class="tb-preset" data-days="30">Last 30 days</button>
+    <button class="tb-preset" data-days="90">Last 90 days</button>
+    <button class="tb-preset" data-from="2026-09-07">Since relaunch (7 Sep)</button>
+    <button class="tb-preset" data-from="2025-10-06">All time</button>
+    <span class="shown">Showing <b data-draw="rangeLabel" data-source="daily">—</b></span>
+  </div>
+
+  <section id="glance">
+    <h2>The range at a glance</h2>
+    <div class="tiles" data-source="daily cohorts events">
+      <div class="tile"><div class="lbl">Installs</div><div class="num" data-draw="t" data-k="installs">—</div><div class="muted"><span data-draw="t" data-k="installs_day">—</span> a day</div></div>
+      <div class="tile"><div class="lbl">Uninstalls</div><div class="num" data-draw="t" data-k="uninstalls">—</div><div class="muted"><span data-draw="t" data-k="uninst_ratio">—</span> of installs in the range</div></div>
+      <div class="tile"><div class="lbl">Reinstalls</div><div class="num" data-draw="t" data-k="reinstalls">—</div><div class="muted">devices that uninstalled and came back</div></div>
+      <div class="tile"><div class="lbl">Reactivations</div><div class="num" data-draw="t" data-k="reattributions">—</div><div class="muted">lapsed users won back by a tracked source</div></div>
+      <div class="tile"><div class="lbl">Avg daily active users</div><div class="num" data-draw="t" data-k="dau">—</div><div class="muted"><span data-draw="t" data-k="sess_dau">—</span> sessions per user a day</div></div>
+      <div class="tile"><div class="lbl">Same-day uninstall</div><div class="num" data-draw="t" data-k="d0_uninst">—</div><div class="muted">of new users, on install day</div></div>
+      <div class="tile"><div class="lbl">Day-1 retention</div><div class="num" data-draw="t" data-k="ret_d1">—</div><div class="muted">day 7: <span data-draw="t" data-k="ret_d7">—</span> · day 30: <span data-draw="t" data-k="ret_d30">—</span></div></div>
+      <div class="tile"><div class="lbl">Install-day time per new user</div><div class="num" data-draw="t" data-k="min_d0">—</div><div class="muted">minutes · day 1: <span data-draw="t" data-k="min_d1">—</span> min</div></div>
+      <div class="tile"><div class="lbl">Videos per active user a day</div><div class="num" data-draw="t" data-k="vv_dau">—</div><div class="muted"><span data-draw="t" data-k="vv_sess">—</span> per session</div></div>
+      <div class="tile"><div class="lbl">Rewarded ads per active user a day</div><div class="num" data-draw="t" data-k="ads_dau">—</div><div class="muted"><span data-draw="t" data-k="ads_vv">—</span> per video watched</div></div>
+    </div>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Retention and same-day uninstall use only install cohorts old enough to have reached that day. Uninstalls are tracked from 23 Mar 2026; reinstalls from 17 Mar 2026.</p>
+  </section>
+
+  <section id="growth">
+    <h2>Installs, uninstalls and active users</h2>
+    <div class="card">
+      <h3>Daily installs, uninstalls and DAU</h3>
+      <p class="note">Uninstalls arrive in Adjust a few days late, so the last days of data read low.</p>
+      <div class="legend"><span><i class="k0"></i>Installs</span><span><i class="k1"></i>Uninstalls</span><span><i class="k2"></i>Daily active users</span></div>
+      <div class="chart" data-draw="flow" data-source="daily"></div>
+    </div>
+  </section>
+
+  <section id="retention">
+    <h2>Retention — where users drop</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Retention curve for cohorts in the range</h3>
+        <p class="note">Share of installed users active again on each day after install, against the all-time curve. Each point uses only cohorts old enough to reach it.</p>
+        <div class="legend"><span><i class="k0"></i>Selected range</span><span><i class="k3"></i>All time</span></div>
+        <div class="chart" data-draw="curve" data-source="cohorts"></div>
+      </div>
+      <div class="card">
+        <h3>Where the users go</h3>
+        <p class="note">Out of every 100 new users in the range: how many are lost at each step. The red bar is the biggest single loss.</p>
+        <div class="chart" data-draw="drops" data-source="cohorts"></div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card">
+        <h3>Day-1 and day-7 retention by install day</h3>
+        <p class="note">7-day rolling average, weighted by installs.</p>
+        <div class="legend"><span><i class="k0"></i>Day 1</span><span><i class="k2"></i>Day 7</span></div>
+        <div class="chart" data-draw="retTrend" data-source="cohorts"></div>
+      </div>
+      <div class="card">
+        <h3>When uninstalls happen</h3>
+        <p class="note">Share of the range's installs that have uninstalled by each day after install. Only cohorts installed after uninstall tracking began.</p>
+        <div class="chart short" data-draw="uninstCurve" data-source="cohorts"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depth">
+    <h2>Video depth — how far new users watch</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Install-day video funnel, unique users</h3>
+        <p class="note">Share of new users who reach each video on the day they install. Each step counts only cohorts installed after that event began firing, so the steps can use different days.</p>
+        <div class="chart short" data-draw="vfunnel" data-source="cohorts"></div>
+        <p class="muted" data-draw="vfNote" data-source="cohorts">—</p>
+      </div>
+      <div class="card">
+        <h3>Reach of the 1st, 5th and 7th video by install day</h3>
+        <p class="note">Unique new users reaching each milestone on day 0, as a share of that day's installs.</p>
+        <div class="legend"><span><i class="k0"></i>1st video</span><span><i class="k2"></i>5th video completed</span><span><i class="k1"></i>7th video</span></div>
+        <div class="chart" data-draw="vreach" data-source="cohorts"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dropoff">
+    <h2>Where new users stop — by number of videos watched</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>How many videos new users watched before they stopped, install day</h3>
+        <p class="note">Out of every 100 new users in the range, the furthest video each reached on the day they installed (unique users). Counted only on install days where every milestone was already tracked; the red bar is the biggest group.</p>
+        <div class="chart short" data-draw="vbuckets" data-source="cohorts paycohort"></div>
+        <p class="muted" data-draw="vbNote" data-source="cohorts paycohort">—</p>
+      </div>
+      <div class="card">
+        <h3>Started vs finished, by video</h3>
+        <p class="note">Share of new users who start and finish the 3rd and 5th video on install day. The gap between the two bars is users who quit in the middle of that episode.</p>
+        <div class="chart short" data-draw="vcomplete" data-source="paycohort cohorts"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ads">
+    <h2>Rewarded-ad viewers who never came back</h2>
+    <div class="tiles" data-source="paycohort cohorts">
+      <div class="tile"><div class="lbl">New users who watched a rewarded ad on install day</div><div class="num" data-draw="ad" data-k="share">—</div><div class="muted"><span data-draw="ad" data-k="users">—</span> users</div></div>
+      <div class="tile"><div class="lbl">Ad viewers who didn't come back on day 1</div><div class="num">at least <span data-draw="ad" data-k="gone1">—</span></div><div class="muted">at least <span data-draw="ad" data-k="gone1n">—</span> users</div></div>
+      <div class="tile"><div class="lbl">Ad viewers not active on day 7</div><div class="num">at least <span data-draw="ad" data-k="gone7">—</span></div><div class="muted">at least <span data-draw="ad" data-k="gone7n">—</span> users</div></div>
+    </div>
+    <div class="card" style="margin-top:var(--cds-gap-md)">
+      <h3>Ad viewers vs users who return the next day, by install day</h3>
+      <p class="note">Adjust can't link the two lists user by user, so "at least" assumes every user who came back had watched an ad — the real share of ad viewers who never return is higher. Either way, most new users who sit through an ad don't open the app again.</p>
+      <div class="legend"><span><i class="k1"></i>Watched a rewarded ad on install day</span><span><i class="k0"></i>Came back on day 1</span></div>
+      <div class="chart" data-draw="adTrend" data-source="paycohort cohorts"></div>
+    </div>
+  </section>
+
+  <section id="purchases">
+    <h2>Subscriptions (Purchase Count event)</h2>
+    <div class="tiles" data-source="purchases paycohort">
+      <div class="tile"><div class="lbl">Subscriptions</div><div class="num" data-draw="pay" data-k="events">—</div><div class="muted"><span data-draw="pay" data-k="perday">—</span> a day</div></div>
+      <div class="tile"><div class="lbl">Subscription revenue</div><div class="num">₹<span data-draw="pay" data-k="rev">—</span></div><div class="muted">₹<span data-draw="pay" data-k="avg">—</span> per subscription</div></div>
+      <div class="tile"><div class="lbl">Subscribers per 1,000 active users</div><div class="num" data-draw="pay" data-k="per1k">—</div><div class="muted">daily unique subscribers over DAU</div></div>
+      <div class="tile"><div class="lbl">New users who subscribe on install day</div><div class="num" data-draw="pay" data-k="conv0">—</div><div class="muted">within 7 days: <span data-draw="pay" data-k="conv7">—</span></div></div>
+      <div class="tile"><div class="lbl">Subscribers who subscribed on install day</div><div class="num" data-draw="pay" data-k="d0share">—</div><div class="muted">of everyone who subscribed within 7 days</div></div>
+      <div class="tile"><div class="lbl">30-day renewal / resubscription rate</div><div class="num" data-draw="pay" data-k="renew">—</div><div class="muted">subscribers from the range’s installs who subscribed again within 30 days (<span data-draw="pay" data-k="repeatN">—</span> of <span data-draw="pay" data-k="buyers30">—</span>)</div></div>
+      <div class="tile"><div class="lbl">Subscriptions from same-day installs</div><div class="num" data-draw="pay" data-k="newshare">—</div><div class="muted">of all subscriptions in the range</div></div>
+      <div class="tile"><div class="lbl">Subscriptions from existing users</div><div class="num" data-draw="pay" data-k="existing">—</div><div class="muted">late first-timers plus any resubscribers</div></div>
+      <div class="tile"><div class="lbl">New users who didn’t subscribe</div><div class="num" data-draw="pay" data-k="never">—</div><div class="muted"><span data-draw="pay" data-k="neverN">—</span> users, within 7 days of installing</div></div>
+    </div>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Purchase Count is Tuktuki’s subscription event, tracked from 11 Sep 2026 (a handful of test events before). Revenue is the Purchase Amount event in ₹; Adjust’s own "revenue" total counts two events and is double the real figure.</p>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card">
+        <h3>Daily subscriptions and unique subscribers</h3>
+        <p class="note">Purchase Count events and the unique users who made them each day. When the two lines part, some users subscribed more than once that day.</p>
+        <div class="legend"><span><i class="k0"></i>Subscriptions</span><span><i class="k2"></i>Unique subscribers</span></div>
+        <div class="chart" data-draw="payTrend" data-source="purchases"></div>
+      </div>
+      <div class="card">
+        <h3>Daily subscription revenue (₹)</h3>
+        <p class="note">Purchase Amount event revenue.</p>
+        <div class="chart" data-draw="revTrend" data-source="purchases"></div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card">
+        <h3>Paywall funnel, install day</h3>
+        <p class="note">Out of new users: how many open the top-up screen and how many buy, on the day they install.</p>
+        <div class="chart short" data-draw="payFunnel" data-source="cohorts paycohort"></div>
+      </div>
+      <div class="card">
+        <h3>Subscribers by channel</h3>
+        <p class="note">For the months your range touches (from Sep 2026). Subscribers per 100 installs and 7-day subscription revenue per install.</p>
+        <div class="tw" data-source="paychan">
+          <table><thead><tr><th>Channel</th><th>Installs</th><th>Subscriptions</th><th>Subscribers / 100 installs (7 days)</th><th>₹ per install (7 days)</th></tr></thead><tbody data-draw="payChan"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="subs">
+    <h2>Subscriptions, renewals and why users don't pay</h2>
+    <div class="grid">
+      <div class="card pb">
+        <h3>Renewals and resubscriptions</h3>
+        <ul>
+          <li><b>Renewal rate is close to zero.</b> Of <span data-draw="pay" data-k="buyers30">—</span> subscribers from the range’s installs whose 30 days have passed, <span data-draw="pay" data-k="repeatN">—</span> subscribed again — a 30-day renewal rate of <span data-draw="pay" data-k="renew">—</span>.</li>
+          <li><b>Subscribing is a day-one act.</b> <span data-draw="pay" data-k="d0share">—</span> of subscribers subscribe on the day they install, and <span data-draw="pay" data-k="newshare">—</span> of the range’s subscriptions come from that day’s installs. Only <span data-draw="pay" data-k="existing">—</span> came from users installed earlier, and most of those are late first-time subscribers, not renewals.</li>
+          <li><b>Same-day repeats exist, renewals don’t.</b> On a typical day about 1 in 9 subscriptions is a second one by the same user (topping up again), but almost nobody subscribes again on a later day.</li>
+          <li><b>Check how renewals are recorded.</b> If plans auto-renew through the Play Store, the renewal is charged by Google without the app opening, so the in-app Purchase Count event never fires for it. If that’s the case, renewals are happening but invisible here, and they need to be sent to Adjust from the server.</li>
+        </ul>
+      </div>
+      <div class="card pb">
+        <h3>Who doesn’t subscribe, and why — what the data points to</h3>
+        <ul>
+          <li><b>Almost everyone.</b> <span data-draw="pay" data-k="never">—</span> of new users don’t subscribe within 7 days of installing.</li>
+          <li><b>Most never see the paywall.</b> Only <span data-draw="pay" data-k="topup">—</span> of new users open the top-up screen on day 0; the rest leave first or keep unlocking with ads.</li>
+          <li><b>Of those who see it, few subscribe.</b> <span data-draw="pay" data-k="topupConv">—</span> of top-up viewers subscribe — the price, plan choice or payment step is losing nearly everyone who gets there.</li>
+          <li><b>Ads are the easier way out.</b> About <span data-draw="ad" data-k="share">—</span> of new users watch rewarded ads on day 0, so a free unlock competes directly with paying.</li>
+          <li><b>Subscribers don’t stay.</b> Day-7 retention is low, so even subscribers rarely come back long enough to renew.</li>
+        </ul>
+        <p class="muted" style="margin-top:var(--cds-gap-sm)">Adjust records that a subscription happened, not why someone didn’t subscribe — the exact reasons need paywall events (see the fixes below).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagement">
+    <h2>Time spent, videos and ads</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Minutes in app per new user</h3>
+        <p class="note">On install day, day 1 and day 7, per installed user (including those who didn't open the app that day).</p>
+        <div class="legend"><span><i class="k0"></i>Install day</span><span><i class="k2"></i>Day 1</span><span><i class="k3"></i>Day 7</span></div>
+        <div class="chart" data-draw="mins" data-source="daily cohorts"></div>
+      </div>
+      <div class="card">
+        <h3>Videos and rewarded ads per active user</h3>
+        <p class="note">Video view events and rewarded ad events per daily active user.</p>
+        <div class="legend"><span><i class="k0"></i>Videos</span><span><i class="k1"></i>Rewarded ads</span></div>
+        <div class="chart" data-draw="vids" data-source="events daily"></div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card">
+        <h3>Monetisation touchpoints for new users</h3>
+        <p class="note">Unique new users who open the top-up screen or buy on install day, as a share of installs.</p>
+        <div class="legend"><span><i class="k0"></i>Saw top-up screen</span><span><i class="k1"></i>Purchased</span></div>
+        <div class="chart short" data-draw="money" data-source="cohorts"></div>
+      </div>
+      <div class="card">
+        <h3>App exceptions per 1,000 active users</h3>
+        <p class="note">Errors the app reports to Adjust. Spikes line up with bad releases and tend to precede uninstalls.</p>
+        <div class="chart short" data-draw="exc" data-source="events daily"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comeback">
+    <h2>Reinstalls and reactivations</h2>
+    <div class="card">
+      <h3>Daily reinstalls and reactivations</h3>
+      <p class="note">Reinstalls are devices that installed again after uninstalling. Reactivations (reattributions) are lapsed users credited to a new source; "reattribution reinstalls" are reactivations that also needed a reinstall. Deattributions are users whose reactivation window expired.</p>
+      <div class="legend"><span><i class="k0"></i>Reinstalls</span><span><i class="k1"></i>Reactivations</span><span><i class="k2"></i>Reactivation reinstalls</span><span><i class="k3"></i>Deattributions</span></div>
+      <div class="chart" data-draw="back" data-source="daily"></div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card">
+        <h3>Reinstalls and reactivations by channel</h3>
+        <p class="note">For the months your range touches. Reactivation rate is reactivations per 100 installs from the same channel.</p>
+        <div class="tw" data-source="channels">
+          <table><thead><tr><th>Channel</th><th>Reinstalls</th><th>Reactivations</th><th>Reactivation reinstalls</th><th>Reactivations / 100 installs</th></tr></thead><tbody data-draw="backChan"></tbody></table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Top campaigns bringing users back</h3>
+        <p class="note">For the months your range touches (campaign detail from Mar 2026). "Expired Attributions" are Meta users who came back after their original attribution expired.</p>
+        <div class="tw" data-source="backcamp">
+          <table><thead><tr><th>Channel</th><th class="l">Campaign</th><th>Reinstalls</th><th>Reactivations</th></tr></thead><tbody data-draw="backCamp"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="channels">
+    <h2>Channel quality</h2>
+    <div class="card">
+      <h3>How users from each channel behave</h3>
+      <p class="note">For the months your range touches; channels with fewer than 100 installs in that period leave their rates blank. Red marks the worst and green the best value in each rate column.</p>
+      <div class="tw" data-source="channels">
+        <table><thead><tr><th>Channel</th><th>Installs</th><th>Same-day uninstall</th><th>Day-1 ret.</th><th>Day-7 ret.</th><th>Min on install day</th><th>Watched 1st video</th><th>Finished 5th video</th></tr></thead><tbody data-draw="chanTbl"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section id="eras">
+    <h2>Before and after the September relaunch</h2>
+    <div class="card" data-source="eras">
+      <p class="note">All history, split at 7 Sep 2026 — the day day-1 retention and time spent jumped. This comparison does not follow the date picker.</p>
+      <div class="tw">
+        <table><thead><tr><th>Period</th><th>Installs / day</th><th>Day-1 ret.</th><th>Day-7 ret.</th><th>Day-30 ret.</th><th>Min on install day</th><th>Same-day uninstall</th></tr></thead><tbody data-draw="eraTbl"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ga">
+    <h2>Google Analytics — who the audience is</h2>
+    <p class="lede">Audience from Google Analytics 4 (property tuktuki-54fa9), month by month. The date picker works in whole months here: every month your range touches is included and compared with the same number of months just before it. Gender, age and interests only exist from September 2026, when demographics started reporting.</p>
+    <p class="muted" style="margin-top:var(--cds-gap-xs)">GA months in view: <b data-draw="gaMonths" data-source="ga_monthly">—</b> · compared with: <b data-draw="gaPrev" data-source="ga_monthly">—</b></p>
+
+    <div class="tiles" style="margin-top:var(--cds-gap-md)" data-source="ga_monthly ga_breakdowns">
+      <div class="tile"><div class="lbl">Avg monthly active users</div><div class="num" data-draw="gaT" data-k="mau">—</div><div class="muted"><span data-draw="gaT" data-k="mau_d">—</span> vs the months before</div></div>
+      <div class="tile"><div class="lbl">New users</div><div class="num" data-draw="gaT" data-k="newu">—</div><div class="muted"><span data-draw="gaT" data-k="new_share">—</span> of monthly active users</div></div>
+      <div class="tile"><div class="lbl">Engagement rate</div><div class="num" data-draw="gaT" data-k="er">—</div><div class="muted"><span data-draw="gaT" data-k="er_d">—</span> vs the months before</div></div>
+      <div class="tile"><div class="lbl">Engagement time per active user</div><div class="num" data-draw="gaT" data-k="eng">—</div><div class="muted">minutes · before: <span data-draw="gaT" data-k="eng_p">—</span> min</div></div>
+      <div class="tile"><div class="lbl">GA revenue (USD)</div><div class="num">$<span data-draw="gaT" data-k="rev">—</span></div><div class="muted">$<span data-draw="gaT" data-k="rev_k">—</span> per 1,000 active users</div></div>
+      <div class="tile"><div class="lbl">Women, of users with known gender</div><div class="num" data-draw="gaT" data-k="fem">—</div><div class="muted">gender known for <span data-draw="gaT" data-k="gcov">—</span> of users</div></div>
+      <div class="tile"><div class="lbl">Aged 18–24, of users with known age</div><div class="num" data-draw="gaT" data-k="y">—</div><div class="muted">25–34: <span data-draw="gaT" data-k="a25">—</span></div></div>
+    </div>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Monthly active users count a person once a month. Gender and age tiles use only months from September 2026 inside your range.</p>
+
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="ga-users">
+        <h3>Monthly active and new users</h3>
+        <p class="note">All months since October 2025; the shaded band is your range. November 2026 holds 5 days only.</p>
+        <div class="legend"><span><i class="k0"></i>Active users</span><span><i class="k2"></i>New users</span></div>
+        <div class="chart" data-draw="gaUsers" data-source="ga_monthly"></div>
+      </div>
+      <div class="card" id="ga-eng">
+        <h3>Engagement time per active user</h3>
+        <p class="note">Average minutes of engagement per active user in each month. The step in September 2026 is the biggest change in the data.</p>
+        <div class="chart" data-draw="gaEng" data-source="ga_monthly"></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">Gender and age</h3>
+    <div class="grid" style="margin-top:var(--cds-gap-sm)">
+      <div class="card" id="ga-gender">
+        <h3>Gender</h3>
+        <p class="note">Your range, from September 2026. Share of known excludes users GA can't classify.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Gender</th><th>Active users</th><th>Share of all users</th><th>Share of known</th><th>Min per user</th><th>Share of revenue</th></tr></thead><tbody data-draw="gaGender"></tbody></table>
+        </div>
+      </div>
+      <div class="card" id="ga-age">
+        <h3>Age</h3>
+        <p class="note">Your range, from September 2026.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Age</th><th>Active users</th><th>Share of all users</th><th>Share of known</th><th>Min per user</th><th>Share of revenue</th></tr></thead><tbody data-draw="gaAge"></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="ga-demo-monthly" style="margin-top:var(--cds-gap-md)">
+      <h3>How the audience moved, month by month</h3>
+      <p class="note">Share of each month's active users. Shows the months in your range from September 2026; if your range ends earlier, every demographic month is shown.</p>
+      <div class="tw" data-source="ga_breakdowns ga_monthly">
+        <table><thead><tr><th>Month</th><th>Male</th><th>Female</th><th>Gender unknown</th><th>18–24</th><th>25–34</th><th>35–44</th><th>45+</th><th>Age unknown</th></tr></thead><tbody data-draw="gaDemoMonthly"></tbody></table>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">Location and language</h3>
+    <div class="grid" style="margin-top:var(--cds-gap-sm)">
+      <div class="card" id="ga-state">
+        <h3>States</h3>
+        <p class="note">Share of active users in your range against the months before. Green is a state gaining share, red one losing it.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>State</th><th>Active users</th><th>Share</th><th>Before</th><th>Shift (pts)</th><th>Min per user</th><th>Share of revenue</th></tr></thead><tbody data-draw="gaState"></tbody></table>
+        </div>
+      </div>
+      <div class="card" id="ga-city">
+        <h3>Cities</h3>
+        <p class="note">Same comparison for cities. "(not set)" is users GA couldn't place.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>City</th><th>Active users</th><th>Share</th><th>Before</th><th>Shift (pts)</th><th>Min per user</th><th>Share of revenue</th></tr></thead><tbody data-draw="gaCity"></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="ga-country">
+        <h3>Countries</h3>
+        <p class="note">Share of active users in your range against the months before.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Country</th><th>Active users</th><th>Share</th><th>Before</th><th>Min per user</th></tr></thead><tbody data-draw="gaCountry"></tbody></table>
+        </div>
+      </div>
+      <div class="card" id="ga-lang">
+        <h3>Device language</h3>
+        <p class="note">The phone's language setting, not the language people watch in.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Language</th><th>Active users</th><th>Share</th><th>Before</th><th>Min per user</th></tr></thead><tbody data-draw="gaLang"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">App builds, devices and interests</h3>
+    <div class="grid" style="margin-top:var(--cds-gap-sm)">
+      <div class="card" id="ga-version">
+        <h3>App version</h3>
+        <p class="note">Users on each build in your range. Old builds that stay installed but barely engage show here as low minutes and no revenue.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Version</th><th>Active users</th><th>Share</th><th>Engagement rate</th><th>Min per user</th><th>Revenue (USD)</th></tr></thead><tbody data-draw="gaVer"></tbody></table>
+        </div>
+      </div>
+      <div class="card" id="ga-os">
+        <h3>Android version</h3>
+        <p class="note">From August 2026.</p>
+        <div class="tw" data-source="ga_breakdowns ga_monthly">
+          <table><thead><tr><th>Android</th><th>Active users</th><th>Share</th><th>Engagement rate</th><th>Min per user</th><th>Revenue (USD)</th></tr></thead><tbody data-draw="gaOs"></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="ga-interests" style="margin-top:var(--cds-gap-md)">
+      <h3>Interests (Google affinity segments)</h3>
+      <p class="note">From September 2026. One user sits in many segments, so these overlap heavily and don't separate the audience; use them only for ad-targeting ideas.</p>
+      <div class="tw" data-source="ga_breakdowns ga_monthly">
+        <table><thead><tr><th class="l">Interest</th><th>Active users</th><th>Share of all users</th><th>Min per user</th></tr></thead><tbody data-draw="gaInt"></tbody></table>
+      </div>
+    </div>
+
+    <div class="card pb" id="ga-insights" style="margin-top:var(--cds-gap-md)" data-source="ga_breakdowns ga_monthly">
+      <h3>What Google Analytics says</h3>
+      <p class="note">These compare fixed periods (June–August 2026 against September–October 2026, or September against October), so they don't follow the date picker.</p>
+      <ol>
+        <li><b>The audience shrank, then got far more engaged.</b> Monthly active users peaked at <span data-draw="gaFact" data-k="mau_peak">—</span> in <span data-draw="gaFact" data-k="mau_peakm">—</span> and were <span data-draw="gaFact" data-k="mau_now">—</span> in October 2026. Engagement time per user went from <span data-draw="gaFact" data-k="eng_b">—</span> min in June–August to <span data-draw="gaFact" data-k="eng_a">—</span> min in September–October.</li>
+        <li><b>The jump comes with the new builds, and old builds are dead weight.</b> In October, users on 1.5.x averaged <span data-draw="gaFact" data-k="new_eng">—</span> minutes at a <span data-draw="gaFact" data-k="new_er">—</span> engagement rate, while <span data-draw="gaFact" data-k="old_v">—</span> users still on builds older than 1.4 averaged <span data-draw="gaFact" data-k="old_eng">—</span> seconds and brought in $<span data-draw="gaFact" data-k="old_rev">—</span>. Demographics also switched on in September, so confirm with the tech team that the engagement step is behaviour and not a change in how engagement is measured.</li>
+        <li><b>The audience moved from the East to the West and North.</b> Bihar's share fell from <span data-draw="gaFact" data-k="bihar_b">—</span> to <span data-draw="gaFact" data-k="bihar_a">—</span> and West Bengal's from <span data-draw="gaFact" data-k="wb_b">—</span> to <span data-draw="gaFact" data-k="wb_a">—</span>, while Gujarat went from <span data-draw="gaFact" data-k="guj_b">—</span> to <span data-draw="gaFact" data-k="guj_a">—</span>, Maharashtra from <span data-draw="gaFact" data-k="mh_b">—</span> to <span data-draw="gaFact" data-k="mh_a">—</span> and Delhi from <span data-draw="gaFact" data-k="del_b">—</span> to <span data-draw="gaFact" data-k="del_a">—</span>. Patna, the biggest city, fell from <span data-draw="gaFact" data-k="patna_b">—</span> to <span data-draw="gaFact" data-k="patna_a">—</span>.</li>
+        <li><b>Women are the fastest-growing group, men still pay.</b> Women went from <span data-draw="gaFact" data-k="fem_sep">—</span> of users with known gender in September to <span data-draw="gaFact" data-k="fem_oct">—</span> in October, and engage as long as men. Men brought <span data-draw="gaFact" data-k="male_rev">—</span> of known-gender revenue in September–October.</li>
+        <li><b>18–24s are growing, 25–34s are the payers.</b> 18–24s went from <span data-draw="gaFact" data-k="y_sep">—</span> to <span data-draw="gaFact" data-k="y_oct">—</span> of users with known age, while 25–34s slipped from <span data-draw="gaFact" data-k="a25_sep">—</span> to <span data-draw="gaFact" data-k="a25_oct">—</span> yet brought <span data-draw="gaFact" data-k="a25_rev">—</span> of known-age revenue.</li>
+        <li><b>The data has gaps.</b> Age is unknown for <span data-draw="gaFact" data-k="age_unk">—</span> of users and city for <span data-draw="gaFact" data-k="city_ns">—</span>. Device language is English for <span data-draw="gaFact" data-k="eng_lang">—</span>, so it says nothing about the language people watch in. October 2025 revenue of $<span data-draw="gaFact" data-k="rev_oct25">—</span> comes almost entirely from build 1.0.18 and looks like test purchases.</li>
+      </ol>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">Recommendations from the GA data</h3>
+    <div class="grid" style="margin-top:var(--cds-gap-sm)">
+      <div class="card"><h3>Force-update old builds</h3><ul>
+        <li>Set a minimum supported version and use Play's in-app update (immediate flow) for anything older than 1.4: those users stay installed but barely open the app and earn nothing.</li>
+        <li>Send a push to old-build users announcing the new app, with a free-episode bundle after updating.</li>
+        <li>Watch the App version table each week until old builds fall to near zero.</li>
+      </ul></div>
+      <div class="card"><h3>Build for the growing audience</h3><ul>
+        <li>Commission and promote more female-led dramas and romance shows; women are the fastest-growing group and watch as long as men.</li>
+        <li>Make creatives for 18–24s (short hooks, college and first-job settings) and split Meta ad sets by gender and age so cost per retained user can be compared.</li>
+        <li>Keep the 25–34 male audience in every campaign mix: it brings the most revenue per user.</li>
+      </ul></div>
+      <div class="card"><h3>Price for who pays and who doesn't</h3><ul>
+        <li>Offer 25–34 men longer and premium plans (weekly or monthly passes with auto-renew).</li>
+        <li>Give women and 18–24s a low-ticket starter pack (₹9–₹19) next to the ad-unlock option, since they grow fast but pay little.</li>
+        <li>Send purchase events to GA in rupees with plan type, so revenue by age, gender and state becomes reliable.</li>
+      </ul></div>
+      <div class="card"><h3>Shift geo budgets</h3><ul>
+        <li>Lean spend into Gujarat, Maharashtra, Rajasthan, Delhi and Punjab, where share, minutes per user and revenue are rising.</li>
+        <li>For Bihar, West Bengal and Assam, test regional-language creatives (Bhojpuri, Bengali, Assamese) before cutting; judge each state on day-7 retention and revenue per user, not installs.</li>
+        <li>Add Gujarati and Marathi dubs or subtitles to top shows to grow the western states further.</li>
+      </ul></div>
+      <div class="card"><h3>Fix the GA setup</h3><ul>
+        <li>Confirm what changed in September (SDK, engagement events, Google signals) so the engagement step can be trusted.</li>
+        <li>Turn on blended reporting identity and keep Google signals on, to shrink the unknown age and gender groups.</li>
+        <li>Send user properties from the app: content language chosen, plan type, signup channel.</li>
+        <li>Link GA4 to AdMob and turn on the BigQuery export, so ad revenue and raw events can come into this dashboard live.</li>
+      </ul></div>
+    </div>
+
+    <h3 id="ga-deep" style="margin-top:var(--cds-gap-lg)">Deeper audience cuts — 5 Sep to 5 Nov 2026</h3>
+    <p class="muted" style="margin-top:var(--cds-gap-xs)">From GA Explorations. This property keeps exploration data for only two months, so these cuts cover 5 Sep – 5 Nov 2026 and don't follow the date picker.</p>
+
+    <div class="card" id="ga-retention" style="margin-top:var(--cds-gap-sm)">
+      <h3>1 · Retention by audience</h3>
+      <p class="note">Share of new users who came back. Day 1 and day 3 are that exact day; week 1, 2 and 4 are any day in days 7–13, 14–20 and 28–34. Only cohorts old enough for each step count. GA hides very small cells, so the oldest age groups show only weekly figures.</p>
+      <div class="tw" data-source="ga_explore">
+        <table><thead><tr><th>Group</th><th>New users</th><th>Day 1</th><th>Day 3</th><th>Week 1</th><th>Week 2</th><th>Week 4</th></tr></thead><tbody data-draw="gxRet"></tbody></table>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="ga-revenue-audience">
+        <h3>2 · Revenue per user by audience</h3>
+        <p class="note">Purchasers are users with at least one purchase event; revenue is GA purchase revenue in USD (the property's currency). Conversion is purchasers over active users.</p>
+        <div class="tw" data-source="ga_explore">
+          <table><thead><tr><th>Group</th><th>Active users</th><th>Purchasers</th><th>Conversion</th><th>Revenue (USD)</th><th>$ per 1,000 users</th><th>$ per purchaser</th></tr></thead><tbody data-draw="gxPay"></tbody></table>
+        </div>
+      </div>
+      <div class="card" id="ga-depth-audience">
+        <h3>3 · Viewing depth by audience</h3>
+        <p class="note">Watched a video and uninstalled are shares of active users; the episode steps are shares of users who watched a video. Which shows and genres each group watches can't be shown: video events carry no show or genre parameter.</p>
+        <div class="tw" data-source="ga_explore">
+          <table><thead><tr><th>Group</th><th>Watched a video</th><th>Started 3rd</th><th>Finished 3rd</th><th>Finished 5th</th><th>Videos per viewer</th><th>Opened top-up</th><th>Uninstalled</th></tr></thead><tbody data-draw="gxDepth"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card pb" id="ga-language" style="margin-top:var(--cds-gap-md)">
+      <h3>4 · Chosen content language</h3>
+      <p>Not available yet. The GA property has no custom dimensions or user properties at all, so there's no record of which language a user picks to watch in; the only language GA knows is the phone's setting (see Device language above). To add it, the app should set a user property such as <code>content_language</code> whenever a user picks or changes language, and the property should be registered in GA under Admin → Custom definitions. The same step would add <code>show_name</code> and <code>genre</code> as parameters on video events, so section 3 can show which shows each group watches.</p>
+    </div>
+
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="ga-hours">
+        <h3>5 · When people watch — by hour</h3>
+        <p class="note">Active users in each hour, 5 Sep – 5 Nov. The property reports in UK time; hours are shifted to India time using +4h30 (UK summer time, which covers most of the period), so treat them as ±30 minutes.</p>
+        <div class="chart short" data-draw="gxHour" data-source="ga_explore"></div>
+      </div>
+      <div class="card" id="ga-weekday">
+        <h3>When people watch — by day of week</h3>
+        <p class="note">Average daily active users on each weekday, 5 Sep – 5 Nov (UK dates).</p>
+        <div class="chart short" data-draw="gxWeekday" data-source="ga_explore"></div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="ga-stickiness">
+        <h3>6 · Stickiness</h3>
+        <p class="note">Daily active users as a share of the last 30 days' users (DAU/MAU) and the last 7 days' (DAU/WAU). Higher means people come back more often.</p>
+        <div class="legend"><span><i class="k0"></i>DAU / MAU</span><span><i class="k2"></i>DAU / WAU</span></div>
+        <div class="chart" data-draw="gxStick" data-source="ga_explore"></div>
+      </div>
+      <div class="card" id="ga-new-returning">
+        <h3>New vs returning users by state</h3>
+        <p class="note">Users in 5 Sep – 5 Nov who were new to the app, against those who had used it before. A high returning share means the state keeps its users.</p>
+        <div class="tw" data-source="ga_explore">
+          <table><thead><tr><th>State</th><th>New</th><th>Returning</th><th>Returning share</th></tr></thead><tbody data-draw="gxNewRet"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="ga-stability" style="margin-top:var(--cds-gap-md)">
+      <h3>7 · Stability by build</h3>
+      <p class="note">Crashlytics isn't linked to GA, so crash-free users can't be read here; this uses the app's own error event (app_exception) instead. "Watched videos" is users who played at least one video on that build.</p>
+      <div class="tw" data-source="ga_explore">
+        <table><thead><tr><th>Version</th><th>Active users</th><th>Users with errors</th><th>Error rate</th><th>Watched videos</th><th>Purchasers</th><th>Revenue (USD)</th><th>Uninstalled</th></tr></thead><tbody data-draw="gxVer"></tbody></table>
+      </div>
+    </div>
+
+    <div class="card pb" id="ga-live" style="margin-top:var(--cds-gap-md)">
+      <h3>8 · Live data</h3>
+      <p>This section is a copy read from GA on 6 Nov 2026, not a live feed: there's no Google Analytics connector in Claude's directory, and the one you added doesn't reach this chat. Two ways to make it refresh itself: turn on the GA4 BigQuery export (Admin → Product links → BigQuery) and connect BigQuery to Claude, which this dashboard can already query; or have your developers host Google's Analytics MCP server and add it as a custom connector. Separately, raise GA's data retention from 2 months to 14 months (Admin → Data collection → Data retention): today Explorations can't look back further than early September.</p>
+    </div>
+
+    <div class="card pb" id="ga-deep-insights" style="margin-top:var(--cds-gap-md)" data-source="ga_explore">
+      <h3>What the deeper cuts say</h3>
+      <ol>
+        <li><b>Retention is the same for everyone.</b> Week-1 return is <span data-draw="gxFact" data-k="w1_all">—</span> overall — <span data-draw="gxFact" data-k="w1_f">—</span> for women and <span data-draw="gxFact" data-k="w1_m">—</span> for men — and by week 4 only <span data-draw="gxFact" data-k="w4_all">—</span> are still coming back. Delhi holds best (<span data-draw="gxFact" data-k="w4_del">—</span> at week 4) and West Bengal worst (<span data-draw="gxFact" data-k="w4_wb">—</span>). The problem is the product loop, not one audience.</li>
+        <li><b>Men convert twice as often as women.</b> <span data-draw="gxFact" data-k="cv_m">—</span> of men bought against <span data-draw="gxFact" data-k="cv_f">—</span> of women, even though women watch as deep. 25–34s convert at <span data-draw="gxFact" data-k="cv_25">—</span> against <span data-draw="gxFact" data-k="cv_18">—</span> for 18–24s.</li>
+        <li><b>States differ more in paying than in watching.</b> Karnataka converts at <span data-draw="gxFact" data-k="cv_ka">—</span> and Maharashtra at <span data-draw="gxFact" data-k="cv_mh">—</span>, while Bihar converts at only <span data-draw="gxFact" data-k="cv_br">—</span>.</li>
+        <li><b>Prime time is the evening.</b> Users peak around <span data-draw="gxFact" data-k="peak_h">—</span> India time and are fewest around <span data-draw="gxFact" data-k="low_h">—</span>; <span data-draw="gxFact" data-k="peak_d">—</span> is the busiest day.</li>
+        <li><b>Stickiness is falling.</b> DAU/MAU peaked at <span data-draw="gxFact" data-k="st_peak">—</span> in late September and averaged <span data-draw="gxFact" data-k="st_last">—</span> over the last 14 days.</li>
+        <li><b>Old builds are broken, not just old.</b> <span data-draw="gxFact" data-k="old_users">—</span> users on builds older than 1.4 were active, but only <span data-draw="gxFact" data-k="old_video">—</span> of them played a video and none bought; on 1.2.x, <span data-draw="gxFact" data-k="old_err">—</span> of users hit app errors, against <span data-draw="gxFact" data-k="new_err">—</span> on 1.5.x.</li>
+      </ol>
+      <h3 style="margin-top:var(--cds-gap-md)">What to do</h3>
+      <ul>
+        <li>Fix the day-7 loop for everyone (next-episode push at prime time, daily check-in rewards) before targeting any one audience for retention.</li>
+        <li>Schedule pushes and episode drops for the evening peak, and run the heaviest ad budgets in the hours before it.</li>
+        <li>Give women a cheaper first purchase (starter pack, first-episode-bundle offer): they watch as much as men but buy half as often.</li>
+        <li>Force-update every build below 1.4 now; on 1.3.x users open the app but can't play videos, and on 1.2.x they hit errors.</li>
+        <li>Turn on the BigQuery export and 14-month retention so these cuts can run over longer periods and refresh automatically.</li>
+      </ul>
+    </div>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Source: Google Analytics 4 web reports, read on 6 Nov 2026 (November is 1–5 Nov). Each month keeps the top 6 countries, 15 states, 15 cities, 5 languages, 6 app and Android versions and 10 interests, so smaller groups are left out and shares don't add to 100%. "Delhi Division" and "Delhi" are merged. Revenue is GA's total revenue in USD. This is a fixed copy, not a live feed, because no Google Analytics connector is linked to this dashboard yet.</p>
+  </section>
+
+  <section id="insights">
+    <h2>What the data says</h2>
+    <div class="card pb">
+      <ol>
+        <li><b>The relaunch fixed engagement, not churn.</b> Day-1 retention went from <span data-draw="era" data-where="era=Before relaunch" data-field="ret_d1" data-fmt="pct1">—</span> to <span data-draw="era" data-where="era=Since relaunch" data-field="ret_d1" data-fmt="pct1">—</span> and install-day time from <span data-draw="era" data-where="era=Before relaunch" data-field="min_d0" data-fmt="dec">—</span> to <span data-draw="era" data-where="era=Since relaunch" data-field="min_d0" data-fmt="dec">—</span> minutes — but day-30 retention barely moved (<span data-draw="era" data-where="era=Before relaunch" data-field="ret_d30" data-fmt="pct1">—</span> → <span data-draw="era" data-where="era=Since relaunch" data-field="ret_d30" data-fmt="pct1">—</span>). Users now like the first session; they still don't build a habit.</li>
+        <li><b>Day 0 is still where most users are lost.</b> Since the relaunch <span data-draw="era" data-where="era=Since relaunch" data-field="d0_uninst" data-fmt="pct0">—</span> of new users uninstall on the day they install. Almost all uninstalls happen on day 0; after day 1 the curve is nearly flat, so anyone kept past day 1 tends to keep the app installed but stop opening it.</li>
+        <li><b>Depth falls off between the 1st and 5th video.</b> Most new users start a video, but only about a third finish a 5th and slightly fewer reach a 7th on day 0. The gap between 5th and 7th is small, which says users who get past the early episodes keep going — the leak is in videos 2–5, where episode locks and ad unlocks start.</li>
+        <li><b>Retention has been sliding since late September.</b> Day-1 retention peaked in the last week of September and has drifted down through October as volume moved to the cheaper Meta first-video-view campaign.</li>
+        <li><b>Reactivations come mostly from paid retargeting reach, not deliberate win-back.</b> The biggest sources are Meta campaigns and "Expired Attributions" — lapsed users who see a new ad. There is no dedicated win-back campaign of meaningful size; ShareChat/Moj and OEM placements reactivate a lot relative to their install volume.</li>
+        <li><b>Organic users barely engage.</b> Organic installs spend a fraction of the time paid users do and retain at the pre-relaunch level — consistent with pre-installs, OEM placements or misattributed installs rather than genuine intent.</li>
+        <li><b>Most new users who leave do so before the 3rd video.</b> See the drop-off chart: about a quarter never start a video and another fifth stop after 1–2, while only a small share stop at videos 3–4. Roughly the same share watch a rewarded ad as start the 3rd video — the ad gate appears to sit right where users quit.</li>
+        <li><b>Rewarded ads don't bring users back.</b> At least three in four new users who watch a rewarded ad on install day don't open the app the next day.</li>
+        <li><b>Subscribing is a one-time, day-one act.</b> About 1 in 80 new users subscribes, nearly all on install day, at around ₹40–60 a subscription, and the 30-day renewal rate is close to zero.</li>
+        <li><b>Crash storms happened.</b> App exceptions ran into the thousands a day in late Nov–early Dec 2025. Exceptions are low now, but keep this chart as an early warning on new releases.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="actions">
+    <h2>Suggestions</h2>
+    <div class="grid">
+      <div class="card"><h3>Plug the 2nd–5th video leak</h3><ul>
+        <li>Make the first 5 episodes of the opening show free for new users, with no ad gate, so they reach the point where the data shows they keep going.</li>
+        <li>Start the first lock at a cliffhanger after episode 5–6, and let one rewarded ad unlock 2–3 episodes on day 0.</li>
+        <li>Auto-play the next episode and show a "continue watching" rail first on every open.</li>
+      </ul></div>
+      <div class="card"><h3>Turn day-1 users into day-7 users</h3><ul>
+        <li>Morning push on day 1 with the exact next episode the user stopped at, unlocked free.</li>
+        <li>A daily check-in reward (free episodes or coins) for days 1–7 to build a habit.</li>
+        <li>Release new episodes of running shows on fixed days and tell users when the next one drops.</li>
+      </ul></div>
+      <div class="card"><h3>Run deliberate win-back</h3><ul>
+        <li>Build a retargeting audience of day-0 uninstallers and lapsed 7-day users and show them the show they were watching.</li>
+        <li>Give returning users a "welcome back" free episode bundle, and track it with its own campaign name so reactivations are measurable.</li>
+        <li>Scale ShareChat/Moj and OEM re-engagement, which bring back many users for their size.</li>
+      </ul></div>
+      <div class="card"><h3>Buy for depth, not first view</h3><ul>
+        <li>Move Meta budget from first-video-view to 3- and 5-video optimisation; judge campaigns on cost per day-7 retained user.</li>
+        <li>Add the 7th-video event as an optimisation goal once it has a few weeks of volume.</li>
+        <li>Audit Organic for pre-installs and attribution leakage.</li>
+      </ul></div>
+      <div class="card"><h3>Fix the paywall and repeat buying</h3><ul>
+        <li>Show the top-up screen at the first lock with a ₹9–₹19 starter pack alongside the ad option, so paying is as easy as watching an ad.</li>
+        <li>Cap free ad unlocks per day after day 0, so heavy viewers eventually meet a paid option.</li>
+        <li>Offer a weekly pass with auto-renew (Play Billing subscription) instead of one-off packs, then turn on Adjust subscription tracking to measure renewals.</li>
+        <li>Remind subscribers before their plan ends, with a discounted renewal, and send a "your plan has ended" push the day after.</li>
+      </ul></div>
+      <div class="card"><h3>Close the tracking gaps</h3><ul>
+        <li>Send paywall events to Adjust: paywall viewed, plan selected, payment started, payment failed (with reason), payment cancelled — this is how we'll learn why users don't pay.</li>
+        <li>If plans auto-renew, send renewals and cancellations to Adjust from the server (Adjust subscription API or Play Real-time Developer Notifications) — the in-app Purchase Count event can’t see them.</li>
+        <li>Send an "episode locked" event with the episode number, so drop-off by video can be tied to locks.</li>
+        <li>Add a watch-time event (seconds watched) and an episode-locked event (with what was offered: ad, top-up), so we can see exactly where users quit.</li>
+        <li>Check video view events: they track screen views almost one-for-one, which suggests they fire on screens, not plays.</li>
+        <li>Turn on time spent for all active users, not just new installs.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="tracking">
+    <h2>When each metric starts in Adjust</h2>
+    <div class="card" data-source="events cohorts daily">
+      <p class="note">First day with data for each metric. Before these dates the metric reads zero, so ranges that start earlier will understate it.</p>
+      <div class="tw"><table><thead><tr><th>Metric</th><th>First day with data</th></tr></thead><tbody data-draw="trackTbl"></tbody></table></div>
+    </div>
+  </section>
+  <p class="muted">Source: Adjust Datascape via the Adjust connector, pulled fresh through yesterday each time the dashboard loads. Time spent is install-cohort time per user; Adjust has no watch-time event for this app.</p>
+</div>
+
+<script>
+(function () {
+  // ---------- loaders: Adjust answers CSV text, sometimes wrapped as {"result": "..."} ----------
+  const loaderFn = ({ answer }) => {
+    let text = answer;
+    if (text && typeof text === 'object') text = text.result ?? text.text ?? (Array.isArray(text.content) ? text.content.map((c) => c.text || '').join('') : JSON.stringify(text));
+    if (typeof text !== 'string') throw new Error('Adjust returned no text');
+    const t = text.trim();
+    if (t.startsWith('{')) { try { const o = JSON.parse(t); if (typeof o.result === 'string') text = o.result; } catch (e) {} }
+    const rows = []; let row = [], cell = '', q = false;
+    const s = String(text).replace(/\r/g, '');
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i];
+      if (q) { if (ch === '"') { if (s[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ',') { row.push(cell); cell = ''; }
+      else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = ''; }
+      else cell += ch;
+    }
+    if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+    if (rows.length < 2 || rows[0].length < 2) throw new Error('Adjust did not return a table: ' + s.slice(0, 200));
+    const cols = rows[0].map((c) => c.trim().toLowerCase().replace(/\s+/g, '_'));
+    const data = rows.slice(1).filter((r) => r.length === cols.length).map((r) => Object.fromEntries(cols.map((c, i) => {
+      const v = r[i].trim();
+      return [c, v !== '' && /^-?\d+(\.\d+)?$/.test(v) ? Number(v) : v];
+    })));
+    return { columns: cols, rows: data };
+  };
+  ['daily', 'events', 'cohorts', 'channels', 'backcamp', 'purchases', 'paycohort', 'paychan'].forEach((id) => dash.loader(id, { description: 'Adjust’s CSV answer as rows; column names lower-cased with spaces as underscores', fn: loaderFn }));
+
+  // ---------- all-history comparison (not filtered by the picker) ----------
+  dash.calc('eras', {
+    title: 'Before vs since relaunch', description: 'Install cohorts split at 7 Sep 2026, retention weighted by installs, only cohorts old enough for each day.',
+    inputs: ['cohorts', 'daily'],
+    fn: (cohorts, daily) => {
+      const split = '2026-09-07';
+      const last = cohorts.reduce((m, r) => (r.day > m ? r.day : m), '');
+      const age = (d) => (Date.parse(last) - Date.parse(d)) / 864e5;
+      const one = (era, keep) => {
+        const c = cohorts.filter((r) => keep(r.day)); const d = daily.filter((r) => keep(r.day));
+        const w = (k, n) => { const m = c.filter((r) => age(r.day) >= n); const i = m.reduce((a, r) => a + (+r.installs || 0), 0); return i ? m.reduce((a, r) => a + (+r[k] || 0) * (+r.installs || 0), 0) / i : null; };
+        const ut = c.filter((r) => r.day >= '2026-03-23');
+        const ui = ut.reduce((a, r) => a + (+r.installs || 0), 0);
+        const di = d.reduce((a, r) => a + (+r.installs || 0), 0);
+        return { era, installs_day: d.length ? di / d.length : null, ret_d1: w('retention_rate_d1', 1), ret_d7: w('retention_rate_d7', 7), ret_d30: w('retention_rate_d30', 30),
+          min_d0: di ? d.reduce((a, r) => a + (+r.time_spent_per_user_d0 || 0) * (+r.installs || 0), 0) / di / 60 : null,
+          d0_uninst: ui ? ut.reduce((a, r) => a + (+r.uninstalls_total_d0 || 0), 0) / ui : null };
+      };
+      return [one('Before relaunch', (d) => d < split), one('Since relaunch', (d) => d >= split)];
+    }
+  });
+
+  // ---------- helpers ----------
+  const F = { int: d3.format(','), pct0: d3.format('.0%'), pct1: d3.format('.1%'), dec: d3.format('.1f'), dec2: d3.format('.2f'), big: (v) => (Math.abs(v) >= 10000 ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : d3.format(',.0f')(v)) };
+  const fmt = (v, f) => (v == null || !Number.isFinite(+v) ? '—' : F[f](+v));
+  const num = (r, ...ks) => { for (const k of ks) { const v = r[k]; if (v !== undefined && v !== '' && v !== null) return +v || 0; } return 0; };
+  const ok = (...ids) => ids.every((id) => dash.data(id).status === 'ok');
+  const err = (...ids) => ids.some((id) => ['error', 'connect', 'declined'].includes(dash.data(id).status));
+  const rows = (id) => (dash.data(id).status === 'ok' ? dash.data(id).data : []);
+  const DEF = { start: '2025-10-06', end: new Date(Date.now() + 19800000 - 864e5).toISOString().slice(0, 10) }; // end = yesterday, India time
+  const range = () => { const p = dash.params(); return { start: p.start || DEF.start, end: p.end || DEF.end }; };
+  const inR = (d) => { const r = range(); return d >= r.start && d <= r.end; };
+  const monthsIn = (m) => { const r = range(); return m >= r.start.slice(0, 7) && m <= r.end.slice(0, 7); };
+  const lastDay = (id) => rows(id).reduce((m, r) => (r.day > m ? r.day : m), '');
+  const age = (d, last) => (Date.parse(last) - Date.parse(d)) / 864e5;
+  const firstNZ = (rs, k) => { const f = rs.filter((r) => num(r, k) > 0).map((r) => r.day).sort()[0]; return f || null; };
+  const sum = (rs, f) => rs.reduce((a, r) => a + (typeof f === 'function' ? f(r) : num(r, f)), 0);
+  const wavg = (rs, k, wk) => { const w = sum(rs, wk); return w ? rs.reduce((a, r) => a + num(r, k) * num(r, wk), 0) / w : null; };
+  const failed = (el) => { const f = document.createElement('div'); f.className = 'fail'; f.append(document.createElement('i'), 'Failed to load'); el.replaceChildren(f); };
+  const note = (el, t) => { const f = document.createElement('div'); f.className = 'empty'; f.textContent = t; el.replaceChildren(f); };
+  const colors = () => { const c = dash.colors; document.querySelectorAll('#dash-root .tb').forEach((n) => { n.style.setProperty('--tb-c0', c[0]); n.style.setProperty('--tb-c1', c[1]); n.style.setProperty('--tb-c2', c[2]); n.style.setProperty('--tb-c3', c[3]); }); };
+
+  // ---------- range controls ----------
+  const startEls = document.querySelectorAll('.tb-start'), endEls = document.querySelectorAll('.tb-end');
+  const show = () => { const r = range(); startEls.forEach((e) => { if (e !== document.activeElement) e.value = r.start; }); endEls.forEach((e) => { if (e !== document.activeElement) e.value = r.end; });
+    document.querySelectorAll('.tb-preset').forEach((b) => { const want = presetRange(b); b.setAttribute('aria-pressed', String(want.start === r.start && want.end === r.end)); }); };
+  const presetRange = (b) => { const end = DEF.end; if (b.dataset.from) return { start: b.dataset.from, end }; const d = new Date(Date.parse(end) - (Number(b.dataset.days) - 1) * 864e5); return { start: d.toISOString().slice(0, 10), end }; };
+  startEls.forEach((e) => { e.addEventListener('change', () => { if (e.value && e.validity.valid) { const r = range(); dash.setParams({ start: e.value, end: e.value > r.end ? e.value : r.end }); } }); e.addEventListener('blur', show); });
+  endEls.forEach((e) => { e.addEventListener('change', () => { if (e.value && e.validity.valid) { const r = range(); dash.setParams({ end: e.value, start: e.value < r.start ? e.value : r.start }); } }); e.addEventListener('blur', show); });
+  document.querySelectorAll('.tb-preset').forEach((b) => b.addEventListener('click', () => dash.setParams(presetRange(b))));
+  dash.onData(() => { colors(); show(); });
+
+  dash.draw('rangeLabel', (el) => { const r = range(); const f = d3.utcFormat('%-d %b %Y'); el.textContent = `${f(new Date(r.start))} – ${f(new Date(r.end))}`; });
+
+  // ---------- tiles ----------
+  dash.draw('t', (el) => {
+    if (!ok('daily', 'cohorts', 'events')) { el.textContent = '—'; return; }
+    const D = rows('daily').filter((r) => inR(r.day)), C = rows('cohorts').filter((r) => inR(r.day)), E = rows('events').filter((r) => inR(r.day));
+    const last = lastDay('cohorts'); const mature = (n) => C.filter((r) => age(r.day, last) >= n);
+    const dauByDay = new Map(rows('daily').map((r) => [r.day, num(r, 'daus')])); const sessByDay = new Map(rows('daily').map((r) => [r.day, num(r, 'sessions')]));
+    const Eu = E.filter((r) => num(r, 'video_view_events') > 0);
+    const eDau = sum(Eu, (r) => dauByDay.get(r.day) || 0), eSess = sum(Eu, (r) => sessByDay.get(r.day) || 0);
+    const ut = C.filter((r) => r.day >= '2026-03-23');
+    const inst = sum(D, 'installs');
+    const v = {
+      installs: [inst, 'big'], installs_day: [D.length ? inst / D.length : null, 'big'], uninstalls: [sum(D, 'uninstalls'), 'big'],
+      uninst_ratio: [inst ? sum(D, 'uninstalls') / inst : null, 'pct0'], reinstalls: [sum(D, 'reinstalls'), 'big'], reattributions: [sum(D, 'reattributions'), 'big'],
+      dau: [D.length ? sum(D, 'daus') / D.length : null, 'big'], sess_dau: [sum(D, 'daus') ? sum(D, 'sessions') / sum(D, 'daus') : null, 'dec2'],
+      d0_uninst: [sum(ut, 'installs') ? sum(ut, 'uninstalls_total_d0') / sum(ut, 'installs') : null, 'pct0'],
+      ret_d1: [wavg(mature(1), 'retention_rate_d1', 'installs'), 'pct1'], ret_d7: [wavg(mature(7), 'retention_rate_d7', 'installs'), 'pct1'], ret_d30: [wavg(mature(30), 'retention_rate_d30', 'installs'), 'pct1'],
+      min_d0: [inst ? sum(D, (r) => num(r, 'time_spent_per_user_d0') * num(r, 'installs')) / inst / 60 : null, 'dec'],
+      min_d1: [(() => { const m = mature(1); const w = wavg(m, 'time_spent_per_user_d1', 'installs'); return w == null ? null : w / 60; })(), 'dec'],
+      vv_dau: [eDau ? sum(Eu, 'video_view_events') / eDau : null, 'dec'], vv_sess: [eSess ? sum(Eu, 'video_view_events') / eSess : null, 'dec'],
+      ads_dau: [eDau ? sum(Eu, 'ad_reward_events') / eDau : null, 'dec'], ads_vv: [sum(Eu, 'video_view_events') ? sum(Eu, 'ad_reward_events') / sum(Eu, 'video_view_events') : null, 'dec2']
+    }[el.dataset.k];
+    el.textContent = v ? fmt(v[0], v[1]) : '—';
+  });
+
+  // ---------- generic line chart ----------
+  function lines(el, data, series, o) {
+    el.replaceChildren();
+    if (!data.length) return note(el, 'No data in this range');
+    const W = Math.max(280, el.clientWidth || 600), H = o.h || 240, m = { t: 10, r: 12, b: 24, l: 10 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleUtc(d3.extent(data, (r) => r.date), [0, 1]);
+    const ymax = d3.max(data, (r) => d3.max(series, (s) => r[s.k] ?? 0)) || 1;
+    const y = d3.scaleLinear([0, ymax * 1.08], [H - m.b, m.t]).nice();
+    const ticks = y.ticks(5);
+    const probe = svg.append('text').attr('font-size', 11).text(o.yf(ticks[ticks.length - 1])); m.l = probe.node().getComputedTextLength() + 10; probe.remove();
+    x.range([m.l, W - m.r]);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(o.yf);
+    const xt = x.ticks(Math.max(2, Math.floor((W - m.l) / 90)));
+    svg.append('g').selectAll('text').data(xt).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.utcFormat(o.xf || '%b %-d'));
+    series.forEach((s) => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', s.c).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+      .attr('d', d3.line().defined((r) => r[s.k] != null).x((r) => x(r.date)).y((r) => y(r[s.k]))));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').style('display', 'none');
+    const dots = svg.selectAll('circle.hd').data(series).join('circle').attr('r', 3.5).attr('fill', (s) => s.c).style('display', 'none');
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', Math.max(0, W - m.l - m.r)).attr('height', H).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        const [px] = d3.pointer(ev); const i = d3.bisector((r) => r.date).center(data, x.invert(px)); const r = data[i];
+        rule.style('display', null).attr('x1', x(r.date)).attr('x2', x(r.date));
+        dots.style('display', (s) => (r[s.k] == null ? 'none' : null)).attr('cx', x(r.date)).attr('cy', (s) => y(r[s.k] ?? 0));
+        const t = tip.style('display', null).node(); t.replaceChildren();
+        const dd = document.createElement('div'); dd.className = 'd'; dd.textContent = d3.utcFormat(o.tf || '%a %-d %b %Y')(r.date); t.append(dd);
+        series.forEach((s) => { const ln = document.createElement('div'); if (series.length > 1) { const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = s.c; ln.append(sw); } ln.append(`${s.n}: ${r[s.k] == null ? '—' : o.vf(r[s.k])}`); t.append(ln); });
+        const sx = (x(r.date) / W) * el.clientWidth; tip.style('left', Math.min(Math.max(0, sx + 12), el.clientWidth - t.offsetWidth) + 'px').style('top', '8px');
+      })
+      .on('mouseleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); dots.style('display', 'none'); });
+  }
+  function hbars(el, data, o) {
+    el.replaceChildren();
+    if (!data.length) return note(el, 'No data in this range');
+    const W = Math.max(280, el.clientWidth || 500), bh = 22, step = bh + 26;
+    const H = data.length * step + 4;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleLinear([0, o.max ?? d3.max(data, (r) => r.v) ?? 1], [0, W - 90]);
+    data.forEach((r, i) => {
+      const y0 = i * step;
+      svg.append('text').attr('x', 0).attr('y', y0 + 12).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.label);
+      svg.append('rect').attr('x', 0).attr('y', y0 + 18).attr('height', bh).attr('rx', 4).attr('width', Math.max(2, x(r.v || 0))).attr('fill', r.hot ? 'var(--cds-chart-status-critical)' : dash.colors[0]);
+      svg.append('text').attr('x', Math.max(2, x(r.v || 0)) + 6).attr('y', y0 + 18 + bh / 2).attr('dy', '0.32em').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(r.txt);
+    });
+  }
+  const roll = (arr, k, wk, n) => arr.map((r, i) => { const win = arr.slice(Math.max(0, i - n + 1), i + 1).filter((w) => w[k] != null); const ws = d3.sum(win, (w) => w[wk]); return ws ? d3.sum(win, (w) => w[k] * w[wk]) / ws : null; });
+
+  // ---------- growth ----------
+  dash.draw('flow', (el) => {
+    if (err('daily')) return failed(el); if (!ok('daily')) return el.replaceChildren();
+    const c = dash.colors;
+    const data = rows('daily').filter((r) => inR(r.day)).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, 'installs'), b: r.day >= '2026-03-23' ? num(r, 'uninstalls') : null, d: num(r, 'daus') }));
+    lines(el, data, [{ k: 'a', n: 'Installs', c: c[0] }, { k: 'b', n: 'Uninstalls', c: c[1] }, { k: 'd', n: 'DAU', c: c[2] }], { yf: F.big, vf: d3.format(',.0f') });
+  });
+
+  // ---------- retention ----------
+  const curvePts = (C, last) => [0, 1, 3, 7, 14, 30].map((n) => { if (!n) return { n, v: 1 }; const m = C.filter((r) => age(r.day, last) >= n); return { n, v: wavg(m, 'retention_rate_d' + n, 'installs') }; });
+  dash.draw('curve', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const all = rows('cohorts'), last = lastDay('cohorts'), C = all.filter((r) => inR(r.day));
+    const a = curvePts(C, last), b = curvePts(all, last);
+    el.replaceChildren();
+    if (!C.length) return note(el, 'No cohorts in this range');
+    const W = Math.max(280, el.clientWidth || 500), H = 240, m = { t: 10, r: 16, b: 26, l: 40 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const xs = [0, 1, 3, 7, 14, 30];
+    const x = d3.scalePoint(xs, [m.l, W - m.r]);
+    const ymax = d3.max([...a, ...b].filter((p) => p.n > 0 && p.v != null), (p) => p.v) || 0.2;
+    const y = d3.scaleLinear([0, Math.min(1, ymax * 1.25)], [H - m.b, m.t]).nice();
+    const yt = y.ticks(5);
+    svg.append('g').selectAll('line').data(yt).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(yt).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.format('.0%'));
+    svg.append('g').selectAll('text').data(xs.slice(1)).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text((n) => 'Day ' + n);
+    const draw = (pts, col) => { const p = pts.filter((q) => q.n > 0 && q.v != null);
+      svg.append('path').datum(p).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x((q) => x(q.n)).y((q) => y(q.v)));
+      svg.append('g').selectAll('circle').data(p).join('circle').attr('cx', (q) => x(q.n)).attr('cy', (q) => y(q.v)).attr('r', 3).attr('fill', col); };
+    draw(b, dash.colors[3]); draw(a, dash.colors[0]);
+    svg.append('g').selectAll('text').data(a.filter((q) => q.n > 0 && q.v != null)).join('text').attr('x', (q) => x(q.n)).attr('y', (q) => y(q.v) - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg)').text((q) => d3.format('.1%')(q.v));
+  });
+  dash.draw('drops', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const last = lastDay('cohorts'); const C = rows('cohorts').filter((r) => inR(r.day));
+    const ut = C.filter((r) => r.day >= '2026-03-23'); const ui = sum(ut, 'installs');
+    const d0 = ui ? sum(ut, 'uninstalls_total_d0') / ui : null;
+    const r1 = wavg(C.filter((r) => age(r.day, last) >= 1), 'retention_rate_d1', 'installs');
+    const r7 = wavg(C.filter((r) => age(r.day, last) >= 7), 'retention_rate_d7', 'installs');
+    const r30 = wavg(C.filter((r) => age(r.day, last) >= 30), 'retention_rate_d30', 'installs');
+    if (r1 == null) return note(el, 'No cohort in this range is old enough yet');
+    const steps = [];
+    if (d0 != null) { steps.push({ label: 'Uninstalled on install day', v: d0 * 100 }); steps.push({ label: 'Kept the app but didn’t return on day 1', v: Math.max(0, (1 - d0 - r1) * 100) }); }
+    else steps.push({ label: 'Didn’t return on day 1', v: (1 - r1) * 100 });
+    if (r7 != null) steps.push({ label: 'Active day 1, gone by day 7', v: Math.max(0, (r1 - r7) * 100) });
+    if (r30 != null && r7 != null) steps.push({ label: 'Active day 7, gone by day 30', v: Math.max(0, (r7 - r30) * 100) });
+    steps.push({ label: r30 != null ? 'Still active on day 30' : (r7 != null ? 'Still active on day 7' : 'Active on day 1'), v: (r30 ?? r7 ?? r1) * 100, keep: true });
+    const mx = d3.max(steps.filter((s) => !s.keep), (s) => s.v);
+    hbars(el, steps.map((s) => ({ ...s, hot: !s.keep && s.v === mx, txt: d3.format('.1f')(s.v) + ' of 100' })), { max: 100 });
+  });
+  dash.draw('retTrend', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const last = lastDay('cohorts');
+    const all = rows('cohorts').slice().sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ day: r.day, i: num(r, 'installs'), d1: age(r.day, last) >= 1 ? num(r, 'retention_rate_d1') : null, d7: age(r.day, last) >= 7 ? num(r, 'retention_rate_d7') : null }));
+    const s1 = roll(all, 'd1', 'i', 7), s7 = roll(all, 'd7', 'i', 7);
+    const data = all.map((r, i) => ({ date: new Date(r.day), day: r.day, a: r.d1 == null ? null : s1[i], b: r.d7 == null ? null : s7[i] })).filter((r) => inR(r.day));
+    lines(el, data, [{ k: 'a', n: 'Day 1', c: dash.colors[0] }, { k: 'b', n: 'Day 7', c: dash.colors[2] }], { yf: d3.format('.0%'), vf: d3.format('.1%') });
+  });
+  dash.draw('uninstCurve', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const last = lastDay('cohorts'); const C = rows('cohorts').filter((r) => inR(r.day) && r.day >= '2026-03-23');
+    if (!C.length) return note(el, 'Uninstalls are only tracked from 23 Mar 2026');
+    const pts = [0, 1, 7, 30].map((n) => { const m = C.filter((r) => age(r.day, last) >= n); const i = sum(m, 'installs'); return { label: n ? 'By day ' + n : 'Install day', v: i ? sum(m, 'uninstalls_total_d' + n) / i : null }; }).filter((p) => p.v != null);
+    hbars(el, pts.map((p, i) => ({ label: p.label, v: p.v, hot: i === 0, txt: d3.format('.0%')(p.v) })), { max: 1 });
+  });
+
+  // ---------- video depth ----------
+  const VK = [['Started 1st video', 'first_video_view_d0_conversions_cohort'], ['Finished 5th video', 'fifth_video_view_complete_d0_conversions_cohort'], ['Reached 7th video', '7th_video_view_d0_conversions_cohort']];
+  dash.draw('vfunnel', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const all = rows('cohorts'), C = all.filter((r) => inR(r.day));
+    const steps = VK.map(([label, k]) => { const f = firstNZ(all, k); const m = f ? C.filter((r) => r.day >= f) : []; const i = sum(m, 'installs'); return { label, v: i ? sum(m, k) / i : null }; }).filter((s) => s.v != null);
+    if (!steps.length) return note(el, 'Video events weren’t tracked yet in this range');
+    hbars(el, [{ label: 'Installed', v: 1, txt: '100%' }, ...steps.map((s) => ({ ...s, txt: d3.format('.0%')(s.v) }))], { max: 1 });
+  });
+  dash.draw('vfNote', (el) => {
+    if (!ok('cohorts')) { el.textContent = '—'; return; }
+    const all = rows('cohorts'); const C = all.filter((r) => inR(r.day));
+    const parts = VK.map(([label, k]) => { const f = firstNZ(all, k); const m = f ? C.filter((r) => r.day >= f) : []; return m.length ? `${label}: ${F.int(sum(m, k))} users of ${F.int(sum(m, 'installs'))} installs` : `${label}: not tracked in this range (starts ${f ? d3.utcFormat('%-d %b %Y')(new Date(f)) : '—'})`; });
+    el.textContent = parts.join(' · ');
+  });
+  dash.draw('vreach', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const all = rows('cohorts'); const f = VK.map(([, k]) => firstNZ(all, k));
+    const data = all.filter((r) => inR(r.day) && f[0] && r.day >= f[0]).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => { const i = num(r, 'installs') || null; return { date: new Date(r.day),
+      a: i ? num(r, VK[0][1]) / i : null, b: i && f[1] && r.day >= f[1] ? num(r, VK[1][1]) / i : null, c: i && f[2] && r.day >= f[2] ? num(r, VK[2][1]) / i : null }; });
+    if (!data.length) return note(el, 'Video events weren’t tracked yet in this range');
+    lines(el, data, [{ k: 'a', n: '1st video', c: dash.colors[0] }, { k: 'b', n: '5th video done', c: dash.colors[2] }, { k: 'c', n: '7th video', c: dash.colors[1] }], { yf: d3.format('.0%'), vf: d3.format('.0%') });
+  });
+
+  // ---------- drop-off by video count ----------
+  const joinCohorts = () => { const m = new Map(rows('cohorts').map((r) => [r.day, r])); return rows('paycohort').filter((r) => inR(r.day)).map((r) => ({ ...(m.get(r.day) || {}), ...r })); };
+  const depthSet = () => {
+    const J = joinCohorts();
+    const f3 = firstNZ(rows('paycohort'), 'third_video_view_start_d0_conversions_cohort'), f7 = firstNZ(rows('cohorts'), '7th_video_view_d0_conversions_cohort');
+    const base = J.filter((r) => f3 && r.day >= f3 && num(r, 'first_video_view_d0_conversions_cohort') > 0);
+    const with7 = f7 ? base.filter((r) => r.day >= f7) : [];
+    return { base, with7, use7: with7.length > 0, f3, f7 };
+  };
+  const bucketsOf = (S, use7) => {
+    const I = sum(S, 'installs'); if (!I) return null;
+    const v1 = sum(S, 'first_video_view_d0_conversions_cohort'), v3 = sum(S, 'third_video_view_start_d0_conversions_cohort'), v5 = sum(S, 'fifth_video_view_start_d0_conversions_cohort'), v7 = use7 ? sum(S, '7th_video_view_d0_conversions_cohort') : 0;
+    const c = (x) => Math.max(0, x);
+    const b = [{ label: 'Didn’t watch any video', v: c(I - v1) }, { label: 'Stopped after 1–2 videos', v: c(v1 - v3) }, { label: 'Stopped after 3–4 videos', v: c(v3 - v5) }];
+    if (use7) { b.push({ label: 'Stopped after 5–6 videos', v: c(v5 - v7) }); b.push({ label: 'Watched 7 or more', v: v7, keep: true }); }
+    else b.push({ label: 'Watched 5 or more', v: v5, keep: true });
+    return { I, b };
+  };
+  dash.draw('vbuckets', (el) => {
+    if (err('cohorts', 'paycohort')) return failed(el); if (!ok('cohorts', 'paycohort')) return el.replaceChildren();
+    const s = depthSet(); const S = s.use7 ? s.with7 : s.base; const r = bucketsOf(S, s.use7);
+    if (!r) return note(el, 'Video milestones weren’t tracked yet in this range');
+    const mx = d3.max(r.b.filter((x) => !x.keep), (x) => x.v);
+    hbars(el, r.b.map((x) => ({ label: x.label, v: (100 * x.v) / r.I, hot: !x.keep && x.v === mx, txt: `${d3.format('.1f')((100 * x.v) / r.I)} of 100 · ${F.int(Math.round(x.v))} users` })), { max: 100 });
+  });
+  dash.draw('vbNote', (el) => {
+    if (!ok('cohorts', 'paycohort')) { el.textContent = '—'; return; }
+    const s = depthSet(); const S = s.use7 ? s.with7 : s.base;
+    if (!S.length) { el.textContent = 'The 3rd and 5th video events start on 21 Aug 2026; the 7th on 28 Oct 2026.'; return; }
+    const f = d3.utcFormat('%-d %b'); const ds = S.map((r) => r.day).sort();
+    el.textContent = `Based on ${F.int(sum(S, 'installs'))} installs from ${f(new Date(ds[0]))} to ${f(new Date(ds[ds.length - 1]))}.` + (s.use7 ? '' : ' The 7th-video event starts on 28 Oct 2026, so this range groups 5+ together.');
+  });
+  dash.draw('vcomplete', (el) => {
+    if (err('paycohort', 'cohorts')) return failed(el); if (!ok('paycohort', 'cohorts')) return el.replaceChildren();
+    const S = depthSet().base; const I = sum(S, 'installs');
+    if (!I) return note(el, 'Video milestones weren’t tracked yet in this range');
+    const items = [['Started 3rd video', 'third_video_view_start_d0_conversions_cohort'], ['Finished 3rd video', 'third_video_view_complete_d0_conversions_cohort'], ['Started 5th video', 'fifth_video_view_start_d0_conversions_cohort'], ['Finished 5th video', 'fifth_video_view_complete_d0_conversions_cohort']];
+    hbars(el, items.map(([label, k]) => { const v = sum(S, k) / I; return { label, v, txt: d3.format('.0%')(v) }; }), { max: 1 });
+  });
+
+  // ---------- ad viewers ----------
+  const adStats = () => {
+    const last = lastDay('cohorts'); const J = joinCohorts().filter((r) => num(r, 'ad_reward_d0_conversions_cohort') > 0 && num(r, 'installs') > 0);
+    const A = sum(J, 'ad_reward_d0_conversions_cohort'), I = sum(J, 'installs');
+    const m1 = J.filter((r) => age(r.day, last) >= 1), m7 = J.filter((r) => age(r.day, last) >= 7);
+    const g = (M, k) => { const a = sum(M, 'ad_reward_d0_conversions_cohort'); const back = sum(M, (r) => num(r, k) * num(r, 'installs')); return a ? { n: Math.max(0, a - back), p: Math.max(0, a - back) / a } : null; };
+    const adEv = sum(J, (r) => num(r, 'ad_reward_d0_events_cohort'));
+    return { A, I, share: I ? A / I : null, g1: g(m1, 'retention_rate_d1'), g7: g(m7, 'retention_rate_d7'), per: adEv && A ? adEv / A : null };
+  };
+  dash.draw('ad', (el) => {
+    if (!ok('paycohort', 'cohorts')) { el.textContent = '—'; return; }
+    const s = adStats();
+    const v = { share: fmt(s.share, 'pct0'), users: fmt(s.A, 'big'), gone1: s.g1 ? fmt(s.g1.p, 'pct0') : '—', gone1n: s.g1 ? fmt(s.g1.n, 'big') : '—', gone7: s.g7 ? fmt(s.g7.p, 'pct0') : '—', gone7n: s.g7 ? fmt(s.g7.n, 'big') : '—', per: s.per ? fmt(s.per, 'dec') : '—' }[el.dataset.k];
+    el.textContent = v ?? '—';
+  });
+  dash.draw('adTrend', (el) => {
+    if (err('paycohort', 'cohorts')) return failed(el); if (!ok('paycohort', 'cohorts')) return el.replaceChildren();
+    const last = lastDay('cohorts');
+    const data = joinCohorts().filter((r) => num(r, 'installs') > 0 && num(r, 'ad_reward_d0_conversions_cohort') > 0).sort((a, b) => (a.day < b.day ? -1 : 1))
+      .map((r) => ({ date: new Date(r.day), a: num(r, 'ad_reward_d0_conversions_cohort') / num(r, 'installs'), b: age(r.day, last) >= 1 && r.retention_rate_d1 !== undefined ? num(r, 'retention_rate_d1') : null }));
+    if (!data.length) return note(el, 'Ad viewers are counted from 15 Aug 2026');
+    lines(el, data, [{ k: 'a', n: 'Watched an ad', c: dash.colors[1] }, { k: 'b', n: 'Back on day 1', c: dash.colors[0] }], { yf: d3.format('.0%'), vf: d3.format('.1%') });
+  });
+
+  // ---------- purchases ----------
+  const PE = 'purchase_count_events', PU = 'purchase_count_d0_conversions_per_period', PR = 'purchase_amount_revenue';
+  const payStats = () => {
+    const P = rows('purchases').filter((r) => inR(r.day)), dauM = new Map(rows('daily').map((r) => [r.day, num(r, 'daus')]));
+    const Pd = P.filter((r) => r.day >= '2026-09-11'); const ev = sum(P, PE), rev = sum(P, PR), u = sum(Pd, PU), dau = sum(Pd, (r) => num(r, 'daus') || dauM.get(r.day) || 0);
+    const last = lastDay('paycohort'); const C = rows('paycohort').filter((r) => inR(r.day) && r.day >= '2026-09-11');
+    const C7 = C.filter((r) => age(r.day, last) >= 7), C30 = C.filter((r) => age(r.day, last) >= 30);
+    const i7 = sum(C7, 'installs'), b0_7 = sum(C7, 'purchase_count_d0_conversions_cohort'), b7 = sum(C7, 'purchase_count_d7_conversions_cohort');
+    const i0 = sum(C, 'installs'), b0 = sum(C, 'purchase_count_d0_conversions_cohort');
+    const b30 = sum(C30, 'purchase_count_d30_conversions_cohort'), e30 = sum(C30, 'purchase_count_d30_events_cohort');
+    const pm = new Map(P.map((r) => [r.day, num(r, PE)])); const same = C.filter((r) => pm.has(r.day));
+    const cm = new Map(rows('cohorts').map((r) => [r.day, r])); const T = C.filter((r) => cm.has(r.day)); const tv = sum(T, (r) => num(cm.get(r.day), 'screenview_topup_d0_conversions_cohort'));
+    return { ev, rev, days: P.length, u, dau, conv0: i0 ? b0 / i0 : null, conv7: i7 ? b7 / i7 : null, d0share: b7 ? b0_7 / b7 : null,
+      repeat: b30 ? (e30 - b30) / b30 : null, repeatN: b30 ? e30 - b30 : null, buyers30: b30 || null,
+      newshare: sum(same, (r) => pm.get(r.day)) ? sum(same, 'purchase_count_d0_events_cohort') / sum(same, (r) => pm.get(r.day)) : null,
+      topup: sum(T, 'installs') ? tv / sum(T, 'installs') : null, existing: ev ? Math.max(0, ev - sum(same, 'purchase_count_d0_events_cohort')) : null, neverN: i7 ? i7 - b7 : null, topupConv: tv ? sum(T, 'purchase_count_d0_conversions_cohort') / tv : null };
+  };
+  dash.draw('pay', (el) => {
+    if (!ok('purchases', 'paycohort', 'cohorts', 'daily')) { el.textContent = '—'; return; }
+    const s = payStats();
+    const v = { events: fmt(s.ev, 'big'), perday: s.days ? fmt(s.ev / s.days, 'dec') : '—', rev: fmt(s.rev, 'big'), avg: s.ev ? fmt(s.rev / s.ev, 'big') : '—', per1k: s.dau ? fmt((1000 * s.u) / s.dau, 'dec') : '—',
+      conv0: fmt(s.conv0, 'pct1'), conv7: fmt(s.conv7, 'pct1'), d0share: fmt(s.d0share, 'pct0'), repeat: fmt(s.repeat, 'dec2'), renew: fmt(s.repeat, 'pct1'), existing: s.existing == null ? '—' : fmt(s.existing, 'int'), never: fmt(s.conv7 == null ? null : 1 - s.conv7, 'pct1'), neverN: s.neverN == null ? '—' : fmt(s.neverN, 'big'), repeatN: fmt(s.repeatN, 'int'), buyers30: fmt(s.buyers30, 'int'),
+      newshare: fmt(Math.min(1, s.newshare ?? NaN), 'pct0'), topup: fmt(s.topup, 'pct0'), topupConv: fmt(s.topupConv, 'pct1') }[el.dataset.k];
+    el.textContent = v ?? '—';
+  });
+  dash.draw('payTrend', (el) => {
+    if (err('purchases')) return failed(el); if (!ok('purchases')) return el.replaceChildren();
+    const data = rows('purchases').filter((r) => inR(r.day) && r.day >= '2026-09-08').sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, PE), b: num(r, PU) }));
+    if (!data.length) return note(el, 'Purchase Count is tracked from 11 Sep 2026');
+    lines(el, data, [{ k: 'a', n: 'Purchases', c: dash.colors[0] }, { k: 'b', n: 'Unique buyers', c: dash.colors[2] }], { yf: d3.format(',.0f'), vf: d3.format(',.0f') });
+  });
+  dash.draw('revTrend', (el) => {
+    if (err('purchases')) return failed(el); if (!ok('purchases')) return el.replaceChildren();
+    const data = rows('purchases').filter((r) => inR(r.day) && r.day >= '2026-09-08').sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, PR) }));
+    if (!data.length) return note(el, 'Purchase Amount is tracked from 11 Sep 2026');
+    lines(el, data, [{ k: 'a', n: 'Revenue', c: dash.colors[0] }], { yf: (v) => '₹' + F.big(v), vf: (v) => '₹' + d3.format(',.0f')(v) });
+  });
+  dash.draw('payFunnel', (el) => {
+    if (err('cohorts', 'paycohort')) return failed(el); if (!ok('cohorts', 'paycohort')) return el.replaceChildren();
+    const T = joinCohorts().filter((r) => r.day >= '2026-09-11' && r.screenview_topup_d0_conversions_cohort !== undefined); const I = sum(T, 'installs');
+    if (!I) return note(el, 'Purchase Count is tracked from 11 Sep 2026');
+    const st = [['Installed', I], ['Started a video', sum(T, 'first_video_view_d0_conversions_cohort')], ['Watched a rewarded ad', sum(T, 'ad_reward_d0_conversions_cohort')], ['Opened top-up screen', sum(T, 'screenview_topup_d0_conversions_cohort')], ['Subscribed', sum(T, 'purchase_count_d0_conversions_cohort')]];
+    hbars(el, st.map(([label, v], i) => ({ label, v: v / I, hot: i === st.length - 1, txt: `${d3.format(v / I < 0.1 ? '.1%' : '.0%')(v / I)} · ${F.int(v)}` })), { max: 1 });
+  });
+  dash.draw('payChan', (tb) => {
+    tb.replaceChildren(); if (!ok('paychan')) return;
+    const g = d3.rollups(rows('paychan').filter((r) => monthsIn(r.month)), (rs) => ({ i: sum(rs, 'installs'), e: sum(rs, 'purchase_count_events'), b7: sum(rs, 'purchase_count_d7_conversions_cohort'), r7: sum(rs, (r) => num(r, 'purchase_amount_d7_revenue_cohort', 'purchase_amount_revenue')) }), (r) => r.channel)
+      .map(([channel, v]) => ({ channel, ...v })).filter((r) => r.i > 0).sort((a, b) => b.i - a.i);
+    if (!g.length) return emptyRow(tb, 5, 'No purchase data for these months (tracked from Sep 2026)');
+    g.forEach((r) => { const big = r.i >= 100; const tr = document.createElement('tr'); tr.append(td(r.channel), td(F.int(r.i)), td(F.int(r.e)), td(big ? d3.format('.2f')((100 * r.b7) / r.i) : '—'), td(big ? d3.format('.2f')(r.r7 / r.i) : '—')); tb.append(tr); });
+  });
+
+  // ---------- engagement ----------
+  dash.draw('mins', (el) => {
+    if (err('daily', 'cohorts')) return failed(el); if (!ok('daily', 'cohorts')) return el.replaceChildren();
+    const last = lastDay('cohorts'); const cm = new Map(rows('cohorts').map((r) => [r.day, r]));
+    const data = rows('daily').filter((r) => inR(r.day)).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => { const c = cm.get(r.day) || {}; return { date: new Date(r.day),
+      a: num(r, 'time_spent_per_user_d0') / 60, b: c.day && age(r.day, last) >= 1 ? num(c, 'time_spent_per_user_d1') / 60 : null, c: c.day && age(r.day, last) >= 7 ? num(c, 'time_spent_per_user_d7') / 60 : null }; });
+    lines(el, data, [{ k: 'a', n: 'Install day', c: dash.colors[0] }, { k: 'b', n: 'Day 1', c: dash.colors[2] }, { k: 'c', n: 'Day 7', c: dash.colors[3] }], { yf: d3.format('.0f'), vf: (v) => d3.format('.1f')(v) + ' min' });
+  });
+  dash.draw('vids', (el) => {
+    if (err('events', 'daily')) return failed(el); if (!ok('events', 'daily')) return el.replaceChildren();
+    const dau = new Map(rows('daily').map((r) => [r.day, num(r, 'daus')]));
+    const data = rows('events').filter((r) => inR(r.day) && dau.get(r.day)).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, 'video_view_events') / dau.get(r.day), b: num(r, 'ad_reward_events') / dau.get(r.day) }));
+    lines(el, data, [{ k: 'a', n: 'Videos', c: dash.colors[0] }, { k: 'b', n: 'Rewarded ads', c: dash.colors[1] }], { yf: d3.format('.0f'), vf: d3.format('.1f') });
+  });
+  dash.draw('money', (el) => {
+    if (err('cohorts')) return failed(el); if (!ok('cohorts')) return el.replaceChildren();
+    const data = rows('cohorts').filter((r) => inR(r.day) && num(r, 'installs') > 0).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, 'screenview_topup_d0_conversions_cohort') / num(r, 'installs'), b: num(r, 'purchase_d0_conversions_cohort', 'purchase_successful_d0_conversions_cohort') / num(r, 'installs') }));
+    lines(el, data, [{ k: 'a', n: 'Saw top-up', c: dash.colors[0] }, { k: 'b', n: 'Purchased', c: dash.colors[1] }], { h: 200, yf: d3.format('.0%'), vf: d3.format('.1%') });
+  });
+  dash.draw('exc', (el) => {
+    if (err('events', 'daily')) return failed(el); if (!ok('events', 'daily')) return el.replaceChildren();
+    const dau = new Map(rows('daily').map((r) => [r.day, num(r, 'daus')]));
+    const data = rows('events').filter((r) => inR(r.day) && dau.get(r.day)).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: (1000 * num(r, 'app_exception_events')) / dau.get(r.day) }));
+    lines(el, data, [{ k: 'a', n: 'Exceptions / 1k DAU', c: dash.colors[1] }], { h: 200, yf: F.big, vf: d3.format(',.0f') });
+  });
+
+  // ---------- comeback ----------
+  dash.draw('back', (el) => {
+    if (err('daily')) return failed(el); if (!ok('daily')) return el.replaceChildren();
+    const c = dash.colors;
+    const data = rows('daily').filter((r) => inR(r.day)).sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ date: new Date(r.day), a: num(r, 'reinstalls'), b: num(r, 'reattributions'), c: num(r, 'reattribution_reinstalls'), d: num(r, 'deattributions') }));
+    lines(el, data, [{ k: 'a', n: 'Reinstalls', c: c[0] }, { k: 'b', n: 'Reactivations', c: c[1] }, { k: 'c', n: 'Reactivation reinstalls', c: c[2] }, { k: 'd', n: 'Deattributions', c: c[3] }], { yf: F.big, vf: d3.format(',.0f') });
+  });
+  const td = (t, cls) => { const e = document.createElement('td'); e.textContent = t; if (cls) e.className = cls; return e; };
+  const emptyRow = (tb, n, t) => { const tr = document.createElement('tr'); const e = td(t); e.colSpan = n; e.className = 'l'; tr.append(e); tb.append(tr); };
+  const byChannel = () => {
+    const g = d3.rollups(rows('channels').filter((r) => monthsIn(r.month)), (rs) => ({
+      installs: sum(rs, 'installs'), reinstalls: sum(rs, 'reinstalls'), reatt: sum(rs, 'reattributions'), reattRe: sum(rs, 'reattribution_reinstalls'),
+      d0u: sum(rs.filter((r) => r.month >= '2026-03'), 'uninstalls_total_d0'), d0i: sum(rs.filter((r) => r.month >= '2026-03'), 'installs'),
+      r1: wavg(rs, 'retention_rate_d1', 'installs'), r7: wavg(rs, 'retention_rate_d7', 'installs'), t0: wavg(rs, 'time_spent_per_user_d0', 'installs'),
+      v1: sum(rs, 'first_video_view_d0_conversions_cohort'), v1i: sum(rs.filter((r) => r.month >= '2025-12'), 'installs'),
+      v5: sum(rs, 'fifth_video_view_complete_d0_conversions_cohort'), v5i: sum(rs.filter((r) => r.month >= '2026-08'), 'installs') }), (r) => r.channel);
+    return g.map(([channel, v]) => ({ channel, ...v }));
+  };
+  dash.draw('backChan', (tb) => {
+    tb.replaceChildren(); if (!ok('channels')) return;
+    const g = byChannel().filter((r) => r.reinstalls + r.reatt > 0).sort((a, b) => b.reatt + b.reinstalls - (a.reatt + a.reinstalls));
+    if (!g.length) return emptyRow(tb, 5, 'No reinstalls or reactivations in these months');
+    g.forEach((r) => { const tr = document.createElement('tr'); tr.append(td(r.channel), td(F.int(r.reinstalls)), td(F.int(r.reatt)), td(F.int(r.reattRe)), td(r.installs >= 100 ? d3.format('.1f')((100 * r.reatt) / r.installs) : '—')); tb.append(tr); });
+  });
+  dash.draw('backCamp', (tb) => {
+    tb.replaceChildren(); if (!ok('backcamp')) return;
+    const g = d3.rollups(rows('backcamp').filter((r) => monthsIn(r.month)), (rs) => ({ re: sum(rs, 'reinstalls'), ra: sum(rs, 'reattributions') }), (r) => r.channel + '\u0001' + (r.campaign_network || r.campaign || ''))
+      .map(([k, v]) => { const [channel, campaign] = k.split('\u0001'); return { channel, campaign, ...v }; }).filter((r) => r.re + r.ra > 0).sort((a, b) => b.ra + b.re - (a.ra + a.re)).slice(0, 25);
+    if (!g.length) return emptyRow(tb, 4, 'No campaign detail for these months');
+    g.forEach((r) => { const tr = document.createElement('tr'); tr.append(td(r.channel), td(r.campaign, 'l'), td(F.int(r.re)), td(F.int(r.ra))); tb.append(tr); });
+  });
+
+  // ---------- channel quality ----------
+  dash.draw('chanTbl', (tb) => {
+    tb.replaceChildren(); if (!ok('channels')) return;
+    const g = byChannel().filter((r) => r.installs > 0).sort((a, b) => b.installs - a.installs).map((r) => {
+      const big = r.installs >= 100;
+      return { ...r, c_d0: big && r.d0i ? r.d0u / r.d0i : null, c_r1: big ? r.r1 : null, c_r7: big ? r.r7 : null, c_t0: big && r.t0 != null ? r.t0 / 60 : null, c_v1: big && r.v1i ? r.v1 / r.v1i : null, c_v5: big && r.v5i >= 100 ? r.v5 / r.v5i : null };
+    });
+    if (!g.length) return emptyRow(tb, 8, 'No installs in these months');
+    const cols = [['c_d0', 'pct0', 'low'], ['c_r1', 'pct1', 'high'], ['c_r7', 'pct1', 'high'], ['c_t0', 'dec', 'high'], ['c_v1', 'pct0', 'high'], ['c_v5', 'pct0', 'high']];
+    const ext = Object.fromEntries(cols.map(([k]) => { const v = g.map((r) => r[k]).filter((x) => x != null); return [k, [d3.min(v), d3.max(v)]]; }));
+    g.forEach((r) => { const tr = document.createElement('tr'); tr.append(td(r.channel), td(F.int(r.installs)));
+      cols.forEach(([k, f, dir]) => { const v = r[k]; let cls = ''; if (v != null && ext[k][0] !== ext[k][1]) { const [lo, hi] = ext[k]; if (v === (dir === 'high' ? hi : lo)) cls = 'ok'; else if (v === (dir === 'high' ? lo : hi)) cls = 'bad'; } tr.append(td(fmt(v, f), cls)); });
+      tb.append(tr); });
+  });
+
+  // ---------- eras ----------
+  dash.draw('eraTbl', (tb) => {
+    tb.replaceChildren(); const d = dash.data('eras'); if (d.status !== 'ok') return;
+    d.data.forEach((r) => { const tr = document.createElement('tr'); tr.append(td(r.era), td(fmt(r.installs_day, 'big')), td(fmt(r.ret_d1, 'pct1')), td(fmt(r.ret_d7, 'pct1')), td(fmt(r.ret_d30, 'pct1')), td(fmt(r.min_d0, 'dec')), td(fmt(r.d0_uninst, 'pct0'))); tb.append(tr); });
+  });
+  dash.draw('era', (el) => {
+    const d = dash.data('eras'); if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const [k, v] = el.dataset.where.split('='); const r = d.data.find((x) => x[k] === decodeURIComponent(v));
+    el.textContent = r ? fmt(r[el.dataset.field], el.dataset.fmt) : '—';
+  });
+
+  // ---------- tracking start dates ----------
+  dash.draw('trackTbl', (tb) => {
+    tb.replaceChildren(); if (!ok('events', 'cohorts', 'daily')) return;
+    const f = (d) => (d ? d3.utcFormat('%-d %b %Y')(new Date(d)) : 'No data yet');
+    const list = [['Installs and DAU', firstNZ(rows('daily'), 'installs')], ['Reactivations', firstNZ(rows('daily'), 'reattributions')], ['Reinstalls', firstNZ(rows('daily'), 'reinstalls')], ['Uninstalls (bulk tracking)', '2026-03-23'],
+      ['First video view', firstNZ(rows('events'), 'first_video_view_events')], ['3rd video complete', firstNZ(rows('events'), 'third_video_view_complete_events')], ['5th video complete', firstNZ(rows('events'), 'fifth_video_view_complete_events')],
+      ['7th video view', firstNZ(rows('events'), '7th_video_view_events')], ['Rewarded ad', firstNZ(rows('events'), 'ad_reward_events')], ['3rd and 5th video start', '2026-08-21'], ['Purchase Count (subscriptions)', '2026-09-11'], ['Top-up screen', firstNZ(rows('events'), 'screenview_topup_events')], ['App exception', firstNZ(rows('events'), 'app_exception_events')]];
+    list.forEach(([n, d]) => { const tr = document.createElement('tr'); tr.append(td(n), td(f(d))); tb.append(tr); });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  // ---------- Google Analytics section ----------
+  const gD = () => dash.data('ga_breakdowns'), gM = () => dash.data('ga_monthly');
+  const gOk = () => gD().status === 'ok' && gM().status === 'ok';
+  const gErr = () => [gD(), gM()].some((d) => ['error', 'connect', 'declined'].includes(d.status));
+  const B = () => (gOk() ? gD().data : []);
+  const M = () => (gOk() ? gM().data.slice().sort((a, b) => (a.month < b.month ? -1 : 1)) : []);
+  const DEMO_FROM = '2026-09';
+  const P = { pct0: d3.format('.0%'), pct1: d3.format('.1%'), int: d3.format(','), dec: d3.format('.1f'), usd: d3.format(',.0f'), usd2: d3.format(',.2f'),
+    big: (v) => (Math.abs(v) >= 10000 ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : d3.format(',.0f')(v)) };
+  const f = (v, k) => (v == null || !Number.isFinite(+v) ? '—' : P[k](+v));
+  const signedPct = (v) => (v == null || !Number.isFinite(v) ? '—' : (v > 0 ? '+' : '') + d3.format('.0%')(v));
+  const signedPts = (v) => (v == null || !Number.isFinite(v) ? '—' : (v > 0 ? '+' : '') + d3.format('.1f')(v));
+  const mlabel = (m) => d3.utcFormat('%b %Y')(new Date(m + '-01T00:00:00Z'));
+  const span = (ms) => (!ms.length ? 'no earlier months' : ms.length === 1 ? mlabel(ms[0]) : mlabel(ms[0]) + ' – ' + mlabel(ms[ms.length - 1]));
+  const isPartial = (m) => { const r = M().find((x) => x.month === m); return !!(r && r.days); };
+
+  const rangeMonths = () => { const p = dash.params(); const s = (p.start || '2025-10-06').slice(0, 7), e = (p.end || new Date(Date.now() + 19800000 - 864e5).toISOString().slice(0, 10)).slice(0, 7); return M().map((r) => r.month).filter((m) => m >= s && m <= e); };
+  const prevMonths = () => { const all = M().map((r) => r.month); const rm = rangeMonths(); if (!rm.length) return []; const i = all.indexOf(rm[0]); return all.slice(Math.max(0, i - rm.length), i); };
+  const totals = (ms) => { const rs = M().filter((r) => ms.includes(r.month)); const a = d3.sum(rs, (r) => r.active_users);
+    return { a, n: d3.sum(rs, (r) => r.new_users), rev: d3.sum(rs, (r) => r.revenue_usd), eng: a ? d3.sum(rs, (r) => r.avg_engagement_sec * r.active_users) / a : null, er: a ? d3.sum(rs, (r) => r.engagement_rate * r.active_users) / a : null }; };
+  const avgMau = (ms) => { const full = ms.filter((m) => !isPartial(m)); const use = full.length ? full : ms; return use.length ? totals(use).a / use.length : null; };
+  const agg = (dim, ms) => d3.rollups(B().filter((r) => r.dimension === dim && ms.includes(r.month)), (rs) => { const a = d3.sum(rs, (r) => r.active_users);
+    return { a, rev: d3.sum(rs, (r) => r.revenue_usd), eng: a ? d3.sum(rs, (r) => r.avg_engagement_sec * r.active_users) / a : null, er: a ? d3.sum(rs, (r) => r.engagement_rate * r.active_users) / a : null }; }, (r) => r.name)
+    .map(([name, v]) => ({ name, ...v }));
+  const demoMonths = (ms) => ms.filter((m) => m >= DEMO_FROM);
+  const known = (rows) => rows.filter((r) => r.name !== 'unknown');
+
+  const gtd = (t, cls) => { const e = document.createElement('td'); e.textContent = t; if (cls) e.className = cls; return e; };
+  const gEmpty = (tb, n, t) => { const tr = document.createElement('tr'); const e = gtd(t, 'l'); e.colSpan = n; tr.append(e); tb.append(tr); };
+  const gFail = (el) => { const x = document.createElement('div'); x.className = 'fail'; x.append(document.createElement('i'), 'Failed to load'); el.replaceChildren(x); };
+
+  // ---------- range labels ----------
+  dash.draw('gaMonths', (el) => { if (!gOk()) { el.textContent = '—'; return; } const rm = rangeMonths(); el.textContent = span(rm) + (rm.some(isPartial) ? ' (Nov 2026 is 1–5 Nov)' : ''); });
+  dash.draw('gaPrev', (el) => { if (!gOk()) { el.textContent = '—'; return; } el.textContent = span(prevMonths()); });
+
+  // ---------- tiles ----------
+  dash.draw('gaT', (el) => {
+    if (!gOk()) { el.textContent = '—'; return; }
+    const rm = rangeMonths(), pm = prevMonths(), t = totals(rm), tp = totals(pm);
+    const mau = avgMau(rm), mauP = pm.length ? avgMau(pm) : null;
+    const dm = demoMonths(rm); const G = agg('Gender', dm), A = agg('Age', dm); const tg = totals(dm).a;
+    const kg = d3.sum(known(G), (r) => r.a), ka = d3.sum(known(A), (r) => r.a);
+    const g = (n) => (G.find((r) => r.name === n) || {}).a, a = (n) => (A.find((r) => r.name === n) || {}).a;
+    const v = {
+      mau: f(mau, 'big'), mau_d: mauP ? signedPct(mau / mauP - 1) : '—',
+      newu: f(t.n, 'big'), new_share: t.a ? f(t.n / t.a, 'pct0') : '—',
+      er: f(t.er, 'pct1'), er_d: pm.length && t.er != null && tp.er != null ? signedPts((t.er - tp.er) * 100) + ' pts' : '—',
+      eng: t.eng == null ? '—' : f(t.eng / 60, 'dec'), eng_p: tp.eng == null || !pm.length ? '—' : f(tp.eng / 60, 'dec'),
+      rev: f(t.rev, 'usd'), rev_k: t.a ? f((1000 * t.rev) / t.a, 'usd2') : '—',
+      fem: kg ? f((g('female') || 0) / kg, 'pct0') : '—', gcov: tg ? f(kg / tg, 'pct0') : '—',
+      y: ka ? f((a('18-24') || 0) / ka, 'pct0') : '—', a25: ka ? f((a('25-34') || 0) / ka, 'pct0') : '—'
+    }[el.dataset.k];
+    el.textContent = v ?? '—';
+  });
+
+  // ---------- charts ----------
+  function gaLines(el, data, series, o) {
+    el.replaceChildren();
+    if (!data.length) { const x = document.createElement('div'); x.className = 'empty'; x.textContent = 'No data'; el.replaceChildren(x); return; }
+    const W = Math.max(280, el.clientWidth || 600), H = 240, m = { t: 12, r: 14, b: 24, l: 10 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleUtc(d3.extent(data, (r) => r.date), [0, 1]);
+    const ymax = d3.max(data, (r) => d3.max(series, (s) => r[s.k] ?? 0)) || 1;
+    const y = d3.scaleLinear([0, ymax * 1.08], [H - m.b, m.t]).nice();
+    const ticks = y.ticks(5);
+    const probe = svg.append('text').attr('font-size', 11).text(o.yf(ticks[ticks.length - 1])); m.l = probe.node().getComputedTextLength() + 10; probe.remove();
+    x.range([m.l + 8, W - m.r - 8]);
+    if (o.band && o.band.length) { const b0 = new Date(o.band[0] + '-01T00:00:00Z'), b1 = d3.utcMonth.offset(new Date(o.band[o.band.length - 1] + '-01T00:00:00Z'), 1);
+      const xa = Math.max(m.l, x(d3.utcDay.offset(b0, -15))), xb = Math.min(W - m.r, x(d3.utcDay.offset(b1, -15)));
+      svg.append('rect').attr('x', xa).attr('y', m.t).attr('width', Math.max(0, xb - xa)).attr('height', H - m.b - m.t).attr('fill', 'var(--cds-chart-grid)').attr('opacity', 0.6); }
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(o.yf);
+    const xt = x.ticks(Math.max(2, Math.min(data.length, Math.floor((W - m.l) / 70))));
+    svg.append('g').selectAll('text').data(xt).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.utcFormat('%b %y'));
+    series.forEach((s) => {
+      svg.append('path').datum(data).attr('fill', 'none').attr('stroke', s.c).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().defined((r) => r[s.k] != null).x((r) => x(r.date)).y((r) => y(r[s.k])));
+      svg.append('g').selectAll('circle').data(data.filter((r) => r[s.k] != null)).join('circle').attr('cx', (r) => x(r.date)).attr('cy', (r) => y(r[s.k])).attr('r', 2.5).attr('fill', s.c);
+    });
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').style('display', 'none');
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', Math.max(0, W - m.l - m.r)).attr('height', H).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        const [px] = d3.pointer(ev); const i = d3.bisector((r) => r.date).center(data, x.invert(px)); const r = data[i];
+        rule.style('display', null).attr('x1', x(r.date)).attr('x2', x(r.date));
+        const t = tip.style('display', null).node(); t.replaceChildren();
+        const dd = document.createElement('div'); dd.className = 'd'; dd.textContent = r.label; t.append(dd);
+        series.forEach((s) => { const ln = document.createElement('div'); if (series.length > 1) { const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = s.c; ln.append(sw); } ln.append(`${s.n}: ${r[s.k] == null ? '—' : o.vf(r[s.k])}`); t.append(ln); });
+        const sx = (x(r.date) / W) * el.clientWidth; tip.style('left', Math.min(Math.max(0, sx + 12), el.clientWidth - t.offsetWidth) + 'px').style('top', '8px');
+      })
+      .on('mouseleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); });
+  }
+  const monthPoints = () => M().map((r) => ({ date: new Date(r.month + '-15T00:00:00Z'), label: mlabel(r.month) + (r.days ? ' (1–5 Nov)' : ''), r }));
+  dash.draw('gaUsers', (el) => {
+    if (gErr()) return gFail(el); if (!gOk()) return el.replaceChildren();
+    gaLines(el, monthPoints().map((p) => ({ ...p, a: p.r.active_users, b: p.r.new_users })), [{ k: 'a', n: 'Active users', c: dash.colors[0] }, { k: 'b', n: 'New users', c: dash.colors[2] }], { yf: P.big, vf: d3.format(','), band: rangeMonths() });
+  });
+  dash.draw('gaEng', (el) => {
+    if (gErr()) return gFail(el); if (!gOk()) return el.replaceChildren();
+    gaLines(el, monthPoints().map((p) => ({ ...p, a: p.r.avg_engagement_sec / 60 })), [{ k: 'a', n: 'Minutes per user', c: dash.colors[0] }], { yf: d3.format('.0f'), vf: (v) => d3.format('.1f')(v) + ' min', band: rangeMonths() });
+  });
+
+  // ---------- gender & age ----------
+  const demoTable = (tb, dim, order) => {
+    tb.replaceChildren(); if (!gOk()) return;
+    const dm = demoMonths(rangeMonths());
+    if (!dm.length) return gEmpty(tb, 6, 'Gender and age start in September 2026 — pick a range that includes it.');
+    const rows = agg(dim, dm), t = totals(dm), k = d3.sum(known(rows), (r) => r.a), rv = d3.sum(rows, (r) => r.rev);
+    rows.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)).forEach((r) => {
+      const tr = document.createElement('tr');
+      tr.append(gtd(r.name === 'unknown' ? 'Unknown' : r.name.charAt(0).toUpperCase() + r.name.slice(1)), gtd(f(r.a, 'int')), gtd(t.a ? f(r.a / t.a, 'pct1') : '—'), gtd(r.name === 'unknown' || !k ? '—' : f(r.a / k, 'pct1')), gtd(r.eng == null ? '—' : f(r.eng / 60, 'dec')), gtd(rv ? f(r.rev / rv, 'pct0') : '—'));
+      tb.append(tr);
+    });
+  };
+  dash.draw('gaGender', (tb) => demoTable(tb, 'Gender', ['male', 'female', 'unknown']));
+  dash.draw('gaAge', (tb) => demoTable(tb, 'Age', ['18-24', '25-34', '35-44', '45-54', '55-64', '65+', 'unknown']));
+  dash.draw('gaDemoMonthly', (tb) => {
+    tb.replaceChildren(); if (!gOk()) return;
+    let dm = demoMonths(rangeMonths()); if (!dm.length) dm = M().map((r) => r.month).filter((m) => m >= DEMO_FROM);
+    dm.forEach((m) => {
+      const t = totals([m]).a; const G = agg('Gender', [m]), A = agg('Age', [m]);
+      const g = (n) => ((G.find((r) => r.name === n) || {}).a || 0) / t, a = (ns) => d3.sum(A.filter((r) => ns.includes(r.name)), (r) => r.a) / t;
+      const tr = document.createElement('tr');
+      tr.append(gtd(mlabel(m) + (isPartial(m) ? ' (1–5)' : '')), gtd(f(g('male'), 'pct0')), gtd(f(g('female'), 'pct0')), gtd(f(g('unknown'), 'pct0')), gtd(f(a(['18-24']), 'pct0')), gtd(f(a(['25-34']), 'pct0')), gtd(f(a(['35-44']), 'pct0')), gtd(f(a(['45-54', '55-64', '65+']), 'pct0')), gtd(f(a(['unknown']), 'pct0')));
+      tb.append(tr);
+    });
+  });
+
+  // ---------- location, language ----------
+  const shiftTable = (tb, dim, n, withRev, cols) => {
+    tb.replaceChildren(); if (!gOk()) return;
+    const rm = rangeMonths(), pm = prevMonths(); const t = totals(rm), tp = totals(pm);
+    const now = agg(dim, rm).sort((a, b) => b.a - a.a).slice(0, n); const before = new Map(agg(dim, pm).map((r) => [r.name, r]));
+    if (!now.length) return gEmpty(tb, cols, 'No data for these months');
+    now.forEach((r) => {
+      const s = t.a ? r.a / t.a : null, b = before.get(r.name), sb = b && tp.a ? b.a / tp.a : null; const d = s != null && sb != null ? (s - sb) * 100 : null;
+      const tr = document.createElement('tr');
+      tr.append(gtd(r.name), gtd(f(r.a, 'int')), gtd(f(s, 'pct1')), gtd(pm.length ? f(sb, 'pct1') : '—'));
+      if (withRev) tr.append(gtd(signedPts(d), d == null || Math.abs(d) < 0.15 ? '' : d > 0 ? 'ok' : 'bad'));
+      tr.append(gtd(r.eng == null ? '—' : f(r.eng / 60, 'dec')));
+      if (withRev) tr.append(gtd(t.rev ? f(r.rev / t.rev, 'pct1') : '—'));
+      tb.append(tr);
+    });
+  };
+  dash.draw('gaState', (tb) => shiftTable(tb, 'State', 15, true, 7));
+  dash.draw('gaCity', (tb) => shiftTable(tb, 'City', 15, true, 7));
+  dash.draw('gaCountry', (tb) => shiftTable(tb, 'Country', 6, false, 5));
+  dash.draw('gaLang', (tb) => shiftTable(tb, 'Language', 5, false, 5));
+
+  // ---------- versions, OS, interests ----------
+  const techTable = (tb, dim, n, emptyMsg) => {
+    tb.replaceChildren(); if (!gOk()) return;
+    const rm = rangeMonths(); const t = totals(rm); const rows = agg(dim, rm).sort((a, b) => b.a - a.a).slice(0, n);
+    if (!rows.length) return gEmpty(tb, 6, emptyMsg);
+    rows.forEach((r) => { const tr = document.createElement('tr'); tr.append(gtd(r.name), gtd(f(r.a, 'int')), gtd(t.a ? f(r.a / t.a, 'pct1') : '—'), gtd(f(r.er, 'pct0')), gtd(r.eng == null ? '—' : f(r.eng / 60, 'dec')), gtd(f(r.rev, 'usd'))); tb.append(tr); });
+  };
+  dash.draw('gaVer', (tb) => techTable(tb, 'App version', 8, 'No data for these months'));
+  dash.draw('gaOs', (tb) => techTable(tb, 'Android version', 6, 'Android versions start in August 2026'));
+  dash.draw('gaInt', (tb) => {
+    tb.replaceChildren(); if (!gOk()) return;
+    const dm = demoMonths(rangeMonths()); if (!dm.length) return gEmpty(tb, 4, 'Interests start in September 2026 — pick a range that includes it.');
+    const t = totals(dm); agg('Interest', dm).sort((a, b) => b.a - a.a).slice(0, 10).forEach((r) => { const tr = document.createElement('tr'); tr.append(gtd(r.name, 'l'), gtd(f(r.a, 'int')), gtd(t.a ? f(r.a / t.a, 'pct0') : '—'), gtd(r.eng == null ? '—' : f(r.eng / 60, 'dec'))); tb.append(tr); });
+  });
+
+  // ---------- fixed-period facts ----------
+  const BEFORE = ['2026-06', '2026-07', '2026-08'], AFTER = ['2026-09', '2026-10'];
+  const shareIn = (dim, name, ms) => { const t = totals(ms).a; const r = agg(dim, ms).find((x) => x.name === name); return t && r ? r.a / t : null; };
+  const knownShare = (dim, name, ms, key) => { const g = known(agg(dim, ms)); const k = d3.sum(g, (x) => x[key || 'a']); const r = g.find((x) => x.name === name); return k && r ? r[key || 'a'] / k : null; };
+  const verAgg = (pred) => { const v = agg('App version', ['2026-10']).filter((r) => pred(r.name.split('.').map(Number))); const a = d3.sum(v, (r) => r.a);
+    return { a, eng: a ? d3.sum(v, (r) => r.eng * r.a) / a : null, er: a ? d3.sum(v, (r) => r.er * r.a) / a : null, rev: d3.sum(v, (r) => r.rev) }; };
+  dash.draw('gaFact', (el) => {
+    if (!gOk()) { el.textContent = '—'; return; }
+    const k = el.dataset.k; const full = M().filter((r) => !r.days); const peak = full.reduce((p, r) => (!p || r.active_users > p.active_users ? r : p), null);
+    const oct = M().find((r) => r.month === '2026-10');
+    const v = {
+      mau_peak: () => f(peak && peak.active_users, 'big'), mau_peakm: () => (peak ? mlabel(peak.month) : '—'), mau_now: () => f(oct && oct.active_users, 'big'),
+      eng_b: () => f(totals(BEFORE).eng / 60, 'dec'), eng_a: () => f(totals(AFTER).eng / 60, 'dec'),
+      new_eng: () => { const x = verAgg((p) => p[0] === 1 && p[1] === 5); return x.eng == null ? '—' : f(x.eng / 60, 'dec'); },
+      new_er: () => f(verAgg((p) => p[0] === 1 && p[1] === 5).er, 'pct0'),
+      old_v: () => f(verAgg((p) => p[0] === 1 && p[1] < 4).a, 'big'),
+      old_eng: () => f(verAgg((p) => p[0] === 1 && p[1] < 4).eng, 'usd'),
+      old_rev: () => f(verAgg((p) => p[0] === 1 && p[1] < 4).rev, 'usd'),
+      bihar_b: () => f(shareIn('State', 'Bihar', BEFORE), 'pct1'), bihar_a: () => f(shareIn('State', 'Bihar', AFTER), 'pct1'),
+      wb_b: () => f(shareIn('State', 'West Bengal', BEFORE), 'pct1'), wb_a: () => f(shareIn('State', 'West Bengal', AFTER), 'pct1'),
+      guj_b: () => f(shareIn('State', 'Gujarat', BEFORE), 'pct1'), guj_a: () => f(shareIn('State', 'Gujarat', AFTER), 'pct1'),
+      mh_b: () => f(shareIn('State', 'Maharashtra', BEFORE), 'pct1'), mh_a: () => f(shareIn('State', 'Maharashtra', AFTER), 'pct1'),
+      del_b: () => f(shareIn('State', 'Delhi', BEFORE), 'pct1'), del_a: () => f(shareIn('State', 'Delhi', AFTER), 'pct1'),
+      patna_b: () => f(shareIn('City', 'Patna', BEFORE), 'pct1'), patna_a: () => f(shareIn('City', 'Patna', AFTER), 'pct1'),
+      fem_sep: () => f(knownShare('Gender', 'female', ['2026-09']), 'pct0'), fem_oct: () => f(knownShare('Gender', 'female', ['2026-10']), 'pct0'),
+      male_rev: () => f(knownShare('Gender', 'male', AFTER, 'rev'), 'pct0'),
+      y_sep: () => f(knownShare('Age', '18-24', ['2026-09']), 'pct0'), y_oct: () => f(knownShare('Age', '18-24', ['2026-10']), 'pct0'),
+      a25_sep: () => f(knownShare('Age', '25-34', ['2026-09']), 'pct0'), a25_oct: () => f(knownShare('Age', '25-34', ['2026-10']), 'pct0'),
+      a25_rev: () => f(knownShare('Age', '25-34', AFTER, 'rev'), 'pct0'),
+      age_unk: () => f(shareIn('Age', 'unknown', AFTER), 'pct0'), city_ns: () => f(shareIn('City', '(not set)', AFTER), 'pct0'),
+      eng_lang: () => f(shareIn('Language', 'English', AFTER), 'pct0'),
+      rev_oct25: () => { const r = M().find((x) => x.month === '2025-10'); return f(r && r.revenue_usd, 'usd'); }
+    }[k];
+    el.textContent = v ? v() : '—';
+  });
+})();
+</script>
+
+<script>
+(function () {
+  // ---------- GA deeper cuts (fixed window 5 Sep – 5 Nov 2026) ----------
+  const X = () => dash.data('ga_explore');
+  const xOk = () => X().status === 'ok';
+  const xErr = () => ['error', 'connect', 'declined'].includes(X().status);
+  const R = (block) => (xOk() ? X().data.filter((r) => r.block === block) : []);
+  const P = { pct0: d3.format('.0%'), pct1: d3.format('.1%'), pct2: d3.format('.2%'), int: d3.format(','), dec: d3.format('.1f'), usd: d3.format(',.0f'), usd2: d3.format(',.2f'),
+    big: (v) => (Math.abs(v) >= 10000 ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : d3.format(',.0f')(v)) };
+  const f = (v, k) => (v == null || !Number.isFinite(+v) ? '—' : P[k](+v));
+  const td = (t, cls) => { const e = document.createElement('td'); e.textContent = t; if (cls) e.className = cls; return e; };
+  const groupRow = (tb, n, t) => { const tr = document.createElement('tr'); const e = document.createElement('th'); e.colSpan = n; e.className = 'l'; e.textContent = t; e.style.position = 'static'; tr.append(e); tb.append(tr); };
+  const fail = (el) => { const x = document.createElement('div'); x.className = 'fail'; x.append(document.createElement('i'), 'Failed to load'); el.replaceChildren(x); };
+  const DIMS = [['Gender', 'Gender'], ['Age', 'Age'], ['State', 'State']];
+  const cap = (s) => (s === 'unknown' ? 'Unknown' : s.charAt(0).toUpperCase() + s.slice(1));
+  const AGE_ORDER = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+', 'unknown'];
+  const order = (dim, rows, key) => (dim === 'Age' ? rows.slice().sort((a, b) => AGE_ORDER.indexOf(a.name) - AGE_ORDER.indexOf(b.name)) : rows.slice().sort((a, b) => (b[key] || 0) - (a[key] || 0)));
+  const ukToIst = (h) => { const m = (h * 60 + 270) % 1440; const fmt = (x) => { const hh = Math.floor(x / 60) % 24, mm = x % 60; const ap = hh < 12 ? 'am' : 'pm'; const h12 = hh % 12 === 0 ? 12 : hh % 12; return h12 + (mm ? ':' + String(mm).padStart(2, '0') : '') + ' ' + ap; }; return fmt(m) + '–' + fmt((m + 60) % 1440); };
+  const ukToIstShort = (h) => { const m = (h * 60 + 270) % 1440; const hh = Math.floor(m / 60), mm = m % 60; const h12 = hh % 12 === 0 ? 12 : hh % 12; return h12 + (mm ? ':' + String(mm).padStart(2, '0') : '') + (hh < 12 ? 'a' : 'p'); };
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const weekdays = () => { const g = d3.rollups(R('daily'), (rs) => d3.mean(rs, (r) => r.active_users), (r) => new Date(r.date + 'T00:00:00Z').getUTCDay()); return [1, 2, 3, 4, 5, 6, 0].map((d) => ({ day: DAYS[d], v: (g.find((x) => x[0] === d) || [0, null])[1] })); };
+
+  function bars(el, data, o) {
+    el.replaceChildren();
+    if (!data.length) return;
+    const W = Math.max(280, el.clientWidth || 500), H = 200, m = { t: 10, r: 8, b: 26, l: 10 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const y = d3.scaleLinear([0, (d3.max(data, (d) => d.v) || 1) * 1.08], [H - m.b, m.t]).nice(); const ticks = y.ticks(4);
+    const probe = svg.append('text').attr('font-size', 11).text(o.yf(ticks[ticks.length - 1])); m.l = probe.node().getComputedTextLength() + 10; probe.remove();
+    const x = d3.scaleBand(data.map((d) => d.k), [m.l, W - m.r]).padding(0.2);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(o.yf);
+    const mx = d3.max(data, (d) => d.v);
+    svg.append('g').selectAll('rect').data(data).join('rect').attr('x', (d) => x(d.k)).attr('width', x.bandwidth()).attr('y', (d) => y(d.v || 0)).attr('height', (d) => Math.max(0, y(0) - y(d.v || 0))).attr('rx', Math.min(4, x.bandwidth() / 2))
+      .attr('fill', (d) => (d.v === mx ? dash.colors[0] : 'var(--cds-chart-muted)'));
+    const step = Math.ceil(data.length / Math.max(1, Math.floor((W - m.l) / 46)));
+    svg.append('g').selectAll('text').data(data.filter((d, i) => i % step === 0)).join('text').attr('x', (d) => x(d.k) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text((d) => d.short);
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    svg.append('g').selectAll('rect').data(data).join('rect').attr('x', (d) => x(d.k) - (x.step() - x.bandwidth()) / 2).attr('width', x.step()).attr('y', m.t).attr('height', H - m.b - m.t).attr('fill', 'transparent')
+      .on('mousemove', (ev, d) => { const t = tip.style('display', null).node(); t.replaceChildren(); const a = document.createElement('div'); a.className = 'd'; a.textContent = d.label; const b = document.createElement('div'); b.textContent = o.vf(d.v); t.append(a, b);
+        const sx = ((x(d.k) + x.bandwidth() / 2) / W) * el.clientWidth; tip.style('left', Math.min(Math.max(0, sx + 10), el.clientWidth - t.offsetWidth) + 'px').style('top', '8px'); })
+      .on('mouseleave', () => tip.style('display', 'none'));
+  }
+
+  dash.draw('gxRet', (tb) => {
+    tb.replaceChildren(); if (!xOk()) return;
+    const rows = R('retention');
+    DIMS.forEach(([dim, label]) => { const rs = rows.filter((r) => r.dim === dim); if (!rs.length) return; groupRow(tb, 7, label);
+      const all = rs.filter((r) => r.name === 'All new users'), rest = order(dim, rs.filter((r) => r.name !== 'All new users'), 'cohort_users');
+      [...all, ...rest].forEach((r) => { const tr = document.createElement('tr'); tr.append(td(r.name === 'All new users' ? 'All new users' : cap(r.name)), td(f(r.cohort_users, 'int')), td(f(r.d1, 'pct1')), td(f(r.d3, 'pct1')), td(f(r.w1, 'pct1')), td(f(r.w2, 'pct1')), td(f(r.w4, 'pct1'))); tb.append(tr); }); });
+  });
+  dash.draw('gxPay', (tb) => {
+    tb.replaceChildren(); if (!xOk()) return;
+    const rows = R('pay');
+    DIMS.forEach(([dim, label]) => { const rs = order(dim, rows.filter((r) => r.dim === dim), 'active_users'); if (!rs.length) return; groupRow(tb, 7, label);
+      rs.forEach((r) => { const tr = document.createElement('tr'); tr.append(td(cap(r.name)), td(f(r.active_users, 'int')), td(f(r.purchasers, 'int')), td(r.active_users ? f(r.purchasers / r.active_users, 'pct2') : '—'), td(f(r.revenue_usd, 'usd')), td(r.active_users ? f((1000 * r.revenue_usd) / r.active_users, 'usd2') : '—'), td(r.purchasers ? f(r.revenue_usd / r.purchasers, 'usd2') : '—')); tb.append(tr); }); });
+  });
+  dash.draw('gxDepth', (tb) => {
+    tb.replaceChildren(); if (!xOk()) return;
+    const rows = R('depth'), act = new Map(R('pay').map((r) => [r.dim + '|' + r.name, r.active_users]));
+    DIMS.forEach(([dim, label]) => { const rs = order(dim, rows.filter((r) => r.dim === dim), 'video_users'); if (!rs.length) return; groupRow(tb, 8, label);
+      rs.forEach((r) => { const a = act.get(dim + '|' + r.name), v = r.video_users; const tr = document.createElement('tr');
+        tr.append(td(cap(r.name)), td(a ? f(v / a, 'pct0') : '—'), td(v ? f(r.started3_users / v, 'pct0') : '—'), td(v ? f(r.finished3_users / v, 'pct0') : '—'), td(v ? f(r.finished5_users / v, 'pct0') : '—'), td(v ? f(r.video_events / v, 'dec') : '—'), td(v ? f(r.topup_users / v, 'pct0') : '—'), td(a ? f(r.removed_users / a, 'pct0') : '—')); tb.append(tr); }); });
+  });
+  dash.draw('gxHour', (el) => {
+    if (xErr()) return fail(el); if (!xOk()) return el.replaceChildren();
+    const rs = R('hour').map((r) => ({ ist: (r.hour_uk * 60 + 270) % 1440, r })).sort((a, b) => a.ist - b.ist);
+    bars(el, rs.map(({ r }) => ({ k: String(r.hour_uk), v: r.active_users, short: ukToIstShort(r.hour_uk), label: ukToIst(r.hour_uk) + ' IST' })), { yf: P.big, vf: (v) => d3.format(',')(v) + ' active users' });
+  });
+  dash.draw('gxWeekday', (el) => {
+    if (xErr()) return fail(el); if (!xOk()) return el.replaceChildren();
+    bars(el, weekdays().map((d) => ({ k: d.day, v: d.v, short: d.day.slice(0, 3), label: d.day })), { yf: P.big, vf: (v) => d3.format(',.0f')(v) + ' average daily users' });
+  });
+  dash.draw('gxStick', (el) => {
+    if (xErr()) return fail(el); if (!xOk()) return el.replaceChildren();
+    el.replaceChildren();
+    const data = R('daily').map((r) => ({ date: new Date(r.date + 'T00:00:00Z'), a: r.dau_mau, b: r.dau_wau })).sort((p, q) => p.date - q.date);
+    if (!data.length) return;
+    const W = Math.max(280, el.clientWidth || 600), H = 240, m = { t: 10, r: 12, b: 24, l: 40 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleUtc(d3.extent(data, (d) => d.date), [m.l, W - m.r]);
+    const y = d3.scaleLinear([0, d3.max(data, (d) => Math.max(d.a, d.b)) * 1.1], [H - m.b, m.t]).nice(); const ticks = y.ticks(5);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.format('.0%'));
+    svg.append('g').selectAll('text').data(x.ticks(Math.max(2, Math.floor((W - m.l) / 90)))).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.utcFormat('%b %-d'));
+    [['a', dash.colors[0]], ['b', dash.colors[2]]].forEach(([k, c]) => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', c).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x((d) => x(d.date)).y((d) => y(d[k]))));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').style('display', 'none');
+    svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+      .on('mousemove', (ev) => { const [px] = d3.pointer(ev); const d = data[d3.bisector((q) => q.date).center(data, x.invert(px))]; rule.style('display', null).attr('x1', x(d.date)).attr('x2', x(d.date));
+        const t = tip.style('display', null).node(); t.replaceChildren(); const a = document.createElement('div'); a.className = 'd'; a.textContent = d3.utcFormat('%a %-d %b %Y')(d.date); t.append(a);
+        [['DAU / MAU', d.a, dash.colors[0]], ['DAU / WAU', d.b, dash.colors[2]]].forEach(([n, v, c]) => { const l = document.createElement('div'); const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = c; l.append(sw, `${n}: ${d3.format('.1%')(v)}`); t.append(l); });
+        const sx = (x(d.date) / W) * el.clientWidth; tip.style('left', Math.min(Math.max(0, sx + 12), el.clientWidth - t.offsetWidth) + 'px').style('top', '8px'); })
+      .on('mouseleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); });
+  });
+  dash.draw('gxNewRet', (tb) => {
+    tb.replaceChildren(); if (!xOk()) return;
+    R('new_returning').slice().sort((a, b) => b.new_users + b.returning_users - (a.new_users + a.returning_users)).forEach((r) => { const s = r.returning_users / (r.new_users + r.returning_users); const tr = document.createElement('tr'); tr.append(td(r.name), td(f(r.new_users, 'int')), td(f(r.returning_users, 'int')), td(f(s, 'pct0'))); tb.append(tr); });
+  });
+  dash.draw('gxVer', (tb) => {
+    tb.replaceChildren(); if (!xOk()) return;
+    R('version').slice().sort((a, b) => b.active_users - a.active_users).slice(0, 15).forEach((r) => { const er = r.active_users ? r.exception_users / r.active_users : null; const tr = document.createElement('tr');
+      tr.append(td(r.name), td(f(r.active_users, 'int')), td(f(r.exception_users, 'int')), td(f(er, 'pct1'), er != null && er >= 0.05 ? 'bad' : ''), td(f(r.video_users, 'int')), td(f(r.purchasers, 'int')), td(f(r.revenue_usd, 'usd')), td(f(r.removed_users, 'int'))); tb.append(tr); });
+  });
+
+  dash.draw('gxFact', (el) => {
+    if (!xOk()) { el.textContent = '—'; return; }
+    const ret = (dim, n) => R('retention').find((r) => r.dim === dim && r.name === n) || {};
+    const pay = (dim, n) => { const r = R('pay').find((x) => x.dim === dim && x.name === n); return r && r.active_users ? r.purchasers / r.active_users : null; };
+    const hours = R('hour'); const pk = hours.reduce((p, r) => (!p || r.active_users > p.active_users ? r : p), null), lo = hours.reduce((p, r) => (!p || r.active_users < p.active_users ? r : p), null);
+    const wd = weekdays().reduce((p, d) => (!p || d.v > p.v ? d : p), null);
+    const daily = R('daily').slice().sort((a, b) => (a.date < b.date ? -1 : 1)); const stPeak = d3.max(daily, (r) => r.dau_mau), stLast = d3.mean(daily.slice(-14), (r) => r.dau_mau);
+    const V = R('version'); const minor = (n) => n.split('.').map(Number); const old = V.filter((r) => { const p = minor(r.name); return p[0] === 1 && p[1] < 4; });
+    const old12 = V.filter((r) => { const p = minor(r.name); return p[0] === 1 && p[1] === 2; }), new15 = V.filter((r) => { const p = minor(r.name); return p[0] === 1 && p[1] === 5; });
+    const rate = (rs) => { const a = d3.sum(rs, (r) => r.active_users); return a ? d3.sum(rs, (r) => r.exception_users) / a : null; };
+    const v = {
+      w1_all: () => f(ret('Gender', 'All new users').w1, 'pct0'), w1_f: () => f(ret('Gender', 'female').w1, 'pct0'), w1_m: () => f(ret('Gender', 'male').w1, 'pct0'),
+      w4_all: () => f(ret('Gender', 'All new users').w4, 'pct0'), w4_del: () => f(ret('State', 'Delhi').w4, 'pct1'), w4_wb: () => f(ret('State', 'West Bengal').w4, 'pct1'),
+      cv_m: () => f(pay('Gender', 'male'), 'pct1'), cv_f: () => f(pay('Gender', 'female'), 'pct1'), cv_25: () => f(pay('Age', '25-34'), 'pct1'), cv_18: () => f(pay('Age', '18-24'), 'pct1'),
+      cv_ka: () => f(pay('State', 'Karnataka'), 'pct1'), cv_mh: () => f(pay('State', 'Maharashtra'), 'pct1'), cv_br: () => f(pay('State', 'Bihar'), 'pct1'),
+      peak_h: () => (pk ? ukToIst(pk.hour_uk) : '—'), low_h: () => (lo ? ukToIst(lo.hour_uk) : '—'), peak_d: () => (wd ? wd.day : '—'),
+      st_peak: () => f(stPeak, 'pct1'), st_last: () => f(stLast, 'pct1'),
+      old_users: () => f(d3.sum(old, (r) => r.active_users), 'big'), old_video: () => f(d3.sum(old, (r) => r.video_users), 'int'),
+      old_err: () => f(rate(old12), 'pct0'), new_err: () => f(rate(new15), 'pct1')
+    }[el.dataset.k];
+    el.textContent = v ? v() : '—';
+  });
+})();
+</script>
