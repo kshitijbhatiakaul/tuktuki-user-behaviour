@@ -1,87 +1,167 @@
 month,campaign_network,channel,reinstalls,reattributions,reattribution_reinstalls
-2026-04,LS - Andriod App installation - India - In Market,Google Ads,767,3128,55
-2026-05,LS - Andriod App installation - India - In Market,Google Ads,720,2290,83
-2026-06,LS - Andriod App installation - India - In Market,Google Ads,439,1917,17
-2026-06,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,121,1743,11
-2026-05,Expired Attributions,Facebook,746,1727,248
-2026-06,Expired Attributions,Facebook,454,1696,101
-2026-04,Expired Attributions,Facebook,351,1532,60
-2026-03,LS - Andriod App installation - India - In Market,Google Ads,41,1442,0
-2026-05,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,248,1313,19
-2026-05,OppoAffinity,OPPO国际 | OPPO Global,21,1242,3
 2026-03,Expired Attributions,Facebook,15,1216,0
-2026-07,LS - Andriod App installation - India - In Market,Google Ads,27,1216,7
-2026-05,unknown,Organic,115,1153,13
-2026-06,unknown,Organic,98,1131,6
-2026-07,unknown,Organic,87,1129,3
-2026-04,unknown,Organic,112,1070,7
-2026-07,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,20,918,1
-2026-08,unknown,Organic,74,902,1
+2026-03,LS - Andriod App installation - India - In Market,Google Ads,41,1442,0
+2026-03,OppoAffinity,OPPO国际 | OPPO Global,2,309,0
+2026-03,Oppo_Affinity,OPPO国际 | OPPO Global,12,115,0
 2026-03,unknown,Organic,13,876,0
-2026-07,Expired Attributions,Facebook,88,849,44
-2026-06,OppoAffinity,OPPO国际 | OPPO Global,18,831,2
-2026-05,Oppo_Affinity,OPPO国际 | OPPO Global,224,813,59
+2026-03,xiaomi_direct,Xiaomi Global,4,695,0
+2026-04,Expired Attributions,Facebook,351,1532,60
+2026-04,Facebook,tuktuki,78,217,18
+2026-04,LS - Andriod App installation - India - In Market,Google Ads,767,3128,55
+2026-04,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,258,593,21
+2026-04,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,98,308,3
 2026-04,OppoAffinity,OPPO国际 | OPPO Global,118,802,0
 2026-04,Oppo_Affinity,OPPO国际 | OPPO Global,237,800,35
-2026-06,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,194,727,14
-2026-04,xiaomi_direct,Xiaomi Global,194,715,20
-2026-03,xiaomi_direct,Xiaomi Global,4,695,0
-2026-05,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,324,631,46
-2026-04,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,258,593,21
-2026-08,LS - Andriod App installation - India - In Market,Google Ads,14,584,5
-2026-07,OppoAffinity,OPPO国际 | OPPO Global,8,570,0
-2026-05,google,tuktuki,79,564,16
-2026-09,unknown,Organic,127,486,20
-2026-10,TT_Meta_FVV_Sep,Facebook,282,485,136
-2026-06,Oppo_Affinity,OPPO国际 | OPPO Global,86,479,15
-2026-07,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,11,401,1
-2026-08,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,7,401,2
-2026-10,TT_Meta_3VV_Sep,Facebook,157,383,79
-2026-10,TT_Sharechat/Moj_30s_Sep,ShareChat,110,338,67
-2026-06,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,171,336,5
-2026-03,OppoAffinity,OPPO国际 | OPPO Global,2,309,0
-2026-04,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,98,308,3
-2026-06,google,tuktuki,36,296,3
-2026-09,LS - Andriod App installation - India - In Market,Google Ads,4,293,0
-2026-08,Install_Campaign_Experiment,Facebook,43,291,5
-2026-09,Install_Campaign_Experiment,Facebook,153,288,117
-2026-05,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,116,280,15
-2026-05,xiaomi_direct,Xiaomi Global,93,275,23
-2026-08,OppoAffinity,OPPO国际 | OPPO Global,2,274,0
-2026-05,Facebook,tuktuki,120,272,50
-2026-07,google,tuktuki,6,266,2
-2026-06,transsion_pai,Transsion Holdings,7,263,0
-2026-07,Oppo_Affinity,OPPO国际 | OPPO Global,15,263,3
-2026-05,transsion_pai,Transsion Holdings,10,262,1
-2026-06,Facebook,tuktuki,52,241,10
-2026-08,Expired Attributions,Facebook,36,237,19
-2026-07,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,20,228,6
-2026-04,Facebook,tuktuki,78,217,18
-2026-07,Install_Campaign_Experiment,Facebook,50,208,9
-2026-06,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,59,203,4
-2026-10,Install_Campaign_Experiment,Facebook,121,202,85
-2026-11,TT_Meta_FVV_Sep,Facebook,127,197,67
-2026-10,unknown,Organic,124,192,13
-2026-07,transsion_pai,Transsion Holdings,5,175,0
-2026-10,Expired Attributions,Facebook,6,174,5
-2026-11,TT_Meta_3VV_Sep,Facebook,90,174,48
-2026-08,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,5,165,0
-2026-09,Expired Attributions,Facebook,19,162,11
-2026-07,Facebook,tuktuki,11,154,6
-2026-10,VP_2,Influencer,90,150,44
-2026-09,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,5,147,0
-2026-06,xiaomi_direct,Xiaomi Global,30,142,4
 2026-04,google,tuktuki,96,132,9
-2026-10,LS - Andriod App installation - India - In Market,Google Ads,0,132,0
-2026-08,Oppo_Affinity,OPPO国际 | OPPO Global,2,124,0
-2026-03,Oppo_Affinity,OPPO国际 | OPPO Global,12,115,0
-2026-09,OppoAffinity,OPPO国际 | OPPO Global,4,105,0
+2026-04,unknown,Organic,112,1070,7
+2026-04,xiaomi_direct,Xiaomi Global,194,715,20
+2026-05,Expired Attributions,Facebook,746,1727,248
+2026-05,Facebook,tuktuki,120,272,50
+2026-05,LS - Andriod App installation - India - In Market,Google Ads,720,2290,83
+2026-05,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,324,631,46
+2026-05,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,116,280,15
+2026-05,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,248,1313,19
+2026-05,OppoAffinity,OPPO国际 | OPPO Global,21,1242,3
+2026-05,Oppo_Affinity,OPPO国际 | OPPO Global,224,813,59
+2026-05,google,tuktuki,79,564,16
+2026-05,transsion_pai,Transsion Holdings,10,262,1
+2026-05,unknown,Organic,115,1153,13
+2026-05,xiaomi_direct,Xiaomi Global,93,275,23
+2026-06,Expired Attributions,Facebook,454,1696,101
+2026-06,Facebook,tuktuki,52,241,10
+2026-06,LS - Andriod App installation - India - In Market,Google Ads,439,1917,17
+2026-06,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,194,727,14
+2026-06,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,59,203,4
+2026-06,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,171,336,5
+2026-06,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,121,1743,11
+2026-06,OppoAffinity,OPPO国际 | OPPO Global,18,831,2
+2026-06,Oppo_Affinity,OPPO国际 | OPPO Global,86,479,15
+2026-06,google,tuktuki,36,296,3
+2026-06,transsion_pai,Transsion Holdings,7,263,0
+2026-06,unknown,Organic,98,1131,6
+2026-06,xiaomi_direct,Xiaomi Global,30,142,4
+2026-07,Expired Attributions,Facebook,88,849,44
+2026-07,Facebook,tuktuki,11,154,6
+2026-07,Install_Campaign_Experiment,Facebook,50,208,9
+2026-07,LS - Andriod App installation - India - In Market,Google Ads,27,1216,7
+2026-07,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,11,401,1
+2026-07,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,20,228,6
+2026-07,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,20,918,1
+2026-07,OppoAffinity,OPPO国际 | OPPO Global,8,570,0
+2026-07,Oppo_Affinity,OPPO国际 | OPPO Global,15,263,3
+2026-07,google,tuktuki,6,266,2
+2026-07,transsion_pai,Transsion Holdings,5,175,0
+2026-07,unknown,Organic,87,1129,3
 2026-07,xiaomi_direct,Xiaomi Global,7,102,0
-2026-09,LS - App installation - Broad - Andriod – First Open Event,Facebook,5,102,2
+2026-08,Expired Attributions,Facebook,36,237,19
+2026-08,Install_Campaign_Experiment,Facebook,43,291,5
+2026-08,LS - Andriod App installation - India - In Market,Google Ads,14,584,5
+2026-08,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,5,165,0
+2026-08,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,7,401,2
+2026-08,OppoAffinity,OPPO国际 | OPPO Global,2,274,0
+2026-08,Oppo_Affinity,OPPO国际 | OPPO Global,2,124,0
 2026-08,google,tuktuki,0,98,0
-2026-11,TT_Sharechat/Moj_30s_Sep,ShareChat,31,75,15
-2026-11,VP_2,Influencer,49,67,18
-2026-11,TT/AppConv/DT/2809,Google Ads,42,63,18
-2026-11,TT_Meta_Purchase_Sep,Facebook,23,33,13
-2026-11,unknown,Organic,30,33,8
-2026-11,Install_Campaign_Experiment,Facebook,13,27,4
+2026-08,unknown,Organic,74,902,1
+2026-09,Expired Attributions,Facebook,19,162,11
+2026-09,Install_Campaign_Experiment,Facebook,153,288,117
+2026-09,LS - Andriod App installation - India - In Market,Google Ads,4,293,0
+2026-09,LS - App installation - Broad - Andriod – First Open Event,Facebook,5,102,2
+2026-09,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,5,147,0
+2026-09,OppoAffinity,OPPO国际 | OPPO Global,4,105,0
+2026-09,unknown,Organic,127,486,20
+2026-10,Affinity_Vivo,Vivo 国际 | Vivo Global,0,1,0
+2026-10,Anurag_Facebook_August,Influencer,1,1,1
+2026-10,Auto Branding,Poster - QR,1,0,0
+2026-10,Dushyant_Viral_Zindagi,Influencer,0,1,0
+2026-10,Expired Attributions,Facebook,6,174,5
+2026-10,Facebook,Facebook,0,2,0
+2026-10,Facebook,tuktuki,6,30,3
+2026-10,IG_Show,Social Media,1,2,0
+2026-10,IG_Shows,Social Media,1,2,0
+2026-10,Instagram,Social Media,5,3,1
+2026-10,Install_Campaign_Experiment,Facebook,121,202,85
+2026-10,LS - Andriod App Subscription - India - In Market_07April26,Google Ads,0,1,0
+2026-10,LS - Andriod App installation - India - In Market,Google Ads,0,132,0
+2026-10,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,4,25,1
+2026-10,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,1,20,0
+2026-10,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,1,20,0
+2026-10,LS - App installation - Broad - Andriod – First Open Event,Facebook,1,38,0
+2026-10,LS - App installation - Broad - Andriod – First Subscription Event_10April26,Facebook,0,3,0
+2026-10,LS - App installation - Broad - Andriod – First Videoview Event_07April26,Facebook,1,25,0
+2026-10,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,10,39,0
+2026-10,OppoAffinity,OPPO国际 | OPPO Global,0,44,0
+2026-10,Oppo_Affinity,OPPO国际 | OPPO Global,3,29,0
+2026-10,RT_TT_FVV&3VV_Inactive,Facebook,0,1,0
+2026-10,RT_TT_Meta_5VV_NoPurchase,Facebook,1,0,0
+2026-10,Rohit_CPI,Influencer,2,2,0
+2026-10,TT/AppConv/DT/2809,Google Ads,54,43,7
+2026-10,TT/Baapu/Int/30sec,ShareChat,4,14,3
+2026-10,TT/DT/Int/2min,ShareChat,9,18,2
+2026-10,TT/DT/Int/30sec,ShareChat,11,42,6
+2026-10,TT/DelvsMum/Int/2min,ShareChat,1,3,1
+2026-10,TT/DelvsMum/Int/30sec,ShareChat,1,4,0
+2026-10,TT/Deva/Int/30sec,ShareChat,7,32,4
+2026-10,TT/HBBM/Int/2min,ShareChat,2,6,0
+2026-10,TT/Hisaab_Barabar/Int/30sec,ShareChat,10,3,0
+2026-10,TT/Sharechat/DT/30sec/Broad,ShareChat,25,60,8
+2026-10,TT/Sharechat/DoubleTrouble/30sec,ShareChat,5,29,4
+2026-10,TT_Meta_3VV_Sep,Facebook,157,383,79
+2026-10,TT_Meta_5VV_Oct,Facebook,1,0,0
+2026-10,TT_Meta_FVV_Sep,Facebook,282,485,136
+2026-10,TT_Meta_Purchase_Sep,Facebook,43,65,15
+2026-10,TT_Sharechat/Moj_20s_Sep,ShareChat,21,82,17
+2026-10,TT_Sharechat/Moj_30s_Sep,ShareChat,110,338,67
+2026-10,TT_YouTube_FVV&3VV_2409,Google Ads,0,1,0
+2026-10,Tuktuki_Video_Camp_21_Aug,ShareChat,0,1,0
+2026-10,Usman_Khan,Influencer,2,2,2
+2026-10,VP_1,Influencer,1,0,0
+2026-10,VP_2,Influencer,90,150,44
+2026-10,VP_3,Influencer,19,65,12
+2026-10,facebook,tuktuki,0,1,0
+2026-10,google,tuktuki,37,72,21
+2026-10,transsion_pai,Transsion Holdings,0,7,0
+2026-10,tuk tuk app download,Google Organic Search,0,1,0
+2026-10,tuk tuki,Google Organic Search,0,1,0
+2026-10,unknown,Organic,125,192,13
+2026-10,xiaomi_direct,Xiaomi Global,0,19,0
+2026-11,Expired Attributions,Facebook,0,59,0
+2026-11,Facebook,tuktuki,1,10,0
+2026-11,IG_Show,Social Media,2,2,0
+2026-11,Instagram,Social Media,1,0,0
+2026-11,Install_Campaign_Experiment,Facebook,14,29,5
+2026-11,LS - Andriod App installation - India - In Market,Google Ads,0,21,0
+2026-11,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,0,4,0
+2026-11,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,0,2,0
+2026-11,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,0,4,0
+2026-11,LS - App installation - Broad - Andriod – First Open Event,Facebook,0,1,0
+2026-11,LS - App installation - Broad - Andriod – First Videoview Event_07April26,Facebook,0,2,0
+2026-11,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,1,2,0
+2026-11,OppoAffinity,OPPO国际 | OPPO Global,0,3,0
+2026-11,Oppo_Affinity,OPPO国际 | OPPO Global,0,5,0
+2026-11,RT_TT_Meta_5VV_NoPurchase,Facebook,0,1,0
+2026-11,TT/AppConv/DT/2809,Google Ads,51,76,20
+2026-11,TT/Baapu/Int/30sec,ShareChat,0,5,0
+2026-11,TT/DT/Int/2min,ShareChat,7,15,2
+2026-11,TT/DT/Int/30sec,ShareChat,7,20,6
+2026-11,TT/DelvsMum/Int/2min,ShareChat,0,2,0
+2026-11,TT/DelvsMum/Int/30sec,ShareChat,0,3,0
+2026-11,TT/Deva/Int/30sec,ShareChat,4,16,1
+2026-11,TT/HBBM/Int/2min,ShareChat,6,7,1
+2026-11,TT/Hisaab_Barabar/Int/30sec,ShareChat,3,9,0
+2026-11,TT/Sharechat/DT/30sec/Broad,ShareChat,9,21,3
+2026-11,TT/Sharechat/DoubleTrouble/30sec,ShareChat,1,2,0
+2026-11,TT_Meta_3VV_Sep,Facebook,97,191,52
+2026-11,TT_Meta_5VV_Oct,Facebook,6,5,2
+2026-11,TT_Meta_AppInstall,Facebook,1,1,1
+2026-11,TT_Meta_FVV_Sep,Facebook,142,215,74
+2026-11,TT_Meta_Purchase_Sep,Facebook,23,36,13
+2026-11,TT_Sharechat/Moj_20s_Sep,ShareChat,7,16,4
+2026-11,TT_Sharechat/Moj_30s_Sep,ShareChat,34,80,16
+2026-11,VP_2,Influencer,58,75,22
+2026-11,VP_3,Influencer,4,11,4
+2026-11,facebook,tuktuki,0,1,0
+2026-11,google,tuktuki,17,23,7
+2026-11,tuktuki,Google Organic Search,1,0,0
+2026-11,tuktuki app,Google Organic Search,0,1,0
+2026-11,unknown,Organic,32,37,9
+2026-11,xiaomi_direct,Xiaomi Global,0,2,0
