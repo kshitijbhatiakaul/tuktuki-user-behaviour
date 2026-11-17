@@ -60,8 +60,18 @@ Needs Kshitij's Mac online with the Claude desktop app and the admin panel logge
 ## 5. Finish
 `update` `refresh/state`: `date` = today, `at` = now, `by` = scheduled/manual, `lock` = null, `status` =
 `full` if steps 1, 2 and 4 all succeeded, else `partial`, and `notes` = one line on anything that failed.
-Send Kshitij a short message (SendUserMessage): admin data through <date>, rows added, anything that failed,
-and the 3 biggest moves vs the previous day (DAU, subscription + AdMob revenue, top show by watch hours).
+Send Kshitij a short message (SendUserMessage): admin data through <date>, what refreshed, anything that failed, then
+ADMIN PANEL INSIGHTS (always, from data/admin/, after removing the broken days the dashboard leaves out: watch time
+> 300 min per viewer, and performance-report days whose episode views are > 4x the surrounding fortnight's median
+AND downloads > 2x that day's DAU):
+- Yesterday vs the 7-day average before it: DAU, share of DAU who watched, minutes and episodes per viewer,
+  subscription revenue, AdMob revenue and eCPM (₹ per 1,000 impressions), payers, paid DAU — call out moves over ~10%.
+- Last 7 days vs the 7 before: same measures in one short table.
+- Shows: top 3 by watch hours yesterday, and the biggest 3 gainers and 3 losers in watch hours (last 7 vs previous 7 days).
+- Renewals: weekly pack renewed-by-day-7 for the latest purchase days old enough (7+ days), vs the previous week.
+- New users: share who watched on day 0 and who watched again on day 1 (latest mature days) vs the week before.
+- 2–3 one-line "what to do" points that follow from the moves (ad load vs eCPM, paid DAU trend, a fading or rising show).
+Keep it phone-readable.
 A scheduled run that skipped sends nothing.
 
 Hard rules: read-only on the admin panel, Adjust, GA and BigQuery. Never type passwords. Never delete repo history.

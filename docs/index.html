@@ -73,7 +73,7 @@ window.dash = (function () {
 </script>
 </head>
 <body>
-<div class="snap">Snapshot refreshed 17 Nov 2026, 6:31 PM IST · Adjust data up to 2026-11-16</div>
+<div class="snap">Snapshot refreshed 17 Nov 2026, 6:48 PM IST · Adjust data up to 2026-11-16</div>
 <div id="dash-root">
 
 <style>
@@ -474,6 +474,61 @@ window.dash = (function () {
       <div class="tile"><div class="lbl">Back on day 7</div><div class="num" data-draw="adT" data-k="r7">—</div><div class="muted">watched on day 7: <span data-draw="adT" data-k="r7v">—</span></div></div>
       <div class="tile"><div class="lbl">Back on day 30</div><div class="num" data-draw="adT" data-k="r30">—</div><div class="muted">watched on day 30: <span data-draw="adT" data-k="r30v">—</span></div></div>
     </div>
+    <h3 style="margin-top:var(--cds-gap-lg)" id="admin-insights">What the admin data says</h3>
+    <div class="grid" style="margin-top:var(--cds-gap-sm)">
+      <div class="card">
+        <h3>Your range vs the same number of days before</h3>
+        <p class="note">Green is better, red is worse. Averages per day unless marked.</p>
+        <p class="muted" data-draw="adCmpNote" data-source="admin_daily">—</p>
+        <div class="tw" data-source="admin_daily">
+          <table><thead><tr><th>Measure</th><th>Your range</th><th>Before</th><th>Change</th></tr></thead><tbody data-draw="adCmp"></tbody></table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Shows gaining and losing watch hours</h3>
+        <p class="note">Watch hours in your range vs the same number of days before. Shows with fewer than 20 hours in both are left out.</p>
+        <div class="tw" data-source="series_daily">
+          <table><thead><tr><th>Show</th><th>Your range</th><th>Before</th><th>Change</th></tr></thead><tbody data-draw="adMovers"></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card pb">
+        <h3>Findings</h3>
+        <p class="note">Before the relaunch = 1 Jan – 16 Jun 2026. Recent = the latest 30 days of admin data. These compare fixed periods and don't follow the date picker.</p>
+        <ol>
+          <li><b>The relaunch fixed viewing.</b> The share of daily active users who watch an episode went from <span data-draw="adIns" data-k="vs_pre">—</span> to <span data-draw="adIns" data-k="vs_now">—</span>, episodes per viewer from <span data-draw="adIns" data-k="ep_pre">—</span> to <span data-draw="adIns" data-k="ep_now">—</span>, and completion from <span data-draw="adIns" data-k="cp_pre">—</span> to <span data-draw="adIns" data-k="cp_now">—</span>. New users who watch on their first day went from <span data-draw="adIns" data-k="nw_pre">—</span> to <span data-draw="adIns" data-k="nw_now">—</span>.</li>
+          <li><b>Ads now earn more than subscriptions.</b> Recently AdMob brings ₹<span data-draw="adIns" data-k="ad_now">—</span> a day against ₹<span data-draw="adIns" data-k="sub_now">—</span> from subscriptions. Ad impressions per active user rose from <span data-draw="adIns" data-k="ipd_pre">—</span> to <span data-draw="adIns" data-k="ipd_now">—</span>, but each 1,000 impressions earns ₹<span data-draw="adIns" data-k="ecpm_now">—</span> against ₹<span data-draw="adIns" data-k="ecpm_pre">—</span> before — more ads at lower prices.</li>
+          <li><b>Subscriptions are small and slipping.</b> Paying users active a day fell from <span data-draw="adIns" data-k="pd_prev">—</span> to <span data-draw="adIns" data-k="pd_now">—</span> over the last two 30-day periods, about <span data-draw="adIns" data-k="pd_share">—</span> of active users, spending ₹<span data-draw="adIns" data-k="arppu_now">—</span> a payment. New users bring <span data-draw="adIns" data-k="newrev">—</span> of subscription revenue, so existing users barely buy.</li>
+          <li><b>Renewals are real but falling with scale.</b> Of weekly-pack buyers, <span data-draw="adIns" data-k="w7_jul">—</span> renewed by day 7 in Jul–Aug when the base was small, and <span data-draw="adIns" data-k="w7_sep">—</span> in Sep–Oct. Only <span data-draw="adIns" data-k="w21_sep">—</span> are still renewing at day 21, and the 30-day pack has had no renewals.</li>
+          <li><b>Viewing rests on very few shows.</b> Recently the top show takes <span data-draw="adIns" data-k="top1">—</span> of all watch hours (<b data-draw="adIns" data-k="top1name">—</b>), the top five take <span data-draw="adIns" data-k="top5">—</span>, and one genre, <b data-draw="adIns" data-k="gname">—</b>, takes <span data-draw="adIns" data-k="gshare">—</span>.</li>
+          <li><b>New users still don't come back.</b> Recently <span data-draw="adIns" data-k="d1v_now">—</span> of new users watch again on day 1 and <span data-draw="adIns" data-k="d7v_now">—</span> on day 7.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Weekly-pack renewal by purchase month</h3>
+        <p class="note">Share of weekly-pack buyers who renewed by day 7, 14 and 21, by the month they first bought. Months too recent to reach a point show a dash.</p>
+        <div class="tw" data-source="admin_daily">
+          <table><thead><tr><th>Bought in</th><th>Buyers</th><th>By day 7</th><th>By day 14</th><th>By day 21</th><th>15-day pack, by day 15</th></tr></thead><tbody data-draw="adRenewMonth"></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card"><h3>Grow ad revenue without killing viewing</h3><ul>
+        <li>Ad load has gone up about 15× per active user while price per 1,000 halved: test frequency caps (fewer, better-placed rewarded ads) and add more ad networks to lift eCPM.</li>
+        <li>Watch the share of users who watch and episodes per viewer every time ad load changes; if they fall, the extra impressions are costing viewing.</li>
+      </ul></div>
+      <div class="card"><h3>Make subscriptions renew</h3><ul>
+        <li>The weekly pack is most of what sells and renews best: make it auto-renew through Play Billing and remind buyers on day 6.</li>
+        <li>Drop or rework the 30-day pack (no renewals) and price-test the 15-day pack, which renews nearly as well as weekly.</li>
+        <li>Sell to existing users: they're most of the active base but buy little — offer a pack when they finish a show.</li>
+      </ul></div>
+      <div class="card"><h3>Spread viewing across more shows</h3><ul>
+        <li>Too much rests on one show: promote the next-best Hidden Identity and Horror &amp; Thriller titles in the "continue watching" and end-of-show slots.</li>
+        <li>Review shows with low minutes per viewer (people open them and leave): fix the first episode or stop pushing them.</li>
+      </ul></div>
+    </div>
+
     <p class="muted" style="margin-top:var(--cds-gap-sm)">Source: Tuktuki admin panel, read with your login. It's a copy refreshed every weekday at about 10:30 AM IST (or when you ask for a refresh), not a live feed — the admin panel isn't a connector the dashboard can call. A few days in the admin panel are broken (watch time above 5 hours per viewer in late Nov 2025, and performance-report days several times the surrounding week); those values are left out rather than summed. The admin panel can't return unique viewers for spans longer than about three months, so all-time unique viewers per show aren't available. AdMob revenue is shown in rupees as the admin panel reports it.</p>
   </section>
 
@@ -1757,6 +1812,80 @@ window.dash = (function () {
     hbars(el, top.map((a) => ({ label: a.series, v: a.hours, txt: `${big(a.hours)} hrs · ${big(a.viewers)} ${showRows().exact ? 'viewers' : 'avg daily viewers'}` })), { empty: 'No show data in this range' });
   });
   const q = () => { const i = document.querySelector('.ad-search'); return i ? i.value.trim().toLowerCase() : ''; };
+  // ---- insights ----
+  const shiftDay = (d, k) => new Date(Date.parse(d + 'T00:00:00Z') + k * 864e5).toISOString().slice(0, 10);
+  const span = (s, e) => clean().rows.filter((x) => x.day >= s && x.day <= e);
+  const agg = (s, e) => {
+    const R = span(s, e); const days = R.length; if (!days) return null;
+    const rv = R.filter((r) => has(r.eng_total_viewers) && n(r.eng_total_viewers) > 0); const V = S(rv, 'eng_total_viewers');
+    const wv = (k) => { const m = rv.filter((r) => has(r[k])); const w = S(m, 'eng_total_viewers'); return w ? m.reduce((a, r) => a + n(r[k]) * n(r.eng_total_viewers), 0) / w : null; };
+    const ad = R.filter((r) => has(r.total_admob_revenue)); const imp = S(ad, 'total_admob_impressions');
+    const last = D('admin_daily').reduce((m, r) => (r.day > m ? r.day : m), '');
+    const ret = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `ret_${k}_d0_users`); return b ? S(m, `ret_${k}_video_users`) / b : null; };
+    const ren = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `sub_${k}_d0_users`); return b ? S(m, `sub_${k}_renewal_users`) / b : null; };
+    const nu = S(R, 'ie_new_users'); const sub = S(R, 'rev_total_revenue'); const pay = S(R, 'rev_total_payers');
+    const packs = ['week', 'days15', 'month1', 'month3', 'month6', 'month12'].reduce((a, k) => a + S(R, 'rev_bucket2_sales_' + k), 0);
+    return { dau: S(R, 'dau_dau_users') / days, vshare: rv.length ? rv.reduce((a, r) => a + n(r.eng_total_viewers) / Math.max(1, n(r.dau_dau_users)), 0) / rv.length : null,
+      viewers: rv.length ? V / rv.length : null, mins: wv('eng_avg_watch_time'), eps: wv('eng_avg_videos'), comp: (wv('eng_completion_rate') ?? NaN) / 100,
+      nw1: nu ? S(R, 'ie_new_users_watched_atleast1') / nu : null, nw5: nu ? S(R, 'ie_new_users_watched_5plus') / nu : null, d1v: ret('d1', 1), d7v: ret('d7', 7),
+      sub: sub / days, admob: ad.length ? S(ad, 'total_admob_revenue') / ad.length : null, ecpm: imp ? (1000 * S(ad, 'total_admob_revenue')) / imp : null,
+      ipd: S(ad, 'dau_dau_users') ? imp / S(ad, 'dau_dau_users') : null, paiddau: S(R, 'pft_active_paid_dau') / days, payers: pay / days, arppu: pay ? sub / pay : null,
+      newrev: sub ? S(R, 'ir_total_paid') / sub : null, weekshare: packs ? S(R, 'rev_bucket2_sales_week') / packs : null, w7: ren('weekly7', 7), w21: ren('weekly21', 21) };
+  };
+  const CMP = [['Daily active users', 'dau', 'big', 1], ['Share of active users who watch', 'vshare', 'p0', 1], ['Minutes per viewer', 'mins', 'd1', 1], ['Episodes per viewer', 'eps', 'd1', 1],
+    ['Episode completion', 'comp', 'p0', 1], ['New users who watch on day 0', 'nw1', 'p0', 1], ['New users watching 5+ on day 0', 'nw5', 'p0', 1], ['New users watching again on day 1', 'd1v', 'p1', 1],
+    ['Subscription revenue (₹ a day)', 'sub', 'big', 1], ['AdMob revenue (₹ a day)', 'admob', 'big', 1], ['₹ per 1,000 ad impressions', 'ecpm', 'd1', 1], ['Ad impressions per active user', 'ipd', 'd1', 0],
+    ['Paying users active a day', 'paiddau', 'big', 1], ['Payments a day', 'payers', 'd1', 1], ['₹ per payment', 'arppu', 'd1', 1], ['Weekly pack renewed by day 7', 'w7', 'p1', 1]];
+  const prevRange = () => { const r = rng(); const len = Math.round((Date.parse(r.e) - Date.parse(r.s)) / 864e5) + 1; return { s: shiftDay(r.s, -len), e: shiftDay(r.s, -1), len }; };
+  dash.draw('adCmpNote', (el) => { if (!okA('admin_daily')) { el.textContent = '—'; return; } const p = prevRange(); const g = d3.utcFormat('%-d %b %Y'); el.textContent = `Compared with ${g(new Date(p.s))} – ${g(new Date(p.e))} (${p.len} days).`; });
+  dash.draw('adCmp', (tb) => {
+    tb.replaceChildren(); if (!okA('admin_daily')) return; const r = rng(); const p = prevRange();
+    if (span(p.s, p.e).length < p.len / 2) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 4; td.className = 'l'; td.textContent = 'Not enough admin data before this range to compare — pick a later start date.'; tr.append(td); tb.append(tr); return; }
+    const A = agg(r.s, r.e), B = agg(p.s, p.e);
+    CMP.forEach(([label, k, fm, good]) => {
+      const a = A && A[k], b = B && B[k]; const tr = document.createElement('tr');
+      const ch = a != null && b != null && Number.isFinite(a) && Number.isFinite(b) && b !== 0 ? a / b - 1 : null;
+      const cls = ch == null || !good || Math.abs(ch) < 0.02 ? '' : ch > 0 ? 'ok' : 'bad';
+      [label, f(a, fm), f(b, fm), ch == null ? '—' : (ch > 0 ? '+' : '') + d3.format('.0%')(ch)].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; if (i === 3 && cls) td.className = cls; tr.append(td); });
+      tb.append(tr);
+    });
+  });
+  dash.draw('adMovers', (tb) => {
+    tb.replaceChildren(); if (!okA('series_daily')) return; const r = rng(); const p = prevRange(); const cur = new Map(), prv = new Map();
+    if (okA('admin_daily') && span(p.s, p.e).length < p.len / 2) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 4; td.className = 'l'; td.textContent = 'Not enough data before this range to compare — pick a later start date.'; tr.append(td); tb.append(tr); return; }
+    for (const x of D('series_daily')) { if (x.day >= r.s && x.day <= r.e) cur.set(x.series, (cur.get(x.series) || 0) + n(x.hours)); else if (x.day >= p.s && x.day <= p.e) prv.set(x.series, (prv.get(x.series) || 0) + n(x.hours)); }
+    const all = [...new Set([...cur.keys(), ...prv.keys()])].map((k) => ({ k, a: cur.get(k) || 0, b: prv.get(k) || 0 })).filter((x) => x.a >= 20 || x.b >= 20).map((x) => ({ ...x, d: x.a - x.b })).sort((x, y) => y.d - x.d);
+    const rows = [...all.slice(0, 5), ...all.slice(-5).filter((x) => !all.slice(0, 5).includes(x))].filter((x) => x.d !== 0);
+    if (!rows.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 4; td.className = 'l'; td.textContent = 'No earlier period to compare with'; tr.append(td); tb.append(tr); return; }
+    rows.forEach((x) => { const tr = document.createElement('tr'); [x.k, d3.format(',.0f')(x.a), d3.format(',.0f')(x.b), (x.d > 0 ? '+' : '') + d3.format(',.0f')(x.d) + ' hrs' + (x.b ? ` (${x.d > 0 ? '+' : ''}${d3.format('.0%')(x.d / x.b)})` : ' (new)')].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; if (i === 3) td.className = x.d > 0 ? 'ok' : 'bad'; tr.append(td); }); tb.append(tr); });
+  });
+  const insights = () => {
+    const last = D('admin_daily').reduce((m, r) => (r.day > m ? r.day : m), ''); if (!last) return null;
+    const pre = agg('2026-01-01', '2026-06-16'), now = agg(shiftDay(last, -29), last), prev = agg(shiftDay(last, -59), shiftDay(last, -30));
+    const jul = agg('2026-07-01', '2026-08-31'), sep = agg('2026-09-01', '2026-10-31');
+    const s0 = shiftDay(last, -29); const hrs = new Map(), gen = new Map(); let tot = 0;
+    for (const x of D('series_daily')) { if (x.day < s0 || x.day > last) continue; const h = n(x.hours); tot += h; hrs.set(x.series, (hrs.get(x.series) || 0) + h); gen.set(x.category || '—', (gen.get(x.category || '—') || 0) + h); }
+    const top = [...hrs.entries()].sort((a, b) => b[1] - a[1]); const g = [...gen.entries()].sort((a, b) => b[1] - a[1]);
+    return { pre, now, prev, jul, sep, top1: tot && top[0] ? top[0][1] / tot : null, top1name: top[0] ? top[0][0] : '—', top5: tot ? top.slice(0, 5).reduce((a, x) => a + x[1], 0) / tot : null, gname: g[0] ? g[0][0] : '—', gshare: tot && g[0] ? g[0][1] / tot : null };
+  };
+  dash.draw('adIns', (el) => {
+    if (!okA('admin_daily', 'series_daily')) { el.textContent = '—'; return; } const I = insights(); if (!I) { el.textContent = '—'; return; }
+    const g = (o, k) => (o ? o[k] : null);
+    const v = { vs_pre: [g(I.pre, 'vshare'), 'p0'], vs_now: [g(I.now, 'vshare'), 'p0'], ep_pre: [g(I.pre, 'eps'), 'd1'], ep_now: [g(I.now, 'eps'), 'd1'], cp_pre: [g(I.pre, 'comp'), 'p0'], cp_now: [g(I.now, 'comp'), 'p0'],
+      nw_pre: [g(I.pre, 'nw1'), 'p0'], nw_now: [g(I.now, 'nw1'), 'p0'], ad_now: [g(I.now, 'admob'), 'big'], sub_now: [g(I.now, 'sub'), 'big'], ipd_pre: [g(I.pre, 'ipd'), 'd1'], ipd_now: [g(I.now, 'ipd'), 'd1'],
+      ecpm_now: [g(I.now, 'ecpm'), 'big'], ecpm_pre: [g(I.pre, 'ecpm'), 'big'], pd_prev: [g(I.prev, 'paiddau'), 'big'], pd_now: [g(I.now, 'paiddau'), 'big'], pd_share: [I.now && I.now.dau ? I.now.paiddau / I.now.dau : null, 'p1'],
+      arppu_now: [g(I.now, 'arppu'), 'big'], newrev: [g(I.now, 'newrev'), 'p0'], w7_jul: [g(I.jul, 'w7'), 'p0'], w7_sep: [g(I.sep, 'w7'), 'p0'], w21_sep: [g(I.sep, 'w21'), 'p0'],
+      top1: [I.top1, 'p0'], top5: [I.top5, 'p0'], gshare: [I.gshare, 'p0'], d1v_now: [g(I.now, 'd1v'), 'p0'], d7v_now: [g(I.now, 'd7v'), 'p1'] }[el.dataset.k];
+    if (el.dataset.k === 'top1name') { el.textContent = I.top1name; return; } if (el.dataset.k === 'gname') { el.textContent = I.gname; return; }
+    el.textContent = v ? f(v[0], v[1]) : '—';
+  });
+  dash.draw('adRenewMonth', (tb) => {
+    tb.replaceChildren(); if (!okA('admin_daily')) return; const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), '');
+    const months = [...new Set(all.filter((r) => n(r.sub_weekly7_d0_users) > 0).map((r) => r.day.slice(0, 7)))].sort();
+    months.forEach((m) => { const R = all.filter((r) => r.day.slice(0, 7) === m);
+      const rate = (k, age) => { const x = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= age); const b = S(x, `sub_${k}_d0_users`); return b && x.length === R.length ? S(x, `sub_${k}_renewal_users`) / b : null; };
+      const tr = document.createElement('tr'); [d3.utcFormat('%b %Y')(new Date(m + '-01')), d3.format(',')(S(R, 'sub_weekly7_d0_users')), f(rate('weekly7', 7), 'p0'), f(rate('weekly14', 14), 'p0'), f(rate('weekly21', 21), 'p0'), f(rate('day15', 15), 'p0')].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr); });
+  });
   document.querySelectorAll('.ad-search').forEach((i) => i.addEventListener('input', () => dash.draw('adShowTbl')));
   dash.draw('adShowTbl', (tb) => {
     tb.replaceChildren(); if (!okA('series_daily', 'series_windows')) return;
