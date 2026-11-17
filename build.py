@@ -14,6 +14,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data")
 ADJUST = ["daily", "events", "cohorts", "channels", "backcamp", "purchases", "paycohort", "paychan"]
 GA = ["ga_breakdowns", "ga_explore", "ga_monthly"]
+ADMIN = ["admin_daily", "series_daily", "series_windows"]  # data/admin/*.csv, Tuktuki admin panel
 
 
 def read_csv(path):
@@ -115,7 +116,7 @@ window.dash = (function () {
       return cache[id];
     },
     onData(fn) { onDataFns.push(fn); },
-    draw(name, fn) { draws.set(name, fn); },
+    draw(name, fn) { if (typeof fn !== 'function') { const f = draws.get(name); if (f) document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { f(el); } catch (e) { console.error(name, e); } }); return; } draws.set(name, fn); },
     params() { return Object.assign({}, params); },
     setParams(o) { Object.assign(params, o); render(); },
     resetParams() { params = {}; render(); },
@@ -141,6 +142,11 @@ def build():
         if os.path.exists(p):
             with open(p, encoding="utf-8") as f:
                 raw[name] = {"text": f.read()}
+    for name in ADMIN:
+        p = os.path.join(DATA, "admin", name + ".csv")
+        if os.path.exists(p):
+            with open(p, newline="", encoding="utf-8") as f:
+                raw[name] = {"data": list(csv.DictReader(f))}
     for name in GA:
         p = os.path.join(DATA, "ga", name + ".json")
         if os.path.exists(p):
@@ -156,7 +162,7 @@ def build():
         rows = list(csv.reader(io.StringIO(raw["daily"]["text"])))
         last = max((r[0] for r in rows[1:] if r), default="")
     data_js = json.dumps(raw, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    missing = [n for n in ADJUST + GA if n not in raw]
+    missing = [n for n in ADJUST + GA + ADMIN if n not in raw]
     note = f"Snapshot refreshed {stamp}" + (f" · Adjust data up to {last}" if last else "")
     if missing:
         note += " · not in this snapshot: " + ", ".join(missing)

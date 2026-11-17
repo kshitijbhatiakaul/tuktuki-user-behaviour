@@ -47,7 +47,7 @@
 <div class="tb">
   <header id="top">
     <h1>Tuktuki user behaviour</h1>
-    <p class="lede">Every Adjust metric that describes how users arrive, watch, leave and come back, from the app's first day of data, plus a <a href="#ga">Google Analytics section</a> on who the audience is (gender, age, location, language, app builds). Pick a date range and every number, chart and table below follows it.</p>
+    <p class="lede">Every Adjust metric that describes how users arrive, watch, leave and come back, from the app's first day of data, plus a <a href="#admin">Tuktuki admin panel section</a> (viewers and watch hours per show, revenue, subscription renewals) and a <a href="#ga">Google Analytics section</a> on who the audience is (gender, age, location, language, app builds). Pick a date range and every number, chart and table below follows it.</p>
   </header>
 
   <div class="bar" id="range">
@@ -313,6 +313,91 @@
         <table><thead><tr><th>Period</th><th>Installs / day</th><th>Day-1 ret.</th><th>Day-7 ret.</th><th>Day-30 ret.</th><th>Min on install day</th><th>Same-day uninstall</th></tr></thead><tbody data-draw="eraTbl"></tbody></table>
       </div>
     </div>
+  </section>
+
+  <section id="admin">
+    <h2>Tuktuki admin panel — viewing, revenue and renewals</h2>
+    <p class="lede">From Tuktuki's own admin panel (the app's backend), day by day from 1 Oct 2025. Every number here follows the date picker. These are the app's own counts, so they won't match Adjust exactly: Adjust counts attributed installs and tracked events, the admin panel counts accounts and payments.</p>
+    <p class="muted" style="margin-top:var(--cds-gap-xs)">Admin data in view: <b data-draw="adRange" data-source="admin_daily">—</b></p>
+
+    <h3 style="margin-top:var(--cds-gap-md)">Audience and viewing</h3>
+    <div class="tiles" style="margin-top:var(--cds-gap-sm)" data-source="admin_daily">
+      <div class="tile"><div class="lbl">Daily active users (avg)</div><div class="num" data-draw="adT" data-k="dau">—</div><div class="muted"><span data-draw="adT" data-k="newshare">—</span> of them new that day</div></div>
+      <div class="tile"><div class="lbl">New users</div><div class="num" data-draw="adT" data-k="newu">—</div><div class="muted"><span data-draw="adT" data-k="newday">—</span> a day</div></div>
+      <div class="tile"><div class="lbl">Daily viewers (avg)</div><div class="num" data-draw="adT" data-k="viewers">—</div><div class="muted">users who watched at least one episode that day</div></div>
+      <div class="tile"><div class="lbl">Minutes watched per viewer a day</div><div class="num" data-draw="adT" data-k="mins">—</div><div class="muted"><span data-draw="adT" data-k="vids">—</span> episodes per viewer</div></div>
+      <div class="tile"><div class="lbl">Episode completion rate</div><div class="num" data-draw="adT" data-k="comp">—</div><div class="muted">episodes watched past 80%</div></div>
+      <div class="tile"><div class="lbl">Episode views</div><div class="num" data-draw="adT" data-k="epv">—</div><div class="muted"><span data-draw="adT" data-k="epvday">—</span> a day</div></div>
+      <div class="tile"><div class="lbl">Total watch hours</div><div class="num" data-draw="adT" data-k="hours">—</div><div class="muted">across all shows</div></div>
+      <div class="tile"><div class="lbl">App downloads</div><div class="num" data-draw="adT" data-k="dl">—</div><div class="muted">Android <span data-draw="adT" data-k="dlandroid">—</span></div></div>
+    </div>
+
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="admin-dau">
+        <h3>Daily active users: new vs returning</h3>
+        <p class="note">Admin panel daily active users, split by whether they joined that day.</p>
+        <div class="legend"><span><i class="k0"></i>Returning users</span><span><i class="k2"></i>New users</span><span><i class="k1"></i>Paid users active</span></div>
+        <div class="chart" data-draw="adDau" data-source="admin_daily"></div>
+      </div>
+      <div class="card" id="admin-view">
+        <h3>Daily viewers</h3>
+        <p class="note">Users who watched at least one episode that day.</p>
+        <div class="chart" data-draw="adView" data-source="admin_daily"></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)" id="admin-shows">Viewership by show</h3>
+    <div class="card" style="margin-top:var(--cds-gap-sm)">
+      <p class="note">For every show: unique users who opened at least one episode, total episode views and total watch hours in your range. Watch hours and views add up for any dates. Unique viewers can't be added across days, so they show exactly when the range is one of the preset buttons (7, 30 or 90 days, or since relaunch) or a single calendar month; for other ranges the column shows the average number of daily viewers instead, and says so.</p>
+      <p class="muted" data-draw="adShowNote" data-source="series_daily series_windows">—</p>
+      <label class="muted" style="display:block;margin:var(--cds-gap-sm) 0">Search shows <input class="ad-search" type="search" aria-label="Search shows" style="font:inherit;color:var(--color-fg);background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:4px 6px"></label>
+      <div class="chart" data-draw="adTopShows" data-source="series_daily"></div>
+      <div class="tw" style="margin-top:var(--cds-gap-md)" data-source="series_daily series_windows">
+        <table><thead><tr><th>Show</th><th class="l">Genre</th><th data-draw="adViewerHead">Unique viewers</th><th>Episode views</th><th>Watch hours</th><th>Minutes per viewer</th><th>Views per viewer</th><th>Share of watch hours</th></tr></thead><tbody data-draw="adShowTbl"></tbody></table>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">Revenue: subscriptions and ads</h3>
+    <div class="tiles" style="margin-top:var(--cds-gap-sm)" data-source="admin_daily">
+      <div class="tile"><div class="lbl">Total revenue</div><div class="num">₹<span data-draw="adT" data-k="rev">—</span></div><div class="muted">subscriptions + AdMob</div></div>
+      <div class="tile"><div class="lbl">Subscription revenue</div><div class="num">₹<span data-draw="adT" data-k="subrev">—</span></div><div class="muted">₹<span data-draw="adT" data-k="arppu">—</span> per payment</div></div>
+      <div class="tile"><div class="lbl">AdMob revenue</div><div class="num">₹<span data-draw="adT" data-k="admob">—</span></div><div class="muted">₹<span data-draw="adT" data-k="ecpm">—</span> per 1,000 impressions</div></div>
+      <div class="tile"><div class="lbl">Payments</div><div class="num" data-draw="adT" data-k="payers">—</div><div class="muted">sum of daily unique payers</div></div>
+      <div class="tile"><div class="lbl">Paying users active a day</div><div class="num" data-draw="adT" data-k="paiddau">—</div><div class="muted"><span data-draw="adT" data-k="paidshare">—</span> of daily active users</div></div>
+      <div class="tile"><div class="lbl">Revenue per daily active user</div><div class="num">₹<span data-draw="adT" data-k="arpdau">—</span></div><div class="muted">subscriptions + ads, per day</div></div>
+    </div>
+    <div class="grid" style="margin-top:var(--cds-gap-md)">
+      <div class="card" id="admin-rev">
+        <h3>Daily revenue: subscriptions vs AdMob (₹)</h3>
+        <p class="note">Subscription payments recorded by the admin panel and AdMob ad revenue.</p>
+        <div class="legend"><span><i class="k0"></i>Subscriptions</span><span><i class="k1"></i>AdMob</span></div>
+        <div class="chart" data-draw="adRev" data-source="admin_daily"></div>
+      </div>
+      <div class="card" id="admin-packs">
+        <h3>Packs sold</h3>
+        <p class="note">Subscription packs sold in your range. The weekly pack is most of what sells.</p>
+        <div class="chart short" data-draw="adPacks" data-source="admin_daily"></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)" id="admin-renewals">Renewals and resubscriptions</h3>
+    <div class="card" style="margin-top:var(--cds-gap-sm)">
+      <p class="note">Of the people who bought each pack on a day in your range, how many renewed. Each row uses only purchase days old enough to have reached that renewal point. These renewals are what Adjust can't see.</p>
+      <div class="tw" data-source="admin_daily">
+        <table><thead><tr><th>Pack and renewal point</th><th>Buyers counted</th><th>Renewed</th><th>Renewal rate</th></tr></thead><tbody data-draw="adRenew"></tbody></table>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--cds-gap-lg)">New users in the admin panel</h3>
+    <div class="tiles" style="margin-top:var(--cds-gap-sm)" data-source="admin_daily">
+      <div class="tile"><div class="lbl">New users who watched an episode</div><div class="num" data-draw="adT" data-k="nw1">—</div><div class="muted">on the day they joined</div></div>
+      <div class="tile"><div class="lbl">New users who watched 5+ episodes</div><div class="num" data-draw="adT" data-k="nw5">—</div><div class="muted"><span data-draw="adT" data-k="nwvid">—</span> episodes and <span data-draw="adT" data-k="nwmin">—</span> min per new viewer</div></div>
+      <div class="tile"><div class="lbl">New users who paid</div><div class="num" data-draw="adT" data-k="nwpay">—</div><div class="muted">₹<span data-draw="adT" data-k="nwrev">—</span> from new users</div></div>
+      <div class="tile"><div class="lbl">Back on day 1</div><div class="num" data-draw="adT" data-k="r1">—</div><div class="muted">watched on day 1: <span data-draw="adT" data-k="r1v">—</span></div></div>
+      <div class="tile"><div class="lbl">Back on day 7</div><div class="num" data-draw="adT" data-k="r7">—</div><div class="muted">watched on day 7: <span data-draw="adT" data-k="r7v">—</span></div></div>
+      <div class="tile"><div class="lbl">Back on day 30</div><div class="num" data-draw="adT" data-k="r30">—</div><div class="muted">watched on day 30: <span data-draw="adT" data-k="r30v">—</span></div></div>
+    </div>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Source: Tuktuki admin panel, read with your login. It's a copy refreshed every weekday at about 10:30 AM IST (or when you ask for a refresh), not a live feed — the admin panel isn't a connector the dashboard can call. A few days in the admin panel are broken (watch time above 5 hours per viewer in late Nov 2025, and performance-report days several times the surrounding week); those values are left out rather than summed. The admin panel can't return unique viewers for spans longer than about three months, so all-time unique viewers per show aren't available. AdMob revenue is shown in rupees as the admin panel reports it.</p>
   </section>
 
   <section id="ga">
@@ -1425,6 +1510,184 @@
       old_err: () => f(rate(old12), 'pct0'), new_err: () => f(rate(new15), 'pct1')
     }[el.dataset.k];
     el.textContent = v ? v() : '—';
+  });
+})();
+</script>
+<script>
+(function () {
+  const yday = () => new Date(Date.now() + 19800000 - 864e5).toISOString().slice(0, 10);
+  const rng = () => { const p = dash.params(); return { s: p.start || '2025-10-06', e: p.end || yday() }; };
+  const okA = (...ids) => ids.every((id) => dash.data(id).status === 'ok');
+  const errA = (...ids) => ids.some((id) => ['error', 'connect', 'declined'].includes(dash.data(id).status));
+  const D = (id) => (dash.data(id).status === 'ok' ? dash.data(id).data : []);
+  const n = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
+  const has = (v) => v !== undefined && v !== null && v !== '' && Number.isFinite(+v);
+  const S = (rows, k) => rows.reduce((a, r) => a + n(r[k]), 0);
+  const big = (v) => (v == null || !Number.isFinite(v) ? '—' : Math.abs(v) >= 10000 ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : d3.format(',.0f')(v));
+  const fx = { int: d3.format(','), p0: d3.format('.0%'), p1: d3.format('.1%'), d1: d3.format('.1f'), d2: d3.format('.2f'), big };
+  const f = (v, k) => (v == null || !Number.isFinite(v) ? '—' : fx[k](v));
+  // The admin panel has a few broken days: watch time above 5 hours per viewer, and performance-report
+  // days several times the surrounding week (duplicated loads). Those values are blanked, not summed.
+  const PERF = ['total_download', 'app_download_android', 'app_download_ios', 'total_episode_views', 'episodes_viewed_android', 'episodes_viewed_ios', 'total_admob_revenue', 'admob_revenue_android', 'admob_revenue_ios', 'total_admob_impressions', 'admob_impressions_android', 'admob_impressions_ios'];
+  let cleanCache = null, cleanSrc = null;
+  const clean = () => {
+    const src = D('admin_daily'); if (cleanSrc === src && cleanCache) return cleanCache;
+    const rows = src.slice().sort((a, b) => (a.day < b.day ? -1 : 1)).map((r) => ({ ...r }));
+    const bad = new Set();
+    rows.forEach((r, i) => {
+      if (has(r.eng_avg_watch_time) && n(r.eng_avg_watch_time) > 300) { r.eng_avg_watch_time = ''; r.eng_avg_videos = ''; r.eng_completion_rate = ''; }
+      if (has(r.ie_avg_watchtime) && n(r.ie_avg_watchtime) > 300) { r.ie_avg_watchtime = ''; }
+      const medOf = (k) => { const nb = rows.slice(Math.max(0, i - 7), i + 8).filter((q) => q !== r && has(q[k])).map((q) => n(q[k])).sort((x, y) => x - y); return nb.length ? nb[Math.floor(nb.length / 2)] : 0; };
+      const mv = medOf('total_episode_views');
+      // episode views far above the surrounding fortnight AND more downloads than twice that day's active users
+      // = a duplicated load in the performance report, not a real spike (a real one, like 22 Aug 2026, keeps downloads below DAU)
+      if (mv > 0 && n(r.total_episode_views) > 4 * mv && n(r.total_download) > 2 * n(r.dau_dau_users)) { bad.add(r.day); PERF.forEach((k) => { r[k] = ''; }); }
+    });
+    cleanSrc = src; cleanCache = { rows, bad }; return cleanCache;
+  };
+  const inRange = () => { const r = rng(); return clean().rows.filter((x) => x.day >= r.s && x.day <= r.e); };
+  const fail = (el) => { const d = document.createElement('div'); d.className = 'fail'; d.append(document.createElement('i'), 'Failed to load'); el.replaceChildren(d); };
+  const empty = (el, t) => { const d = document.createElement('div'); d.className = 'empty'; d.textContent = t; el.replaceChildren(d); };
+
+  dash.draw('adRange', (el) => {
+    if (!okA('admin_daily')) { el.textContent = '—'; return; }
+    const R = inRange(); if (!R.length) { el.textContent = 'no admin data in this range'; return; }
+    const g = d3.utcFormat('%-d %b %Y'); const bad = [...clean().bad].filter((d) => R.some((x) => x.day === d));
+    el.textContent = `${g(new Date(R[0].day))} – ${g(new Date(R[R.length - 1].day))} (${R.length} days)` + (bad.length ? ` · left out of downloads, episode views and AdMob: ${bad.map((d) => g(new Date(d))).join(', ')} (the admin panel shows several times the normal day there)` : '');
+  });
+
+  const stats = () => {
+    const R = inRange(), days = R.length || 1;
+    const rv = R.filter((r) => has(r.eng_total_viewers) && n(r.eng_total_viewers) > 0); const V = S(rv, 'eng_total_viewers');
+    const wv = (k) => (V ? rv.reduce((a, r) => a + n(r[k]) * n(r.eng_total_viewers), 0) / V : null);
+    const ad = R.filter((r) => has(r.total_admob_revenue)); const imp = S(ad, 'total_admob_impressions');
+    const sub = S(R, 'rev_total_revenue'), adm = S(R, 'total_admob_revenue'), pay = S(R, 'rev_total_payers'), dau = S(R, 'dau_dau_users');
+    const ie = R.filter((r) => n(r.ie_new_users) > 0); const nu = S(ie, 'ie_new_users'); const nw = S(ie, 'ie_new_users_watched_atleast1');
+    const wn = (k) => (nw ? ie.reduce((a, r) => a + n(r[k]) * n(r.ie_new_users_watched_atleast1), 0) / nw : null);
+    const last = D('admin_daily').reduce((m, r) => (r.day > m ? r.day : m), '');
+    const ret = (k, days2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= days2); const b = S(m, `ret_${k}_d0_users`); return b ? [S(m, `ret_${k}_active_users`) / b, S(m, `ret_${k}_video_users`) / b] : [null, null]; };
+    const [r1, r1v] = ret('d1', 1), [r7, r7v] = ret('d7', 7), [r30, r30v] = ret('d30', 30);
+    const sd = D('series_daily'); const r = rng(); const hrs = sd.reduce((a, x) => (x.day >= r.s && x.day <= r.e ? a + n(x.hours) : a), 0);
+    return {
+      dau: dau / days, newshare: dau ? S(R, 'dau_new_users') / dau : null, newu: S(R, 'dau_new_users'), newday: S(R, 'dau_new_users') / days,
+      viewers: rv.length ? V / rv.length : null, mins: wv('eng_avg_watch_time'), vids: wv('eng_avg_videos'), comp: (wv('eng_completion_rate') ?? NaN) / 100,
+      epv: S(R, 'total_episode_views'), epvday: S(R, 'total_episode_views') / days, hours: okA('series_daily') ? hrs : null, dl: S(R, 'total_download'), dlandroid: S(R, 'app_download_android'),
+      rev: sub + adm, subrev: sub, arppu: pay ? sub / pay : null, admob: adm, ecpm: imp ? (1000 * S(ad, 'total_admob_revenue')) / imp : null, payers: pay,
+      paiddau: S(R, 'pft_active_paid_dau') / days, paidshare: S(R, 'pft_dau_users') ? S(R, 'pft_active_paid_dau') / S(R, 'pft_dau_users') : null, arpdau: dau ? (sub + adm) / dau : null,
+      nw1: nu ? nw / nu : null, nw5: nu ? S(ie, 'ie_new_users_watched_5plus') / nu : null, nwvid: wn('ie_avg_videos'), nwmin: wn('ie_avg_watchtime'),
+      nwpay: S(R, 'ir_no_of_payers'), nwrev: S(R, 'ir_total_paid'), r1, r1v, r7, r7v, r30, r30v
+    };
+  };
+  const fmtK = { dau: 'big', newshare: 'p0', newu: 'big', newday: 'big', viewers: 'big', mins: 'd1', vids: 'd1', comp: 'p0', epv: 'big', epvday: 'big', hours: 'big', dl: 'big', dlandroid: 'big',
+    rev: 'big', subrev: 'big', arppu: 'd1', admob: 'big', ecpm: 'd1', payers: 'big', paiddau: 'big', paidshare: 'p1', arpdau: 'd2', nw1: 'p0', nw5: 'p0', nwvid: 'd1', nwmin: 'd1', nwpay: 'big', nwrev: 'big',
+    r1: 'p1', r1v: 'p1', r7: 'p1', r7v: 'p1', r30: 'p1', r30v: 'p1' };
+  dash.draw('adT', (el) => {
+    if (!okA('admin_daily')) { el.textContent = '—'; return; }
+    const k = el.dataset.k; const v = stats()[k]; el.textContent = f(v == null ? null : +v, fmtK[k] || 'big');
+  });
+
+  function lines(el, data, series, o) {
+    el.replaceChildren(); if (!data.length) return empty(el, 'No admin data in this range');
+    const W = Math.max(280, el.clientWidth || 600), H = 240, m = { t: 10, r: 12, b: 24, l: 10 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleUtc(d3.extent(data, (r) => r.date), [0, 1]);
+    const y = d3.scaleLinear([0, (d3.max(data, (r) => d3.max(series, (s) => r[s.k] ?? 0)) || 1) * 1.08], [H - m.b, m.t]).nice();
+    const ticks = y.ticks(5);
+    m.l = 10 + d3.max(ticks, (tk) => { const pr = svg.append('text').attr('font-size', 11).text(o.yf(tk)); const w = pr.node().getComputedTextLength(); pr.remove(); return w; });
+    x.range([m.l, W - m.r]);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(o.yf);
+    svg.append('g').selectAll('text').data(x.ticks(Math.max(2, Math.floor((W - m.l) / 90)))).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d3.utcFormat('%b %-d'));
+    series.forEach((s) => svg.append('path').datum(data).attr('fill', 'none').attr('stroke', s.c).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().defined((r) => r[s.k] != null).x((r) => x(r.date)).y((r) => y(r[s.k]))));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').style('display', 'none');
+    svg.append('rect').attr('x', m.l).attr('width', Math.max(0, W - m.l - m.r)).attr('height', H).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        const [px] = d3.pointer(ev); const r = data[d3.bisector((q) => q.date).center(data, x.invert(px))];
+        rule.style('display', null).attr('x1', x(r.date)).attr('x2', x(r.date));
+        const t = tip.style('display', null).node(); t.replaceChildren(); const dd = document.createElement('div'); dd.className = 'd'; dd.textContent = d3.utcFormat('%a %-d %b %Y')(r.date); t.append(dd);
+        series.forEach((s) => { const ln = document.createElement('div'); const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = s.c; ln.append(sw, `${s.n}: ${r[s.k] == null ? '—' : (s.vf || o.vf)(r[s.k])}`); t.append(ln); });
+        const sx = (x(r.date) / W) * el.clientWidth; tip.style('left', Math.min(Math.max(0, sx + 12), el.clientWidth - t.offsetWidth) + 'px').style('top', '8px');
+      })
+      .on('mouseleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); });
+  }
+  function hbars(el, rows, o) {
+    el.replaceChildren(); if (!rows.length) return empty(el, o.empty || 'No data in this range');
+    const W = Math.max(280, el.clientWidth || 500), bh = 18, step = bh + 24, H = rows.length * step + 4;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.v) || 1], [0, Math.max(60, W - 230)]);
+    rows.forEach((r, i) => { const y0 = i * step;
+      svg.append('text').attr('x', 0).attr('y', y0 + 12).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.label);
+      svg.append('rect').attr('x', 0).attr('y', y0 + 17).attr('height', bh).attr('rx', 4).attr('width', Math.max(2, x(r.v))).attr('fill', dash.colors[o.c ?? 0]);
+      svg.append('text').attr('x', Math.max(2, x(r.v)) + 6).attr('y', y0 + 17 + bh / 2).attr('dy', '0.32em').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(r.txt); });
+  }
+
+  dash.draw('adDau', (el) => {
+    if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
+    const c = dash.colors;
+    lines(el, inRange().map((r) => ({ date: new Date(r.day), a: n(r.dau_old_users), b: n(r.dau_new_users), p: has(r.pft_active_paid_dau) ? n(r.pft_active_paid_dau) : null })),
+      [{ k: 'a', n: 'Returning', c: c[0] }, { k: 'b', n: 'New', c: c[2] }, { k: 'p', n: 'Paid active', c: c[1] }], { yf: big, vf: d3.format(',.0f') });
+  });
+  dash.draw('adView', (el) => {
+    if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
+    const c = dash.colors;
+    lines(el, inRange().filter((r) => has(r.eng_total_viewers)).map((r) => ({ date: new Date(r.day), a: n(r.eng_total_viewers) })),
+      [{ k: 'a', n: 'Viewers', c: c[0] }], { yf: big, vf: d3.format(',.0f') });
+  });
+  dash.draw('adRev', (el) => {
+    if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
+    const c = dash.colors;
+    lines(el, inRange().map((r) => ({ date: new Date(r.day), a: n(r.rev_total_revenue), b: has(r.total_admob_revenue) ? n(r.total_admob_revenue) : null })),
+      [{ k: 'a', n: 'Subscriptions', c: c[0] }, { k: 'b', n: 'AdMob', c: c[1] }], { yf: (v) => '₹' + big(v), vf: (v) => '₹' + d3.format(',.0f')(v) });
+  });
+  dash.draw('adPacks', (el) => {
+    if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
+    const R = inRange(); const P = [['Weekly', 'rev_bucket2_sales_week'], ['15 days', 'rev_bucket2_sales_days15'], ['1 month', 'rev_bucket2_sales_month1'], ['3 months', 'rev_bucket2_sales_month3'], ['6 months', 'rev_bucket2_sales_month6'], ['12 months', 'rev_bucket2_sales_month12']];
+    const tot = P.reduce((a, [, k]) => a + S(R, k), 0);
+    hbars(el, tot ? P.map(([label, k]) => { const v = S(R, k); return { label, v, txt: `${d3.format(',')(v)} · ${d3.format('.0%')(v / tot)}` }; }) : [], { empty: 'No packs sold in this range' });
+  });
+  dash.draw('adRenew', (tb) => {
+    tb.replaceChildren(); if (!okA('admin_daily')) return;
+    const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), ''); const R = inRange();
+    const rows = [['Weekly pack — renewed by day 7', 'weekly7', 7], ['Weekly pack — renewed again by day 14', 'weekly14', 14], ['Weekly pack — renewed again by day 21', 'weekly21', 21], ['15-day pack — renewed by day 15', 'day15', 15], ['30-day pack — renewed by day 30', 'month30', 30]];
+    rows.forEach(([label, k, age]) => {
+      const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= age); const b = S(m, `sub_${k}_d0_users`), rn = S(m, `sub_${k}_renewal_users`);
+      const tr = document.createElement('tr'); [label, b ? d3.format(',')(b) : '—', b ? d3.format(',')(rn) : '—', b ? d3.format('.1%')(rn / b) : 'Not enough days yet'].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); });
+      tb.append(tr);
+    });
+  });
+
+  // ---- shows ----
+  const exactWin = () => { const r = rng(); const w = D('series_windows').filter((x) => x.start === r.s && x.end === r.e); return w.length ? w : null; };
+  const showRows = () => {
+    const r = rng(); const agg = new Map(); const dayset = new Set();
+    for (const x of D('series_daily')) { if (x.day < r.s || x.day > r.e) continue; dayset.add(x.day);
+      const a = agg.get(x.series) || { series: x.series, category: x.category, views: 0, hours: 0, vd: 0 }; a.views += n(x.views); a.hours += n(x.hours); a.vd += n(x.viewers); agg.set(x.series, a); }
+    const W = exactWin(); const wm = W ? new Map(W.map((x) => [x.series, x])) : null; const nd = dayset.size || 1;
+    const out = [...agg.values()].map((a) => { const w = wm && wm.get(a.series); return { ...a, viewers: w ? n(w.viewers) : a.vd / nd, exact: !!w }; });
+    const tot = out.reduce((s, a) => s + a.hours, 0); out.forEach((a) => { a.share = tot ? a.hours / tot : null; });
+    return { rows: out.sort((a, b) => b.hours - a.hours), exact: !!W, days: dayset.size };
+  };
+  dash.draw('adShowNote', (el) => {
+    if (!okA('series_daily', 'series_windows')) { el.textContent = '—'; return; }
+    const s = showRows();
+    el.textContent = !s.days ? 'No show data in this range.' : s.exact ? `Unique viewers are exact for this range (${s.rows.length} shows watched).` : `This range isn’t a preset or a single calendar month, so the viewer column shows average daily viewers per show (${s.rows.length} shows watched over ${s.days} days). Pick a preset or one month to see exact unique viewers.`;
+  });
+  dash.draw('adViewerHead', (el) => { const s = okA('series_daily', 'series_windows') ? showRows() : null; el.textContent = s && !s.exact ? 'Avg daily viewers' : 'Unique viewers'; });
+  dash.draw('adTopShows', (el) => {
+    if (errA('series_daily')) return fail(el); if (!okA('series_daily', 'series_windows')) return el.replaceChildren();
+    const top = showRows().rows.slice(0, 12);
+    hbars(el, top.map((a) => ({ label: a.series, v: a.hours, txt: `${big(a.hours)} hrs · ${big(a.viewers)} ${showRows().exact ? 'viewers' : 'avg daily viewers'}` })), { empty: 'No show data in this range' });
+  });
+  const q = () => { const i = document.querySelector('.ad-search'); return i ? i.value.trim().toLowerCase() : ''; };
+  document.querySelectorAll('.ad-search').forEach((i) => i.addEventListener('input', () => dash.draw('adShowTbl')));
+  dash.draw('adShowTbl', (tb) => {
+    tb.replaceChildren(); if (!okA('series_daily', 'series_windows')) return;
+    const s = showRows(); const qq = q(); const rows = s.rows.filter((a) => !qq || a.series.toLowerCase().includes(qq) || String(a.category || '').toLowerCase().includes(qq));
+    if (!rows.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 8; td.className = 'l'; td.textContent = 'No shows match'; tr.append(td); tb.append(tr); return; }
+    rows.forEach((a) => { const tr = document.createElement('tr');
+      const v = [a.series, a.category || '—', big(a.viewers), d3.format(',')(Math.round(a.views)), d3.format(',.0f')(a.hours), s.exact && a.viewers ? d3.format('.1f')((a.hours * 60) / a.viewers) : '—', s.exact && a.viewers ? d3.format('.1f')(a.views / a.viewers) : '—', f(a.share, 'p1')];
+      v.forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i < 2) td.className = 'l'; tr.append(td); }); tb.append(tr); });
   });
 })();
 </script>
