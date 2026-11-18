@@ -34,7 +34,7 @@
       const f1 = `from=${F}&to=${T}`, f2 = `fromDate=${F}&toDate=${T}`;
       const calls = { dau: `dau?view=day&${f1}`, pft: `dau?view=day&metric=paid_free_total&${f1}`, life: `dau?view=day&metric=lifetime_paid_dau&${f1}` };
       for (const m of ['total_viewers', 'avg_watch_time', 'avg_videos', 'completion_rate']) calls['eng_' + m] = `engagement?view=day&metric=${m}&${f1}`;
-      for (const m of ['total_revenue', 'total_payers', 'avg_paid_amount', 'bucket2_sales', 'conversion_rate']) calls['rev_' + m] = `revenue?view=day&metric=${m}&${f1}`;
+      for (const m of ['total_revenue', 'total_payers', 'avg_paid_amount', 'bucket1_sales', 'bucket2_sales', 'conversion_rate']) calls['rev_' + m] = `revenue?view=day&metric=${m}&${f1}`;
       for (const m of ['downloads', 'episodeViews', 'razorpayRevenue', 'admobRevenue', 'admobImpressions']) calls['perf_' + m] = `performance-report?metric=${m}&view=day&${f2}`;
       calls.ie = `install-engagement?view=day&${f2}`;
       for (const m of ['total_paid', 'no_of_payers', 'avg_spend']) calls['ir_' + m] = `install-revenue?view=day&metric=${m}&${f2}`;
@@ -50,7 +50,7 @@
           for (const [f, v] of Object.entries(r)) { if (f === 'label' || f === 'report_date') continue;
             const name = f === 'value' ? k : /^(ret_|sub_|dau|pft|ie|rev_bucket)/.test(k) ? k + '_' + f : f; put(d, name, v); } });
       }
-      const cols = [...new Set(Object.values(TT).flatMap((o) => Object.keys(o)))].filter((c) => !/registered_and_visited|rev_bucket1/.test(c));
+      const cols = [...new Set(Object.values(TT).flatMap((o) => Object.keys(o)))].filter((c) => !/registered_and_visited/.test(c));
       S.out.daily = ['day,' + cols.join(','), ...Object.keys(TT).sort().map((d) => d + ',' + cols.map((c) => num(TT[d][c])).join(','))].join('\n');
       // ---- per-show daily ----
       S.step = 'series';

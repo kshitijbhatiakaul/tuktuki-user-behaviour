@@ -33,6 +33,9 @@
 #dash-root .tb th, #dash-root .tb td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
 #dash-root .tb th:first-child, #dash-root .tb td:first-child, #dash-root .tb th.l, #dash-root .tb td.l { text-align: left; }
 #dash-root .tb th { position: sticky; top: 0; background: var(--color-panel); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+#dash-root .tb details.more { margin-top: var(--cds-gap-md); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-sm); }
+#dash-root .tb details.more > summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); padding: var(--cds-gap-xs) 0; }
+#dash-root .tb details.more > summary .muted { font-weight: normal; }
 #dash-root .tb td.bad { color: var(--color-bad); } #dash-root .tb td.ok { color: var(--color-ok); }
 #dash-root .tb .pb b, #dash-root .tb .tile b { font-weight: 600; }
 #dash-root .tb ol, #dash-root .tb ul { margin: 0; padding-left: 1.2rem; line-height: 1.6; }
@@ -176,7 +179,7 @@
       <div class="tile"><div class="lbl">Subscribers per 1,000 active users</div><div class="num" data-draw="pay" data-k="per1k">—</div><div class="muted">daily unique subscribers over DAU</div></div>
       <div class="tile"><div class="lbl">New users who subscribe on install day</div><div class="num" data-draw="pay" data-k="conv0">—</div><div class="muted">within 7 days: <span data-draw="pay" data-k="conv7">—</span></div></div>
       <div class="tile"><div class="lbl">Subscribers who subscribed on install day</div><div class="num" data-draw="pay" data-k="d0share">—</div><div class="muted">of everyone who subscribed within 7 days</div></div>
-      <div class="tile"><div class="lbl">30-day renewal / resubscription rate</div><div class="num" data-draw="pay" data-k="renew">—</div><div class="muted">subscribers from the range’s installs who subscribed again within 30 days (<span data-draw="pay" data-k="repeatN">—</span> of <span data-draw="pay" data-k="buyers30">—</span>)</div></div>
+      <div class="tile"><div class="lbl">30-day renewal / resubscription rate</div><div class="num" data-draw="pay" data-k="renew">—</div><div class="muted">subscribers from the range’s installs who subscribed again within 30 days, any plan in Bucket 1 or 2 — Adjust can't tell buckets apart (<span data-draw="pay" data-k="repeatN">—</span> of <span data-draw="pay" data-k="buyers30">—</span>)</div></div>
       <div class="tile"><div class="lbl">Subscriptions from same-day installs</div><div class="num" data-draw="pay" data-k="newshare">—</div><div class="muted">of all subscriptions in the range</div></div>
       <div class="tile"><div class="lbl">Subscriptions from existing users</div><div class="num" data-draw="pay" data-k="existing">—</div><div class="muted">late first-timers plus any resubscribers</div></div>
       <div class="tile"><div class="lbl">New users who didn’t subscribe</div><div class="num" data-draw="pay" data-k="never">—</div><div class="muted"><span data-draw="pay" data-k="neverN">—</span> users, within 7 days of installing</div></div>
@@ -375,14 +378,14 @@
       </div>
       <div class="card" id="admin-packs">
         <h3>Packs sold</h3>
-        <p class="note">Subscription packs sold in your range. The weekly pack is most of what sells.</p>
+        <p class="note">Packs sold in your range, labelled with the admin panel's bucket. <b>Bucket 1</b> = episode packs (5, 10, 25, 50 episodes) and 1–12 month plans, sold Oct 2025 – Mar 2026. <b>Bucket 2</b> = 1-week, 15-day and 1–12 month plans, sold from Jan 2026. The Bucket 2 weekly pack is most of what sells now.</p>
         <div class="chart short" data-draw="adPacks" data-source="admin_daily"></div>
       </div>
     </div>
 
     <h3 style="margin-top:var(--cds-gap-lg)" id="admin-renewals">Renewals and resubscriptions</h3>
     <div class="card" style="margin-top:var(--cds-gap-sm)">
-      <p class="note">Of the people who bought each pack on a day in your range, how many renewed. Each row uses only purchase days old enough to have reached that renewal point. These renewals are what Adjust can't see.</p>
+      <p class="note">Of the people who bought each pack on a day in your range, how many renewed. Each row uses only purchase days old enough to have reached that renewal point. These renewals are what Adjust can't see. The admin panel tracks renewals only for Bucket 2 plans; Bucket 1 plans have no renewal data.</p>
       <div class="tw" data-source="admin_daily">
         <table><thead><tr><th>Pack and renewal point</th><th>Buyers counted</th><th>Renewed</th><th>Renewal rate</th></tr></thead><tbody data-draw="adRenew"></tbody></table>
       </div>
@@ -423,17 +426,31 @@
           <li><b>The relaunch fixed viewing.</b> The share of daily active users who watch an episode went from <span data-draw="adIns" data-k="vs_pre">—</span> to <span data-draw="adIns" data-k="vs_now">—</span>, episodes per viewer from <span data-draw="adIns" data-k="ep_pre">—</span> to <span data-draw="adIns" data-k="ep_now">—</span>, and completion from <span data-draw="adIns" data-k="cp_pre">—</span> to <span data-draw="adIns" data-k="cp_now">—</span>. New users who watch on their first day went from <span data-draw="adIns" data-k="nw_pre">—</span> to <span data-draw="adIns" data-k="nw_now">—</span>.</li>
           <li><b>Ads now earn more than subscriptions.</b> Recently AdMob brings ₹<span data-draw="adIns" data-k="ad_now">—</span> a day against ₹<span data-draw="adIns" data-k="sub_now">—</span> from subscriptions. Ad impressions per active user rose from <span data-draw="adIns" data-k="ipd_pre">—</span> to <span data-draw="adIns" data-k="ipd_now">—</span>, but each 1,000 impressions earns ₹<span data-draw="adIns" data-k="ecpm_now">—</span> against ₹<span data-draw="adIns" data-k="ecpm_pre">—</span> before — more ads at lower prices.</li>
           <li><b>Subscriptions are small and slipping.</b> Paying users active a day fell from <span data-draw="adIns" data-k="pd_prev">—</span> to <span data-draw="adIns" data-k="pd_now">—</span> over the last two 30-day periods, about <span data-draw="adIns" data-k="pd_share">—</span> of active users, spending ₹<span data-draw="adIns" data-k="arppu_now">—</span> a payment. New users bring <span data-draw="adIns" data-k="newrev">—</span> of subscription revenue, so existing users barely buy.</li>
-          <li><b>Renewals are real but falling with scale.</b> Of weekly-pack buyers, <span data-draw="adIns" data-k="w7_jul">—</span> renewed by day 7 in Jul–Aug when the base was small, and <span data-draw="adIns" data-k="w7_sep">—</span> in Sep–Oct. Only <span data-draw="adIns" data-k="w21_sep">—</span> are still renewing at day 21, and the 30-day pack has had no renewals.</li>
+          <li><b>Renewals are real but falling with scale.</b> Of Bucket 2 weekly-pack buyers, <span data-draw="adIns" data-k="w7_jul">—</span> renewed by day 7 in Jul–Aug when the base was small, and <span data-draw="adIns" data-k="w7_sep">—</span> in Sep–Oct. Only <span data-draw="adIns" data-k="w21_sep">—</span> are still renewing at day 21, and the Bucket 2 30-day pack has had no renewals.</li>
           <li><b>Viewing rests on very few shows.</b> Recently the top show takes <span data-draw="adIns" data-k="top1">—</span> of all watch hours (<b data-draw="adIns" data-k="top1name">—</b>), the top five take <span data-draw="adIns" data-k="top5">—</span>, and one genre, <b data-draw="adIns" data-k="gname">—</b>, takes <span data-draw="adIns" data-k="gshare">—</span>.</li>
           <li><b>New users still don't come back.</b> Recently <span data-draw="adIns" data-k="d1v_now">—</span> of new users watch again on day 1 and <span data-draw="adIns" data-k="d7v_now">—</span> on day 7.</li>
         </ol>
       </div>
-      <div class="card">
-        <h3>Weekly-pack renewal by purchase month</h3>
-        <p class="note">Share of weekly-pack buyers who renewed by day 7, 14 and 21, by the month they first bought. Months too recent to reach a point show a dash.</p>
+      <div class="card" style="grid-column:1/-1" id="admin-renew-time">
+        <h3>Renewal by purchase month, week and day (Bucket 2 plans)</h3>
+        <p class="note">Share of buyers who renewed, grouped by when they bought, for purchase days in your date range. All plans here are Bucket 2 — the only bucket the admin panel tracks renewals for. Periods too recent to reach a renewal point show a dash or “Not yet”.</p>
         <div class="tw" data-source="admin_daily">
-          <table><thead><tr><th>Bought in</th><th>Buyers</th><th>By day 7</th><th>By day 14</th><th>By day 21</th><th>15-day pack, by day 15</th></tr></thead><tbody data-draw="adRenewMonth"></tbody></table>
+          <table><thead><tr><th>Bought in</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th></tr></thead><tbody data-draw="adRenewMonth"></tbody></table>
         </div>
+        <details class="more" data-source="admin_daily">
+          <summary>By purchase week <span class="muted" data-draw="adRenewWkNote">—</span></summary>
+          <p class="note">Weeks run Monday to Sunday; the first and last week are cut to your date range. Each cell is renewal rate (renewed / buyers). Red = under half the range's day-7 rate with 10+ buyers.</p>
+          <div class="tw">
+            <table><thead><tr><th>Week bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th></tr></thead><tbody data-draw="adRenewWeek"></tbody></table>
+          </div>
+        </details>
+        <details class="more" data-source="admin_daily">
+          <summary>By purchase day <span class="muted" data-draw="adRenewDayNote">—</span></summary>
+          <p class="note">One row per purchase day in your range, newest first. Each cell is renewal rate (renewed / buyers). Red = under half the range's day-7 rate with 10+ buyers. <b>Read Mondays and Tuesdays together (marked *):</b> every week since March, Monday buyers show almost no day-7 renewals and Tuesday buyers the most, so the admin panel appears to count Monday buyers' renewals under Tuesday. Week and month totals aren't affected.</p>
+          <div class="tw">
+            <table><thead><tr><th>Day bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th></tr></thead><tbody data-draw="adRenewDay"></tbody></table>
+          </div>
+        </details>
       </div>
     </div>
     <div class="grid" style="margin-top:var(--cds-gap-md)">
@@ -442,8 +459,8 @@
         <li>Watch the share of users who watch and episodes per viewer every time ad load changes; if they fall, the extra impressions are costing viewing.</li>
       </ul></div>
       <div class="card"><h3>Make subscriptions renew</h3><ul>
-        <li>The weekly pack is most of what sells and renews best: make it auto-renew through Play Billing and remind buyers on day 6.</li>
-        <li>Drop or rework the 30-day pack (no renewals) and price-test the 15-day pack, which renews nearly as well as weekly.</li>
+        <li>The Bucket 2 weekly pack is most of what sells and renews best: make it auto-renew through Play Billing and remind buyers on day 6.</li>
+        <li>Drop or rework the Bucket 2 30-day pack (no renewals) and price-test the Bucket 2 15-day pack, which renews nearly as well as weekly.</li>
         <li>Sell to existing users: they're most of the active base but buy little — offer a pack when they finish a show.</li>
       </ul></div>
       <div class="card"><h3>Spread viewing across more shows</h3><ul>
@@ -595,8 +612,8 @@
         <li>Keep the 25–34 male audience in every campaign mix: it brings the most revenue per user.</li>
       </ul></div>
       <div class="card"><h3>Price for who pays and who doesn't</h3><ul>
-        <li>Offer 25–34 men longer and premium plans (weekly or monthly passes with auto-renew).</li>
-        <li>Give women and 18–24s a low-ticket starter pack (₹9–₹19) next to the ad-unlock option, since they grow fast but pay little.</li>
+        <li>Offer 25–34 men longer and premium plans (the Bucket 2 weekly and monthly plans, with auto-renew).</li>
+        <li>Give women and 18–24s a low-ticket starter pack (₹9–₹19; a new plan — the closest past one is the Bucket 1 5-episode pack) next to the ad-unlock option, since they grow fast but pay little.</li>
         <li>Send purchase events to GA in rupees with plan type, so revenue by age, gender and state becomes reliable.</li>
       </ul></div>
       <div class="card"><h3>Shift geo budgets</h3><ul>
@@ -701,7 +718,7 @@
       <ul>
         <li>Fix the day-7 loop for everyone (next-episode push at prime time, daily check-in rewards) before targeting any one audience for retention.</li>
         <li>Schedule pushes and episode drops for the evening peak, and run the heaviest ad budgets in the hours before it.</li>
-        <li>Give women a cheaper first purchase (starter pack, first-episode-bundle offer): they watch as much as men but buy half as often.</li>
+        <li>Give women a cheaper first purchase (a starter pack like the Bucket 1 5-episode pack, or a first-episode-bundle offer): they watch as much as men but buy half as often.</li>
         <li>Force-update every build below 1.4 now; on 1.3.x users open the app but can't play videos, and on 1.2.x they hit errors.</li>
         <li>Turn on the BigQuery export and 14-month retention so these cuts can run over longer periods and refresh automatically.</li>
       </ul>
@@ -751,9 +768,9 @@
         <li>Audit Organic for pre-installs and attribution leakage.</li>
       </ul></div>
       <div class="card"><h3>Fix the paywall and repeat buying</h3><ul>
-        <li>Show the top-up screen at the first lock with a ₹9–₹19 starter pack alongside the ad option, so paying is as easy as watching an ad.</li>
+        <li>Show the top-up screen at the first lock with a ₹9–₹19 starter pack (a new plan, like the old Bucket 1 5-episode pack) alongside the ad option, so paying is as easy as watching an ad.</li>
         <li>Cap free ad unlocks per day after day 0, so heavy viewers eventually meet a paid option.</li>
-        <li>Offer a weekly pass with auto-renew (Play Billing subscription) instead of one-off packs, then turn on Adjust subscription tracking to measure renewals.</li>
+        <li>Make the Bucket 2 weekly pack auto-renew (Play Billing subscription) instead of a one-off purchase, then turn on Adjust subscription tracking to measure renewals.</li>
         <li>Remind subscribers before their plan ends, with a discounted renewal, and send a "your plan has ended" push the day after.</li>
       </ul></div>
       <div class="card"><h3>Close the tracking gaps</h3><ul>
@@ -1695,16 +1712,18 @@
     lines(el, inRange().map((r) => ({ date: new Date(r.day), a: n(r.rev_total_revenue), b: has(r.total_admob_revenue) ? n(r.total_admob_revenue) : null })),
       [{ k: 'a', n: 'Subscriptions', c: c[0] }, { k: 'b', n: 'AdMob', c: c[1] }], { yf: (v) => '₹' + big(v), vf: (v) => '₹' + d3.format(',.0f')(v) });
   });
+  const PACKS = [['Weekly · Bucket 2', 'rev_bucket2_sales_week'], ['15 days · Bucket 2', 'rev_bucket2_sales_days15'], ['1 month · Bucket 2', 'rev_bucket2_sales_month1'], ['3 months · Bucket 2', 'rev_bucket2_sales_month3'], ['6 months · Bucket 2', 'rev_bucket2_sales_month6'], ['12 months · Bucket 2', 'rev_bucket2_sales_month12'],
+    ['5 episodes · Bucket 1', 'rev_bucket1_sales_episode5'], ['10 episodes · Bucket 1', 'rev_bucket1_sales_episode10'], ['25 episodes · Bucket 1', 'rev_bucket1_sales_episode25'], ['50 episodes · Bucket 1', 'rev_bucket1_sales_episode50'], ['1 month · Bucket 1', 'rev_bucket1_sales_month1'], ['3 months · Bucket 1', 'rev_bucket1_sales_month3'], ['6 months · Bucket 1', 'rev_bucket1_sales_month6'], ['12 months · Bucket 1', 'rev_bucket1_sales_month12']];
   dash.draw('adPacks', (el) => {
     if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
-    const R = inRange(); const P = [['Weekly', 'rev_bucket2_sales_week'], ['15 days', 'rev_bucket2_sales_days15'], ['1 month', 'rev_bucket2_sales_month1'], ['3 months', 'rev_bucket2_sales_month3'], ['6 months', 'rev_bucket2_sales_month6'], ['12 months', 'rev_bucket2_sales_month12']];
+    const R = inRange(); const P = PACKS;
     const tot = P.reduce((a, [, k]) => a + S(R, k), 0);
-    hbars(el, tot ? P.map(([label, k]) => { const v = S(R, k); return { label, v, txt: `${d3.format(',')(v)} · ${d3.format('.0%')(v / tot)}` }; }) : [], { empty: 'No packs sold in this range' });
+    hbars(el, tot ? P.filter(([, k]) => S(R, k) > 0).map(([label, k]) => { const v = S(R, k); return { label, v, txt: `${d3.format(',')(v)} · ${d3.format('.0%')(v / tot)}` }; }) : [], { empty: 'No packs sold in this range' });
   });
   dash.draw('adRenew', (tb) => {
     tb.replaceChildren(); if (!okA('admin_daily')) return;
     const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), ''); const R = inRange();
-    const rows = [['Weekly pack — renewed by day 7', 'weekly7', 7], ['Weekly pack — renewed again by day 14', 'weekly14', 14], ['Weekly pack — renewed again by day 21', 'weekly21', 21], ['15-day pack — renewed by day 15', 'day15', 15], ['30-day pack — renewed by day 30', 'month30', 30]];
+    const rows = [['Weekly pack (Bucket 2) — renewed by day 7', 'weekly7', 7], ['Weekly pack (Bucket 2) — renewed again by day 14', 'weekly14', 14], ['Weekly pack (Bucket 2) — renewed again by day 21', 'weekly21', 21], ['15-day pack (Bucket 2) — renewed by day 15', 'day15', 15], ['30-day pack (Bucket 2) — renewed by day 30', 'month30', 30]];
     rows.forEach(([label, k, age]) => {
       const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= age); const b = S(m, `sub_${k}_d0_users`), rn = S(m, `sub_${k}_renewal_users`);
       const tr = document.createElement('tr'); [label, b ? d3.format(',')(b) : '—', b ? d3.format(',')(rn) : '—', b ? d3.format('.1%')(rn / b) : 'Not enough days yet'].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); });
@@ -1747,7 +1766,7 @@
     const ret = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `ret_${k}_d0_users`); return b ? S(m, `ret_${k}_video_users`) / b : null; };
     const ren = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `sub_${k}_d0_users`); return b ? S(m, `sub_${k}_renewal_users`) / b : null; };
     const nu = S(R, 'ie_new_users'); const sub = S(R, 'rev_total_revenue'); const pay = S(R, 'rev_total_payers');
-    const packs = ['week', 'days15', 'month1', 'month3', 'month6', 'month12'].reduce((a, k) => a + S(R, 'rev_bucket2_sales_' + k), 0);
+    const packs = PACKS.reduce((a, [, k]) => a + S(R, k), 0);
     return { dau: S(R, 'dau_dau_users') / days, vshare: rv.length ? rv.reduce((a, r) => a + n(r.eng_total_viewers) / Math.max(1, n(r.dau_dau_users)), 0) / rv.length : null,
       viewers: rv.length ? V / rv.length : null, mins: wv('eng_avg_watch_time'), eps: wv('eng_avg_videos'), comp: (wv('eng_completion_rate') ?? NaN) / 100,
       nw1: nu ? S(R, 'ie_new_users_watched_atleast1') / nu : null, nw5: nu ? S(R, 'ie_new_users_watched_5plus') / nu : null, d1v: ret('d1', 1), d7v: ret('d7', 7),
@@ -1758,7 +1777,7 @@
   const CMP = [['Daily active users', 'dau', 'big', 1], ['Share of active users who watch', 'vshare', 'p0', 1], ['Minutes per viewer', 'mins', 'd1', 1], ['Episodes per viewer', 'eps', 'd1', 1],
     ['Episode completion', 'comp', 'p0', 1], ['New users who watch on day 0', 'nw1', 'p0', 1], ['New users watching 5+ on day 0', 'nw5', 'p0', 1], ['New users watching again on day 1', 'd1v', 'p1', 1],
     ['Subscription revenue (₹ a day)', 'sub', 'big', 1], ['AdMob revenue (₹ a day)', 'admob', 'big', 1], ['₹ per 1,000 ad impressions', 'ecpm', 'd1', 1], ['Ad impressions per active user', 'ipd', 'd1', 0],
-    ['Paying users active a day', 'paiddau', 'big', 1], ['Payments a day', 'payers', 'd1', 1], ['₹ per payment', 'arppu', 'd1', 1], ['Weekly pack renewed by day 7', 'w7', 'p1', 1]];
+    ['Paying users active a day', 'paiddau', 'big', 1], ['Payments a day', 'payers', 'd1', 1], ['₹ per payment', 'arppu', 'd1', 1], ['Weekly pack (Bucket 2) renewed by day 7', 'w7', 'p1', 1]];
   const prevRange = () => { const r = rng(); const len = Math.round((Date.parse(r.e) - Date.parse(r.s)) / 864e5) + 1; return { s: shiftDay(r.s, -len), e: shiftDay(r.s, -1), len }; };
   dash.draw('adCmpNote', (el) => { if (!okA('admin_daily')) { el.textContent = '—'; return; } const p = prevRange(); const g = d3.utcFormat('%-d %b %Y'); el.textContent = `Compared with ${g(new Date(p.s))} – ${g(new Date(p.e))} (${p.len} days).`; });
   dash.draw('adCmp', (tb) => {
@@ -1803,12 +1822,47 @@
     el.textContent = v ? f(v[0], v[1]) : '—';
   });
   dash.draw('adRenewMonth', (tb) => {
-    tb.replaceChildren(); if (!okA('admin_daily')) return; const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), '');
-    const months = [...new Set(all.filter((r) => n(r.sub_weekly7_d0_users) > 0).map((r) => r.day.slice(0, 7)))].sort();
-    months.forEach((m) => { const R = all.filter((r) => r.day.slice(0, 7) === m);
+    tb.replaceChildren(); if (!okA('admin_daily')) return; const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), ''); const IR = inRange();
+    const months = [...new Set(IR.filter((r) => n(r.sub_weekly7_d0_users) > 0).map((r) => r.day.slice(0, 7)))].sort();
+    if (!months.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 6; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); }
+    months.forEach((m) => { const R = IR.filter((r) => r.day.slice(0, 7) === m);
       const rate = (k, age) => { const x = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= age); const b = S(x, `sub_${k}_d0_users`); return b && x.length === R.length ? S(x, `sub_${k}_renewal_users`) / b : null; };
       const tr = document.createElement('tr'); [d3.utcFormat('%b %Y')(new Date(m + '-01')), d3.format(',')(S(R, 'sub_weekly7_d0_users')), f(rate('weekly7', 7), 'p0'), f(rate('weekly14', 14), 'p0'), f(rate('weekly21', 21), 'p0'), f(rate('day15', 15), 'p0')].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr); });
   });
+  // ---- renewals by purchase week / day (Bucket 2 plans), following the date range ----
+  const RN_COLS = [['weekly7', 7], ['weekly14', 14], ['weekly21', 21], ['day15', 15], ['month30', 30]];
+  const rnLast = () => D('admin_daily').reduce((m, r) => (r.day > m ? r.day : m), '');
+  const rnBuyers = (r) => RN_COLS.reduce((a, [k]) => a + n(r[`sub_${k}_d0_users`]), 0);
+  const rnBench = () => { const last = rnLast(); const m = inRange().filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= 7); const b = S(m, 'sub_weekly7_d0_users'); return b ? S(m, 'sub_weekly7_renewal_users') / b : null; };
+  const rnTable = (tb, groups) => {
+    tb.replaceChildren(); if (!okA('admin_daily')) return; const last = rnLast(); const bench = rnBench();
+    if (!groups.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 7; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); return; }
+    groups.forEach(({ label, rows, noflag }) => {
+      const end = rows.reduce((m, r) => (r.day > m ? r.day : m), ''); const age = (Date.parse(last) - Date.parse(end)) / 864e5;
+      const tr = document.createElement('tr'); const add = (t, cls, title) => { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; if (title) td.title = title; tr.append(td); };
+      add(label, 'l'); add(d3.format(',')(S(rows, 'sub_weekly7_d0_users')));
+      RN_COLS.forEach(([k, a]) => {
+        const b = S(rows, `sub_${k}_d0_users`); if (!b) return add('—');
+        if (age < a) return add('Not yet', null, `Buyers here reach day ${a} after ${d3.utcFormat('%-d %b')(new Date(Date.parse(end) + a * 864e5))}`);
+        const rn = S(rows, `sub_${k}_renewal_users`); const rate = rn / b;
+        const low = !noflag && k === 'weekly7' && bench != null && b >= 10 && rate < bench / 2;
+        add(`${d3.format('.0%')(rate)} (${d3.format(',')(rn)}/${d3.format(',')(b)})`, low ? 'bad' : null, low ? `Under half the range's day-7 rate (${d3.format('.0%')(bench)})` : null);
+      });
+      tb.append(tr);
+    });
+  };
+  const rnWeeks = () => {
+    const R = inRange().filter((r) => rnBuyers(r) > 0); const g = new Map();
+    R.forEach((r) => { const t = Date.parse(r.day); const dow = (new Date(t).getUTCDay() + 6) % 7; const k = new Date(t - dow * 864e5).toISOString().slice(0, 10); if (!g.has(k)) g.set(k, []); g.get(k).push(r); });
+    const fm = d3.utcFormat('%-d %b'), fy = d3.utcFormat('%-d %b %Y');
+    return [...g.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1)).map(([, rows]) => { const ds = rows.map((r) => r.day).sort(); const a = new Date(ds[0]), b = new Date(ds.at(-1));
+      return { label: ds[0] === ds.at(-1) ? fy(a) : `${fm(a)} – ${fy(b)}`, rows }; });
+  };
+  const rnDays = () => inRange().filter((r) => rnBuyers(r) > 0).sort((a, b) => (a.day < b.day ? 1 : -1)).map((r) => { const wd = new Date(r.day).getUTCDay(); const mt = wd === 1 || wd === 2; return { label: d3.utcFormat('%a %-d %b %Y')(new Date(r.day)) + (mt ? ' *' : ''), rows: [r], noflag: mt }; });
+  dash.draw('adRenewWeek', (tb) => rnTable(tb, okA('admin_daily') ? rnWeeks() : []));
+  dash.draw('adRenewDay', (tb) => rnTable(tb, okA('admin_daily') ? rnDays() : []));
+  dash.draw('adRenewWkNote', (el) => { if (!okA('admin_daily')) { el.textContent = ''; return; } const w = rnWeeks(); el.textContent = w.length ? `· ${w.length} week${w.length > 1 ? 's' : ''} in range` : '· none in range'; });
+  dash.draw('adRenewDayNote', (el) => { if (!okA('admin_daily')) { el.textContent = ''; return; } const d = rnDays(); el.textContent = d.length ? `· ${d.length} day${d.length > 1 ? 's' : ''} in range` : '· none in range'; });
   document.querySelectorAll('.ad-search').forEach((i) => i.addEventListener('input', () => dash.draw('adShowTbl')));
   dash.draw('adShowTbl', (tb) => {
     tb.replaceChildren(); if (!okA('series_daily', 'series_windows')) return;
