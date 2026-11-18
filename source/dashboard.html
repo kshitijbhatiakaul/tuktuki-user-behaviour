@@ -378,14 +378,14 @@
       </div>
       <div class="card" id="admin-packs">
         <h3>Packs sold</h3>
-        <p class="note">Packs sold in your range, labelled with the admin panel's bucket. <b>Bucket 1</b> = episode packs (5, 10, 25, 50 episodes) and 1–12 month plans, sold Oct 2025 – Mar 2026. <b>Bucket 2</b> = 1-week, 15-day and 1–12 month plans, sold from Jan 2026. The Bucket 2 weekly pack is most of what sells now.</p>
+        <p class="note">Packs sold in your range, labelled with the admin panel's bucket. <b>Bucket 1</b> = episode packs (5, 10, 25, 50 episodes) and 1–12 month plans, sold Oct 2025 – Mar 2026. <b>Bucket 2</b> = 1-week, 15-day and 1–12 month plans, sold from Jan 2026. The Bucket 2 weekly pack is most of what sells now. <b>*Other purchases</b> = payments the admin panel records minus Bucket 1 and 2 pack sales; since the relaunch this is about 30% of purchases and is most likely Bucket 3, which the panel doesn't report by plan yet.</p>
         <div class="chart short" data-draw="adPacks" data-source="admin_daily"></div>
       </div>
     </div>
 
     <h3 style="margin-top:var(--cds-gap-lg)" id="admin-renewals">Renewals and resubscriptions</h3>
     <div class="card" style="margin-top:var(--cds-gap-sm)">
-      <p class="note">Of the people who bought each pack on a day in your range, how many renewed. Each row uses only purchase days old enough to have reached that renewal point. These renewals are what Adjust can't see. The admin panel tracks renewals only for Bucket 2 plans; Bucket 1 plans have no renewal data.</p>
+      <p class="note">Of the people who bought each pack on a day in your range, how many renewed. Each row uses only purchase days old enough to have reached that renewal point. These renewals are what Adjust can't see. The admin panel tracks renewals only for Bucket 2 plans; Bucket 1 plans and other purchases (likely Bucket 3) have no renewal data, so their buyers are shown with renewals marked not tracked.</p>
       <div class="tw" data-source="admin_daily">
         <table><thead><tr><th>Pack and renewal point</th><th>Buyers counted</th><th>Renewed</th><th>Renewal rate</th></tr></thead><tbody data-draw="adRenew"></tbody></table>
       </div>
@@ -432,23 +432,23 @@
         </ol>
       </div>
       <div class="card" style="grid-column:1/-1" id="admin-renew-time">
-        <h3>Renewal by purchase month, week and day (Bucket 2 plans)</h3>
-        <p class="note">Share of buyers who renewed, grouped by when they bought, for purchase days in your date range. All plans here are Bucket 2 — the only bucket the admin panel tracks renewals for. Periods too recent to reach a renewal point show a dash or “Not yet”.</p>
+        <h3>Renewal by purchase month, week and day</h3>
+        <p class="note">Share of buyers who renewed, grouped by when they bought, for purchase days in your date range. Renewal rates are for Bucket 2 plans — the only bucket the admin panel tracks renewals for. Periods too recent to reach a renewal point show a dash or “Not yet”. *Other purchases (most likely Bucket 3) are payments outside Bucket 1 and 2 packs; the admin panel doesn't say who bought them, so their renewals can't be tracked yet.</p>
         <div class="tw" data-source="admin_daily">
-          <table><thead><tr><th>Bought in</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th></tr></thead><tbody data-draw="adRenewMonth"></tbody></table>
+          <table><thead><tr><th>Bought in</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>Other purchases (likely B3)*</th></tr></thead><tbody data-draw="adRenewMonth"></tbody></table>
         </div>
         <details class="more" data-source="admin_daily">
           <summary>By purchase week <span class="muted" data-draw="adRenewWkNote">—</span></summary>
           <p class="note">Weeks run Monday to Sunday; the first and last week are cut to your date range. Each cell is renewal rate (renewed / buyers). Red = under half the range's day-7 rate with 10+ buyers.</p>
           <div class="tw">
-            <table><thead><tr><th>Week bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th></tr></thead><tbody data-draw="adRenewWeek"></tbody></table>
+            <table><thead><tr><th>Week bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th><th>Other purchases (likely B3)*</th></tr></thead><tbody data-draw="adRenewWeek"></tbody></table>
           </div>
         </details>
         <details class="more" data-source="admin_daily">
           <summary>By purchase day <span class="muted" data-draw="adRenewDayNote">—</span></summary>
           <p class="note">One row per purchase day in your range, newest first. Each cell is renewal rate (renewed / buyers). Red = under half the range's day-7 rate with 10+ buyers. <b>Read Mondays and Tuesdays together (marked *):</b> every week since March, Monday buyers show almost no day-7 renewals and Tuesday buyers the most, so the admin panel appears to count Monday buyers' renewals under Tuesday. Week and month totals aren't affected.</p>
           <div class="tw">
-            <table><thead><tr><th>Day bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th></tr></thead><tbody data-draw="adRenewDay"></tbody></table>
+            <table><thead><tr><th>Day bought</th><th>Weekly pack (B2) buyers</th><th>Weekly (B2), by day 7</th><th>Weekly (B2), by day 14</th><th>Weekly (B2), by day 21</th><th>15-day pack (B2), by day 15</th><th>30-day pack (B2), by day 30</th><th>Other purchases (likely B3)*</th></tr></thead><tbody data-draw="adRenewDay"></tbody></table>
           </div>
         </details>
       </div>
@@ -1615,6 +1615,9 @@
       // = a duplicated load in the performance report, not a real spike (a real one, like 22 Aug 2026, keeps downloads below DAU)
       if (mv > 0 && n(r.total_episode_views) > 4 * mv && n(r.total_download) > 2 * n(r.dau_dau_users)) { bad.add(r.day); PERF.forEach((k) => { r[k] = ''; }); }
     });
+    // payments the admin panel records that aren't in any Bucket 1 or 2 pack sale = other plans, most likely Bucket 3 (not reported by the panel)
+    const PK = ['rev_bucket1_sales_episode5', 'rev_bucket1_sales_episode10', 'rev_bucket1_sales_episode25', 'rev_bucket1_sales_episode50', 'rev_bucket1_sales_month1', 'rev_bucket1_sales_month3', 'rev_bucket1_sales_month6', 'rev_bucket1_sales_month12', 'rev_bucket2_sales_week', 'rev_bucket2_sales_days15', 'rev_bucket2_sales_month1', 'rev_bucket2_sales_month3', 'rev_bucket2_sales_month6', 'rev_bucket2_sales_month12'];
+    rows.forEach((r) => { r.other_purchases = has(r.rev_total_payers) ? n(r.rev_total_payers) - PK.reduce((a, k) => a + n(r[k]), 0) : 0; });
     cleanSrc = src; cleanCache = { rows, bad }; return cleanCache;
   };
   const inRange = () => { const r = rng(); return clean().rows.filter((x) => x.day >= r.s && x.day <= r.e); };
@@ -1713,12 +1716,13 @@
       [{ k: 'a', n: 'Subscriptions', c: c[0] }, { k: 'b', n: 'AdMob', c: c[1] }], { yf: (v) => '₹' + big(v), vf: (v) => '₹' + d3.format(',.0f')(v) });
   });
   const PACKS = [['Weekly · Bucket 2', 'rev_bucket2_sales_week'], ['15 days · Bucket 2', 'rev_bucket2_sales_days15'], ['1 month · Bucket 2', 'rev_bucket2_sales_month1'], ['3 months · Bucket 2', 'rev_bucket2_sales_month3'], ['6 months · Bucket 2', 'rev_bucket2_sales_month6'], ['12 months · Bucket 2', 'rev_bucket2_sales_month12'],
-    ['5 episodes · Bucket 1', 'rev_bucket1_sales_episode5'], ['10 episodes · Bucket 1', 'rev_bucket1_sales_episode10'], ['25 episodes · Bucket 1', 'rev_bucket1_sales_episode25'], ['50 episodes · Bucket 1', 'rev_bucket1_sales_episode50'], ['1 month · Bucket 1', 'rev_bucket1_sales_month1'], ['3 months · Bucket 1', 'rev_bucket1_sales_month3'], ['6 months · Bucket 1', 'rev_bucket1_sales_month6'], ['12 months · Bucket 1', 'rev_bucket1_sales_month12']];
+    ['5 episodes · Bucket 1', 'rev_bucket1_sales_episode5'], ['10 episodes · Bucket 1', 'rev_bucket1_sales_episode10'], ['25 episodes · Bucket 1', 'rev_bucket1_sales_episode25'], ['50 episodes · Bucket 1', 'rev_bucket1_sales_episode50'], ['1 month · Bucket 1', 'rev_bucket1_sales_month1'], ['3 months · Bucket 1', 'rev_bucket1_sales_month3'], ['6 months · Bucket 1', 'rev_bucket1_sales_month6'], ['12 months · Bucket 1', 'rev_bucket1_sales_month12'], ['Other purchases · likely Bucket 3*', 'other_purchases']];
+  const S0 = (rows, k) => Math.max(0, S(rows, k));
   dash.draw('adPacks', (el) => {
     if (errA('admin_daily')) return fail(el); if (!okA('admin_daily')) return el.replaceChildren();
     const R = inRange(); const P = PACKS;
-    const tot = P.reduce((a, [, k]) => a + S(R, k), 0);
-    hbars(el, tot ? P.filter(([, k]) => S(R, k) > 0).map(([label, k]) => { const v = S(R, k); return { label, v, txt: `${d3.format(',')(v)} · ${d3.format('.0%')(v / tot)}` }; }) : [], { empty: 'No packs sold in this range' });
+    const tot = P.reduce((a, [, k]) => a + S0(R, k), 0);
+    hbars(el, tot ? P.filter(([, k]) => S0(R, k) > 0).map(([label, k]) => { const v = S0(R, k); return { label, v, txt: `${d3.format(',')(v)} · ${d3.format('.0%')(v / tot)}` }; }) : [], { empty: 'No packs sold in this range' });
   });
   dash.draw('adRenew', (tb) => {
     tb.replaceChildren(); if (!okA('admin_daily')) return;
@@ -1729,6 +1733,8 @@
       const tr = document.createElement('tr'); [label, b ? d3.format(',')(b) : '—', b ? d3.format(',')(rn) : '—', b ? d3.format('.1%')(rn / b) : 'Not enough days yet'].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); });
       tb.append(tr);
     });
+    const ob = S0(R, 'other_purchases'); const tr = document.createElement('tr');
+    ['Other purchases (likely Bucket 3) — renewals', ob ? d3.format(',')(ob) : '—', '—', 'Not tracked by the admin panel'].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr);
   });
 
   // ---- shows ----
@@ -1766,7 +1772,7 @@
     const ret = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `ret_${k}_d0_users`); return b ? S(m, `ret_${k}_video_users`) / b : null; };
     const ren = (k, a2) => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= a2); const b = S(m, `sub_${k}_d0_users`); return b ? S(m, `sub_${k}_renewal_users`) / b : null; };
     const nu = S(R, 'ie_new_users'); const sub = S(R, 'rev_total_revenue'); const pay = S(R, 'rev_total_payers');
-    const packs = PACKS.reduce((a, [, k]) => a + S(R, k), 0);
+    const packs = PACKS.reduce((a, [, k]) => a + Math.max(0, S(R, k)), 0);
     return { dau: S(R, 'dau_dau_users') / days, vshare: rv.length ? rv.reduce((a, r) => a + n(r.eng_total_viewers) / Math.max(1, n(r.dau_dau_users)), 0) / rv.length : null,
       viewers: rv.length ? V / rv.length : null, mins: wv('eng_avg_watch_time'), eps: wv('eng_avg_videos'), comp: (wv('eng_completion_rate') ?? NaN) / 100,
       nw1: nu ? S(R, 'ie_new_users_watched_atleast1') / nu : null, nw5: nu ? S(R, 'ie_new_users_watched_5plus') / nu : null, d1v: ret('d1', 1), d7v: ret('d7', 7),
@@ -1823,20 +1829,20 @@
   });
   dash.draw('adRenewMonth', (tb) => {
     tb.replaceChildren(); if (!okA('admin_daily')) return; const all = D('admin_daily'); const last = all.reduce((m, r) => (r.day > m ? r.day : m), ''); const IR = inRange();
-    const months = [...new Set(IR.filter((r) => n(r.sub_weekly7_d0_users) > 0).map((r) => r.day.slice(0, 7)))].sort();
-    if (!months.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 6; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); }
+    const months = [...new Set(IR.filter((r) => n(r.sub_weekly7_d0_users) > 0 || r.other_purchases > 0).map((r) => r.day.slice(0, 7)))].sort();
+    if (!months.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 7; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); }
     months.forEach((m) => { const R = IR.filter((r) => r.day.slice(0, 7) === m);
       const rate = (k, age) => { const x = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= age); const b = S(x, `sub_${k}_d0_users`); return b && x.length === R.length ? S(x, `sub_${k}_renewal_users`) / b : null; };
-      const tr = document.createElement('tr'); [d3.utcFormat('%b %Y')(new Date(m + '-01')), d3.format(',')(S(R, 'sub_weekly7_d0_users')), f(rate('weekly7', 7), 'p0'), f(rate('weekly14', 14), 'p0'), f(rate('weekly21', 21), 'p0'), f(rate('day15', 15), 'p0')].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr); });
+      const tr = document.createElement('tr'); [d3.utcFormat('%b %Y')(new Date(m + '-01')), d3.format(',')(S(R, 'sub_weekly7_d0_users')), f(rate('weekly7', 7), 'p0'), f(rate('weekly14', 14), 'p0'), f(rate('weekly21', 21), 'p0'), f(rate('day15', 15), 'p0'), S0(R, 'other_purchases') ? `${d3.format(',')(S0(R, 'other_purchases'))} · renewals not tracked` : '—'].forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr); });
   });
   // ---- renewals by purchase week / day (Bucket 2 plans), following the date range ----
   const RN_COLS = [['weekly7', 7], ['weekly14', 14], ['weekly21', 21], ['day15', 15], ['month30', 30]];
   const rnLast = () => D('admin_daily').reduce((m, r) => (r.day > m ? r.day : m), '');
-  const rnBuyers = (r) => RN_COLS.reduce((a, [k]) => a + n(r[`sub_${k}_d0_users`]), 0);
+  const rnBuyers = (r) => RN_COLS.reduce((a, [k]) => a + n(r[`sub_${k}_d0_users`]), 0) + Math.max(0, r.other_purchases || 0);
   const rnBench = () => { const last = rnLast(); const m = inRange().filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= 7); const b = S(m, 'sub_weekly7_d0_users'); return b ? S(m, 'sub_weekly7_renewal_users') / b : null; };
   const rnTable = (tb, groups) => {
     tb.replaceChildren(); if (!okA('admin_daily')) return; const last = rnLast(); const bench = rnBench();
-    if (!groups.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 7; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); return; }
+    if (!groups.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 8; td.className = 'l'; td.textContent = 'No Bucket 2 pack buyers in this range'; tr.append(td); tb.append(tr); return; }
     groups.forEach(({ label, rows, noflag }) => {
       const end = rows.reduce((m, r) => (r.day > m ? r.day : m), ''); const age = (Date.parse(last) - Date.parse(end)) / 864e5;
       const tr = document.createElement('tr'); const add = (t, cls, title) => { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; if (title) td.title = title; tr.append(td); };
@@ -1848,6 +1854,7 @@
         const low = !noflag && k === 'weekly7' && bench != null && b >= 10 && rate < bench / 2;
         add(`${d3.format('.0%')(rate)} (${d3.format(',')(rn)}/${d3.format(',')(b)})`, low ? 'bad' : null, low ? `Under half the range's day-7 rate (${d3.format('.0%')(bench)})` : null);
       });
+      const ob = S0(rows, 'other_purchases'); add(ob ? `${d3.format(',')(ob)} · not tracked` : '—', null, 'Payments outside Bucket 1 and 2 packs (most likely Bucket 3); renewals not tracked by the admin panel');
       tb.append(tr);
     });
   };
