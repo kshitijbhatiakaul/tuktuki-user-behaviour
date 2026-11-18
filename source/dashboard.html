@@ -65,20 +65,42 @@
   </div>
 
   <section id="glance">
-    <h2>The range at a glance</h2>
-    <div class="tiles" data-source="daily cohorts events">
-      <div class="tile"><div class="lbl">Installs</div><div class="num" data-draw="t" data-k="installs">—</div><div class="muted"><span data-draw="t" data-k="installs_day">—</span> a day</div></div>
-      <div class="tile"><div class="lbl">Uninstalls</div><div class="num" data-draw="t" data-k="uninstalls">—</div><div class="muted"><span data-draw="t" data-k="uninst_ratio">—</span> of installs in the range</div></div>
-      <div class="tile"><div class="lbl">Reinstalls</div><div class="num" data-draw="t" data-k="reinstalls">—</div><div class="muted">devices that uninstalled and came back</div></div>
-      <div class="tile"><div class="lbl">Reactivations</div><div class="num" data-draw="t" data-k="reattributions">—</div><div class="muted">lapsed users won back by a tracked source</div></div>
-      <div class="tile"><div class="lbl">Avg daily active users</div><div class="num" data-draw="t" data-k="dau">—</div><div class="muted"><span data-draw="t" data-k="sess_dau">—</span> sessions per user a day</div></div>
-      <div class="tile"><div class="lbl">Same-day uninstall</div><div class="num" data-draw="t" data-k="d0_uninst">—</div><div class="muted">of new users, on install day</div></div>
-      <div class="tile"><div class="lbl">Day-1 retention</div><div class="num" data-draw="t" data-k="ret_d1">—</div><div class="muted">day 7: <span data-draw="t" data-k="ret_d7">—</span> · day 30: <span data-draw="t" data-k="ret_d30">—</span></div></div>
-      <div class="tile"><div class="lbl">Install-day time per new user</div><div class="num" data-draw="t" data-k="min_d0">—</div><div class="muted">minutes · day 1: <span data-draw="t" data-k="min_d1">—</span> min</div></div>
-      <div class="tile"><div class="lbl">Videos per active user a day</div><div class="num" data-draw="t" data-k="vv_dau">—</div><div class="muted"><span data-draw="t" data-k="vv_sess">—</span> per session</div></div>
-      <div class="tile"><div class="lbl">Rewarded ads per active user a day</div><div class="num" data-draw="t" data-k="ads_dau">—</div><div class="muted"><span data-draw="t" data-k="ads_vv">—</span> per video watched</div></div>
+    <h2>Key numbers</h2>
+    <div class="tiles" data-source="daily cohorts events mau admin_daily">
+      <div class="tile"><div class="lbl">Installs</div><div class="num"><span data-draw="t" data-k="installs">—</span></div><div class="muted"><span data-draw="t" data-k="installs_day">—</span> a day · Adjust</div></div>
+      <div class="tile"><div class="lbl">Daily active users (avg)</div><div class="num"><span data-draw="t" data-k="dau">—</span></div><div class="muted"><span data-draw="t" data-k="sess_dau">—</span> sessions per user a day · Adjust</div></div>
+      <div class="tile"><div class="lbl">Monthly active users</div><div class="num"><span data-draw="mau" data-k="v">—</span></div><div class="muted"><span data-draw="mau" data-k="n">—</span> · Adjust</div></div>
+      <div class="tile"><div class="lbl">Day-1 retention</div><div class="num"><span data-draw="t" data-k="ret_d1">—</span></div><div class="muted">of new users back on day 1 · Adjust</div></div>
+      <div class="tile"><div class="lbl">Day-7 retention</div><div class="num"><span data-draw="t" data-k="ret_d7">—</span></div><div class="muted">of new users back on day 7 · Adjust</div></div>
+      <div class="tile"><div class="lbl">Reinstalls</div><div class="num"><span data-draw="t" data-k="reinstalls">—</span></div><div class="muted">devices that uninstalled and came back · Adjust</div></div>
+      <div class="tile"><div class="lbl">Reactivations</div><div class="num"><span data-draw="t" data-k="reattributions">—</span></div><div class="muted">lapsed users won back by a tracked source · Adjust</div></div>
+      <div class="tile"><div class="lbl">Total episodes watched</div><div class="num"><span data-draw="adT" data-k="epv">—</span></div><div class="muted"><span data-draw="adT" data-k="epvday">—</span> a day · admin panel</div></div>
+      <div class="tile"><div class="lbl">Avg time per user a day</div><div class="num"><span data-draw="adT" data-k="mins">—</span> min</div><div class="muted">per viewer · <span data-draw="adT" data-k="minsdau">—</span> min per active user · admin panel</div></div>
+      <div class="tile"><div class="lbl">Avg videos per user a day</div><div class="num"><span data-draw="adT" data-k="vids">—</span></div><div class="muted">per viewer · <span data-draw="adT" data-k="vidsdau">—</span> per active user · admin panel</div></div>
+      <div class="tile"><div class="lbl">Subscribers</div><div class="num"><span data-draw="adT" data-k="payers">—</span></div><div class="muted">purchases in range (daily paying users added up) · <span data-draw="adT" data-k="paiddau">—</span> paying users active a day · admin panel</div></div>
+      <div class="tile"><div class="lbl">Subscription revenue</div><div class="num">₹<span data-draw="adT" data-k="subrev">—</span></div><div class="muted">₹<span data-draw="adT" data-k="subday">—</span> a day · ₹<span data-draw="adT" data-k="arppu">—</span> per payment · admin panel</div></div>
+      <div class="tile"><div class="lbl">AdMob revenue</div><div class="num">₹<span data-draw="adT" data-k="admob">—</span></div><div class="muted">₹<span data-draw="adT" data-k="admobday">—</span> a day · ₹<span data-draw="adT" data-k="ecpm">—</span> per 1,000 impressions · admin panel</div></div>
     </div>
-    <p class="muted" style="margin-top:var(--cds-gap-sm)">Retention and same-day uninstall use only install cohorts old enough to have reached that day. Uninstalls are tracked from 23 Mar 2026; reinstalls from 17 Mar 2026.</p>
+    <p class="muted" style="margin-top:var(--cds-gap-sm)">Every number follows the date range above. Retention uses only install cohorts old enough to have reached that day; reinstalls are tracked from 17 Mar 2026. Monthly active users is Adjust’s monthly figure, averaged over the months your range touches. Subscribers, subscription revenue and AdMob come from the Tuktuki admin panel (data through the latest refresh).</p>
+  </section>
+
+  <section id="more">
+    <h2>More numbers for the range</h2>
+    <div class="tiles" data-source="daily cohorts events admin_daily">
+      <div class="tile"><div class="lbl">Uninstalls</div><div class="num"><span data-draw="t" data-k="uninstalls">—</span></div><div class="muted"><span data-draw="t" data-k="uninst_ratio">—</span> of installs in the range · Adjust</div></div>
+      <div class="tile"><div class="lbl">Same-day uninstall</div><div class="num"><span data-draw="t" data-k="d0_uninst">—</span></div><div class="muted">of new users, on install day · Adjust (tracked from 23 Mar 2026)</div></div>
+      <div class="tile"><div class="lbl">Day-30 retention</div><div class="num"><span data-draw="t" data-k="ret_d30">—</span></div><div class="muted">of new users back on day 30 · Adjust</div></div>
+      <div class="tile"><div class="lbl">Install-day time per new user</div><div class="num"><span data-draw="t" data-k="min_d0">—</span></div><div class="muted">minutes · day 1: <span data-draw="t" data-k="min_d1">—</span> min · Adjust</div></div>
+      <div class="tile"><div class="lbl">Videos per active user a day (Adjust)</div><div class="num"><span data-draw="t" data-k="vv_dau">—</span></div><div class="muted"><span data-draw="t" data-k="vv_sess">—</span> per session · Adjust video-view events</div></div>
+      <div class="tile"><div class="lbl">Rewarded ads per active user a day</div><div class="num"><span data-draw="t" data-k="ads_dau">—</span></div><div class="muted"><span data-draw="t" data-k="ads_vv">—</span> per video watched · Adjust</div></div>
+      <div class="tile"><div class="lbl">Daily viewers (avg)</div><div class="num"><span data-draw="adT" data-k="viewers">—</span></div><div class="muted"><span data-draw="adT" data-k="vshare">—</span> of daily active users watch an episode · admin panel</div></div>
+      <div class="tile"><div class="lbl">Episode completion rate</div><div class="num"><span data-draw="adT" data-k="comp">—</span></div><div class="muted">episodes watched past 80% · admin panel</div></div>
+      <div class="tile"><div class="lbl">Total watch hours</div><div class="num"><span data-draw="adT" data-k="hours">—</span></div><div class="muted">across all shows · admin panel</div></div>
+      <div class="tile"><div class="lbl">Paying users active a day</div><div class="num"><span data-draw="adT" data-k="paiddau">—</span></div><div class="muted"><span data-draw="adT" data-k="paidshare">—</span> of daily active users · admin panel</div></div>
+      <div class="tile"><div class="lbl">Revenue per daily active user</div><div class="num">₹<span data-draw="adT" data-k="arpdau">—</span></div><div class="muted">subscriptions + AdMob, per day · total ₹<span data-draw="adT" data-k="rev">—</span> · admin panel</div></div>
+      <div class="tile"><div class="lbl">Weekly pack (Bucket 2) renewed by day 7</div><div class="num"><span data-draw="adT" data-k="w7">—</span></div><div class="muted"><span data-draw="adT" data-k="w7n">—</span> · admin panel</div></div>
+      <div class="tile"><div class="lbl">Other purchases (likely Bucket 3)</div><div class="num"><span data-draw="adT" data-k="other">—</span></div><div class="muted">payments outside Bucket 1 and 2 packs; renewals not tracked · admin panel</div></div>
+    </div>
   </section>
 
   <section id="growth">
@@ -822,7 +844,7 @@
     })));
     return { columns: cols, rows: data };
   };
-  ['daily', 'events', 'cohorts', 'channels', 'backcamp', 'purchases', 'paycohort', 'paychan'].forEach((id) => dash.loader(id, { description: 'Adjust’s CSV answer as rows; column names lower-cased with spaces as underscores', fn: loaderFn }));
+  ['daily', 'events', 'cohorts', 'channels', 'backcamp', 'purchases', 'paycohort', 'paychan', 'mau'].forEach((id) => dash.loader(id, { description: 'Adjust’s CSV answer as rows; column names lower-cased with spaces as underscores', fn: loaderFn }));
 
   // ---------- all-history comparison (not filtered by the picker) ----------
   dash.calc('eras', {
@@ -879,6 +901,13 @@
   dash.draw('rangeLabel', (el) => { const r = range(); const f = d3.utcFormat('%-d %b %Y'); el.textContent = `${f(new Date(r.start))} – ${f(new Date(r.end))}`; });
 
   // ---------- tiles ----------
+  dash.draw('mau', (el) => {
+    if (err('mau')) { el.textContent = 'Failed to load'; return; } if (!ok('mau')) { el.textContent = '—'; return; }
+    const M = rows('mau').filter((r) => r.month && monthsIn(String(r.month).slice(0, 7)) && num(r, 'maus') > 0).sort((a, b) => (a.month < b.month ? -1 : 1));
+    if (!M.length) { el.textContent = el.dataset.k === 'v' ? '—' : 'no months in range'; return; }
+    const avg = sum(M, 'maus') / M.length; const L = M[M.length - 1]; const lab = d3.utcFormat('%b %Y')(new Date(String(L.month).slice(0, 7) + '-01'));
+    el.textContent = el.dataset.k === 'v' ? fmt(avg, 'big') : (M.length > 1 ? `avg of ${M.length} months · ${lab}: ${fmt(num(L, 'maus'), 'big')}` : lab);
+  });
   dash.draw('t', (el) => {
     if (!ok('daily', 'cohorts', 'events')) { el.textContent = '—'; return; }
     const D = rows('daily').filter((r) => inR(r.day)), C = rows('cohorts').filter((r) => inR(r.day)), E = rows('events').filter((r) => inR(r.day));
@@ -1646,19 +1675,24 @@
     return {
       dau: dau / days, newshare: dau ? S(R, 'dau_new_users') / dau : null, newu: S(R, 'dau_new_users'), newday: S(R, 'dau_new_users') / days,
       viewers: rv.length ? V / rv.length : null, mins: wv('eng_avg_watch_time'), vids: wv('eng_avg_videos'), comp: (wv('eng_completion_rate') ?? NaN) / 100,
-      epv: S(R, 'total_episode_views'), epvday: S(R, 'total_episode_views') / days, hours: okA('series_daily') ? hrs : null, dl: S(R, 'total_download'), dlandroid: S(R, 'app_download_android'),
-      rev: sub + adm, subrev: sub, arppu: pay ? sub / pay : null, admob: adm, ecpm: imp ? (1000 * S(ad, 'total_admob_revenue')) / imp : null, payers: pay,
+      epv: (() => { const e = R.filter((r) => has(r.total_episode_views)); return e.length ? S(e, 'total_episode_views') : null; })(), epvday: (() => { const e = R.filter((r) => has(r.total_episode_views)); return e.length ? S(e, 'total_episode_views') / e.length : null; })(), hours: okA('series_daily') ? hrs : null, dl: S(R, 'total_download'), dlandroid: S(R, 'app_download_android'),
+      rev: sub + adm, subrev: sub, arppu: pay ? sub / pay : null, admob: ad.length ? adm : null, ecpm: imp ? (1000 * S(ad, 'total_admob_revenue')) / imp : null, payers: pay,
       paiddau: S(R, 'pft_active_paid_dau') / days, paidshare: S(R, 'pft_dau_users') ? S(R, 'pft_active_paid_dau') / S(R, 'pft_dau_users') : null, arpdau: dau ? (sub + adm) / dau : null,
       nw1: nu ? nw / nu : null, nw5: nu ? S(ie, 'ie_new_users_watched_5plus') / nu : null, nwvid: wn('ie_avg_videos'), nwmin: wn('ie_avg_watchtime'),
-      nwpay: S(R, 'ir_no_of_payers'), nwrev: S(R, 'ir_total_paid'), r1, r1v, r7, r7v, r30, r30v
+      nwpay: S(R, 'ir_no_of_payers'), nwrev: S(R, 'ir_total_paid'), r1, r1v, r7, r7v, r30, r30v,
+      vshare: dau && rv.length ? V / S(rv, 'dau_dau_users') : null, minsdau: (() => { const m = wv('eng_avg_watch_time'); const d = S(rv, 'dau_dau_users'); return m != null && d ? (m * V) / d : null; })(),
+      vidsdau: (() => { const m = wv('eng_avg_videos'); const d = S(rv, 'dau_dau_users'); return m != null && d ? (m * V) / d : null; })(),
+      subday: sub / days, admobday: ad.length ? adm / ad.length : null, other: Math.max(0, S(R, 'other_purchases')),
+      w7: (() => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= 7); const b = S(m, 'sub_weekly7_d0_users'); return b ? S(m, 'sub_weekly7_renewal_users') / b : null; })(),
+      w7n: (() => { const m = R.filter((r) => (Date.parse(last) - Date.parse(r.day)) / 864e5 >= 7); const b = S(m, 'sub_weekly7_d0_users'); return b ? `${d3.format(',')(S(m, 'sub_weekly7_renewal_users'))} of ${d3.format(',')(b)} buyers` : 'no buyers old enough yet'; })()
     };
   };
   const fmtK = { dau: 'big', newshare: 'p0', newu: 'big', newday: 'big', viewers: 'big', mins: 'd1', vids: 'd1', comp: 'p0', epv: 'big', epvday: 'big', hours: 'big', dl: 'big', dlandroid: 'big',
     rev: 'big', subrev: 'big', arppu: 'd1', admob: 'big', ecpm: 'd1', payers: 'big', paiddau: 'big', paidshare: 'p1', arpdau: 'd2', nw1: 'p0', nw5: 'p0', nwvid: 'd1', nwmin: 'd1', nwpay: 'big', nwrev: 'big',
-    r1: 'p1', r1v: 'p1', r7: 'p1', r7v: 'p1', r30: 'p1', r30v: 'p1' };
+    r1: 'p1', r1v: 'p1', r7: 'p1', r7v: 'p1', r30: 'p1', r30v: 'p1', vshare: 'p0', minsdau: 'd1', vidsdau: 'd1', subday: 'big', admobday: 'big', other: 'big', w7: 'p1' };
   dash.draw('adT', (el) => {
     if (!okA('admin_daily')) { el.textContent = '—'; return; }
-    const k = el.dataset.k; const v = stats()[k]; el.textContent = f(v == null ? null : +v, fmtK[k] || 'big');
+    const k = el.dataset.k; const v = stats()[k]; if (typeof v === 'string') { el.textContent = v; return; } el.textContent = f(v == null ? null : +v, fmtK[k] || 'big');
   });
 
   function lines(el, data, series, o) {

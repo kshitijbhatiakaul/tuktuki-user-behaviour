@@ -19,9 +19,9 @@ Public copy: this repo → GitHub Pages (`docs/index.html`).
 
 ## 1. Adjust (live on the dashboard; refresh the repo copy)
 The dashboard's Adjust sections query Adjust live and already run "up to and including yesterday".
-For the repo copy: for each dataset `daily, events, cohorts, channels, backcamp, purchases, paycohort, paychan`,
+For the repo copy: for each dataset `daily, events, cohorts, channels, backcamp, purchases, paycohort, paychan, mau`,
 read `datasets/<id>` from the dashboard store, run its `source.args.report_question` with the Adjust connector
-(`reporting_tool`), take the CSV text (unwrap `{"result": "..."}` if present) and overwrite `data/<id>.csv`.
+(`copilot_reporting_tool`; the old `reporting_tool` now takes structured inputs, not questions), take the CSV text (unwrap `{"result": "..."}` if present) and overwrite `data/<id>.csv`.
 If an answer is not a CSV table with a `day`/`month`/`week` column, keep the old file and note it.
 
 ## 2. Tuktuki admin panel (copy refreshed here — the dashboard can't call it)

@@ -12,7 +12,7 @@ import csv, io, json, os, sys, datetime, html
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data")
-ADJUST = ["daily", "events", "cohorts", "channels", "backcamp", "purchases", "paycohort", "paychan"]
+ADJUST = ["daily", "events", "cohorts", "channels", "backcamp", "purchases", "paycohort", "paychan", "mau"]
 GA = ["ga_breakdowns", "ga_explore", "ga_monthly"]
 ADMIN = ["admin_daily", "series_daily", "series_windows"]  # data/admin/*.csv, Tuktuki admin panel
 
