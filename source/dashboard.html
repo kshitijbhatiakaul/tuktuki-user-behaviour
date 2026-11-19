@@ -499,6 +499,28 @@
     <p class="lede">Audience from Google Analytics 4 (property tuktuki-54fa9), month by month. The date picker works in whole months here: every month your range touches is included and compared with the same number of months just before it. Gender, age and interests only exist from September 2026, when demographics started reporting.</p>
     <p class="muted" style="margin-top:var(--cds-gap-xs)">GA months in view: <b data-draw="gaMonths" data-source="ga_monthly">—</b> · compared with: <b data-draw="gaPrev" data-source="ga_monthly">—</b></p>
 
+    <div class="card" id="ga-daily" style="margin-top:var(--cds-gap-md)">
+      <h3>Daily Google Analytics, day by day (from 17 Nov 2026)</h3>
+      <p class="note">Live from the Google Analytics export to BigQuery, for the exact days in your date range. The export starts on 17 Nov 2026, so earlier days use the monthly figures below. Each new day appears the morning after. Revenue is in US dollars, as Google Analytics records it.</p>
+      <p class="muted" data-draw="gdNote" data-source="ga_daily">—</p>
+      <div class="tiles" style="margin-top:var(--cds-gap-sm)" data-source="ga_daily">
+        <div class="tile"><div class="lbl">Active users a day (avg)</div><div class="num" data-draw="gdT" data-k="au">—</div><div class="muted">GA export</div></div>
+        <div class="tile"><div class="lbl">New users</div><div class="num" data-draw="gdT" data-k="nu">—</div><div class="muted"><span data-draw="gdT" data-k="nuday">—</span> a day</div></div>
+        <div class="tile"><div class="lbl">Sessions</div><div class="num" data-draw="gdT" data-k="ses">—</div><div class="muted"><span data-draw="gdT" data-k="eng">—</span> engaged</div></div>
+        <div class="tile"><div class="lbl">Engagement time per user a day</div><div class="num" data-draw="gdT" data-k="min">—</div><div class="muted">minutes</div></div>
+        <div class="tile"><div class="lbl">Purchases</div><div class="num" data-draw="gdT" data-k="pur">—</div><div class="muted">$<span data-draw="gdT" data-k="rev">—</span> revenue</div></div>
+      </div>
+      <div class="legend" style="margin-top:var(--cds-gap-md)"><span><i class="k0"></i>Active users</span><span><i class="k2"></i>New users</span></div>
+      <div class="chart short" data-draw="gdChart" data-source="ga_daily"></div>
+      <div style="margin-top:var(--cds-gap-md)">
+        <label class="muted">Break down by <select class="gd-dim" aria-label="Break down by" style="font:inherit;color:var(--color-fg);background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:4px 6px">
+          <option value="region">State / region</option><option value="city">City</option><option value="country">Country</option><option value="language">Language</option><option value="app_version">App version</option><option value="os_version">Android version</option></select></label>
+      </div>
+      <div class="tw" style="margin-top:var(--cds-gap-sm)" data-source="ga_dims">
+        <table><thead><tr><th class="l" data-draw="gdDimHead">Value</th><th>Users</th><th>Share of all users in range</th><th>New users</th><th>Sessions</th><th>Minutes per user</th></tr></thead><tbody data-draw="gdDims"></tbody></table>
+      </div>
+    </div>
+
     <div class="tiles" style="margin-top:var(--cds-gap-md)" data-source="ga_monthly ga_breakdowns">
       <div class="tile"><div class="lbl">Avg monthly active users</div><div class="num" data-draw="gaT" data-k="mau">—</div><div class="muted"><span data-draw="gaT" data-k="mau_d">—</span> vs the months before</div></div>
       <div class="tile"><div class="lbl">New users</div><div class="num" data-draw="gaT" data-k="newu">—</div><div class="muted"><span data-draw="gaT" data-k="new_share">—</span> of monthly active users</div></div>
@@ -1915,3 +1937,52 @@
   });
 })();
 </script>
+<script>
+  // ---- Google Analytics daily, live from the BigQuery export (first full day 17 Nov 2026) ----
+  ['ga_daily', 'ga_dims'].forEach((id) => dash.loader(id, { description: 'BigQuery query result as rows', fn: ({ answer, read }) => read.bigquery(answer) }));
+  const gN = (v) => { const x = +v; return Number.isFinite(x) ? x : 0; };
+  const gOk = (id) => dash.data(id).status === 'ok';
+  const gBad = (id) => ['error', 'connect', 'declined'].includes(dash.data(id).status);
+  const gRows = (id) => (gOk(id) ? dash.data(id).data : []);
+  const gFmt = { big: (v) => (Math.abs(v) >= 1e4 ? d3.format('.3~s')(v).replace('G', 'B') : d3.format(',.0f')(v)), d1: d3.format(',.1f'), p0: d3.format('.0%'), usd: d3.format(',.0f') };
+  const gf = (v, k) => (v == null || !Number.isFinite(+v) ? '—' : gFmt[k](+v));
+  const gStats = () => { const R = gRows('ga_daily'); const days = R.length; if (!days) return null;
+    const au = R.reduce((a, r) => a + gN(r.active_users), 0); const ses = R.reduce((a, r) => a + gN(r.sessions), 0);
+    return { au: au / days, nu: R.reduce((a, r) => a + gN(r.new_users), 0), nuday: R.reduce((a, r) => a + gN(r.new_users), 0) / days, ses,
+      eng: ses ? R.reduce((a, r) => a + gN(r.engaged_sessions), 0) / ses : null, min: au ? R.reduce((a, r) => a + gN(r.engagement_minutes), 0) / au : null,
+      pur: R.reduce((a, r) => a + gN(r.purchases), 0), rev: R.reduce((a, r) => a + gN(r.revenue_usd), 0), days }; };
+  const gK = { au: 'big', nu: 'big', nuday: 'big', ses: 'big', eng: 'p0', min: 'd1', pur: 'big', rev: 'usd' };
+  dash.draw('gdT', (el) => { if (gBad('ga_daily')) { el.textContent = 'Failed to load'; return; } const st = gStats(); el.textContent = st ? gf(st[el.dataset.k], gK[el.dataset.k]) : '—'; });
+  dash.draw('gdNote', (el) => {
+    if (gBad('ga_daily')) { el.textContent = 'Couldn’t load the export: ' + (dash.data('ga_daily').message || 'BigQuery connector not available'); return; }
+    if (!gOk('ga_daily')) { el.textContent = 'Loading…'; return; }
+    const R = gRows('ga_daily'); const g = d3.utcFormat('%-d %b %Y');
+    el.textContent = R.length ? `Exported days in your range: ${g(new Date(String(R[0].day)))} – ${g(new Date(String(R[R.length - 1].day)))} (${R.length} day${R.length > 1 ? 's' : ''})` : 'No exported days in your range yet. The export’s first full day is 17 Nov 2026, and each day lands the morning after.';
+  });
+  dash.draw('gdChart', (el) => {
+    el.replaceChildren(); const R = gRows('ga_daily').map((r) => ({ date: new Date(String(r.day)), au: gN(r.active_users), nu: gN(r.new_users) }));
+    if (!R.length) { const d = document.createElement('div'); d.className = 'empty'; d.textContent = gBad('ga_daily') ? 'Failed to load' : 'No exported days in this range yet'; el.append(d); return; }
+    const W = Math.max(280, el.clientWidth || 600), H = 180, m = { t: 10, r: 12, b: 24, l: 44 };
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = R.length > 1 ? d3.scaleUtc(d3.extent(R, (r) => r.date), [m.l, W - m.r]) : d3.scaleUtc([new Date(+R[0].date - 864e5), new Date(+R[0].date + 864e5)], [m.l, W - m.r]);
+    const y = d3.scaleLinear([0, (d3.max(R, (r) => r.au) || 1) * 1.1], [H - m.b, m.t]).nice();
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(y.ticks(4)).join('text').attr('x', m.l - 6).attr('y', y).attr('dy', '0.32em').attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(d3.format('~s'));
+    svg.append('g').selectAll('text').data(R.length > 1 ? x.ticks(Math.min(R.length, Math.floor(W / 90))) : [R[0].date]).join('text').attr('x', x).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(d3.utcFormat('%b %-d'));
+    [['au', 0], ['nu', 2]].forEach(([k, c]) => { svg.append('path').datum(R).attr('fill', 'none').attr('stroke', dash.colors[c]).attr('stroke-width', 2).attr('d', d3.line().x((r) => x(r.date)).y((r) => y(r[k])));
+      svg.append('g').selectAll('circle').data(R).join('circle').attr('cx', (r) => x(r.date)).attr('cy', (r) => y(r[k])).attr('r', 3).attr('fill', dash.colors[c]).append('title').text((r) => `${d3.utcFormat('%-d %b')(r.date)}: ${d3.format(',')(r[k])} ${k === 'au' ? 'active users' : 'new users'}`); });
+  });
+  const gDimName = { region: 'State / region', city: 'City', country: 'Country', language: 'Language', app_version: 'App version', os_version: 'Android version' };
+  const gDim = () => { const s = document.querySelector('.gd-dim'); return s ? s.value : 'region'; };
+  dash.draw('gdDimHead', (el) => { el.textContent = gDimName[gDim()]; });
+  dash.draw('gdDims', (tb) => {
+    tb.replaceChildren(); const dim = gDim(); const all = gRows('ga_dims').filter((r) => r.dim === dim);
+    if (!all.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 6; td.className = 'l'; td.textContent = gBad('ga_dims') ? 'Failed to load' : 'No exported days in this range yet'; tr.append(td); tb.append(tr); return; }
+    const totRow = gRows('ga_dims').find((r) => r.dim === 'total'); const users = totRow ? gN(totRow.users) : all.reduce((a, r) => a + gN(r.users), 0);
+    all.forEach((r) => { const tr = document.createElement('tr'); tr.dataset.key = r.value;
+      [r.value, d3.format(',')(gN(r.users)), d3.format('.1%')(gN(r.users) / (all.length ? Math.max(users, 1) : 1)), d3.format(',')(gN(r.new_users)), d3.format(',')(gN(r.sessions)), d3.format(',.1f')(gN(r.minutes_per_user))]
+        .forEach((t, i) => { const td = document.createElement('td'); td.textContent = t; if (i === 0) td.className = 'l'; tr.append(td); }); tb.append(tr); });
+  });
+  document.querySelectorAll('.gd-dim').forEach((s) => s.addEventListener('change', () => { dash.draw('gdDims'); dash.draw('gdDimHead'); }));
+</script>
+
