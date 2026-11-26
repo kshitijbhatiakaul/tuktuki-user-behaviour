@@ -127,52 +127,54 @@ month,campaign_network,channel,reinstalls,reattributions,reattribution_reinstall
 2026-10,xiaomi_direct,Xiaomi Global,0,19,0
 2026-11,Affinity_Vivo,Vivo 国际 | Vivo Global,2,0,0
 2026-11,Ajas_Khan,Influencer,0,1,0
-2026-11,Expired Attributions,Facebook,3,128,2
-2026-11,Facebook,tuktuki,2,19,0
+2026-11,Expired Attributions,Facebook,3,132,2
+2026-11,Facebook,tuktuki,2,22,0
 2026-11,Google/5VV_7VV/1611,Google Ads,3,0,0
-2026-11,Google/FVV_3VV_Sub/2809,Google Ads,134,208,63
-2026-11,IG_Show,Social Media,3,3,1
+2026-11,Google/FVV_3VV_Sub/2809,Google Ads,140,225,68
+2026-11,IG_Show,Social Media,4,3,1
 2026-11,IG_Shows,Social Media,2,2,1
 2026-11,Instagram,Social Media,1,0,0
-2026-11,Install_Campaign_Experiment,Facebook,21,60,9
-2026-11,LS - Andriod App installation - India - In Market,Google Ads,1,42,0
-2026-11,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,2,18,0
+2026-11,Install_Campaign_Experiment,Facebook,22,62,9
+2026-11,LS - Andriod App installation - India - In Market,Google Ads,1,44,0
+2026-11,LS - Andriod App installation - India - In Market_23Feb26_NP,Google Ads,2,20,0
 2026-11,LS - Andriod App installation - India_In Market_23Feb26_LP,Google Ads,0,4,0
 2026-11,LS - Andriod Videoview - India - In Market_07April26_NP,Google Ads,2,9,1
 2026-11,LS - App installation - Broad - Andriod – First Open Event,Facebook,0,2,0
 2026-11,LS - App installation - Broad - Andriod – First Videoview Event_07April26,Facebook,0,2,0
-2026-11,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,1,3,0
+2026-11,LS_TukTuki_Android_UA_Campaign_Apr'26,MOLOCO,1,4,0
 2026-11,OppoAffinity,OPPO国际 | OPPO Global,2,10,0
-2026-11,Oppo_Affinity,OPPO国际 | OPPO Global,0,8,0
-2026-11,RT_TT_FVV&3VV_Inactive,Facebook,1,0,0
+2026-11,Oppo_Affinity,OPPO国际 | OPPO Global,0,10,0
+2026-11,RT_TT_FVV&3VV_Inactive,Facebook,2,2,1
 2026-11,RT_TT_Meta_5VV_NoPurchase,Facebook,1,4,0
 2026-11,Rohit_CPI,Influencer,0,1,0
 2026-11,TT/AppConv/DT/2809,Google Ads,51,76,20
-2026-11,TT/Baapu/Int/30sec,ShareChat,2,15,2
-2026-11,TT/DT/Int/2min,ShareChat,14,32,7
-2026-11,TT/DT/Int/30sec,ShareChat,12,33,9
+2026-11,TT/Baapu/Int/30sec,ShareChat,2,16,2
+2026-11,TT/DT/Int/2min,ShareChat,14,34,7
+2026-11,TT/DT/Int/30sec,ShareChat,13,34,10
 2026-11,TT/DelvsMum/Int/2min,ShareChat,0,2,0
 2026-11,TT/DelvsMum/Int/30sec,ShareChat,0,5,0
 2026-11,TT/Deva/Int/30sec,ShareChat,6,28,2
 2026-11,TT/HBBM/Int/2min,ShareChat,9,17,4
-2026-11,TT/Hisaab_Barabar/Int/30sec,ShareChat,11,23,4
-2026-11,TT/Sharechat/DT/30sec/Broad,ShareChat,12,37,6
+2026-11,TT/Hisaab_Barabar/Int/30sec,ShareChat,12,24,4
+2026-11,TT/Sharechat/DT/30sec/Broad,ShareChat,12,39,6
 2026-11,TT/Sharechat/DoubleTrouble/30sec,ShareChat,2,4,1
-2026-11,TT_Meta_3VV_Sep,Facebook,242,440,139
-2026-11,TT_Meta_5VV_Oct,Facebook,17,20,10
+2026-11,TT_Meta_3VV_Sep,Facebook,255,467,150
+2026-11,TT_Meta_5VV_Oct,Facebook,19,21,11
 2026-11,TT_Meta_7VV_Nov,Facebook,3,2,1
-2026-11,TT_Meta_AppInstall,Facebook,1,3,1
-2026-11,TT_Meta_FVV_Sep,Facebook,343,491,195
-2026-11,TT_Meta_Purchase_Sep,Facebook,37,64,23
-2026-11,TT_Sharechat/Moj_20s_Sep,ShareChat,13,26,7
-2026-11,TT_Sharechat/Moj_30s_Sep,ShareChat,67,158,38
+2026-11,TT_Meta_AppInstall,Facebook,2,4,2
+2026-11,TT_Meta_FVV_Sep,Facebook,361,514,206
+2026-11,TT_Meta_Purchase_Sep,Facebook,39,66,25
+2026-11,TT_Sharechat/Moj_20s_Sep,ShareChat,15,30,9
+2026-11,TT_Sharechat/Moj_30s_Sep,ShareChat,70,161,39
 2026-11,TT_YouTube_FVV&3VV_2409,Google Ads,0,1,0
-2026-11,VP_2,Influencer,141,199,65
-2026-11,VP_3,Influencer,6,19,6
+2026-11,VP_2,Influencer,148,209,69
+2026-11,VP_3,Influencer,7,19,6
+2026-11,download tuk tuki,Google Organic Search,1,1,1
 2026-11,facebook,tuktuki,0,2,0
-2026-11,google,tuktuki,33,60,17
+2026-11,google,tuktuki,35,62,17
+2026-11,indian hindi short drama app,Google Organic Search,1,0,0
 2026-11,transsion_pai,Transsion Holdings,1,1,0
 2026-11,tuktuki,Google Organic Search,1,0,0
 2026-11,tuktuki app,Google Organic Search,0,1,0
-2026-11,unknown,Organic,64,76,16
-2026-11,xiaomi_direct,Xiaomi Global,0,3,0
+2026-11,unknown,Organic,67,80,16
+2026-11,xiaomi_direct,Xiaomi Global,0,4,0
